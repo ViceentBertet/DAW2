@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="297.02045mm"
+   height="209.99149mm"
+   viewBox="0 0 297.02045 209.99149"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="Esqueleto.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.99761952"
+     inkscape:cx="-219.02138"
+     inkscape:cy="407.46998"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="297.02045"
+       height="209.99149"
+       id="page9"
+       margin="0"
+       bleed="0" />
+    <inkscape:page
+       x="-93.332527"
+       y="56.456585"
+       width="89.293831"
+       height="153.96631"
+       id="page11"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <rect
+       x="79.277451"
+       y="-336.44577"
+       width="330.64496"
+       height="101.51379"
+       id="rect9" />
+    <rect
+       x="170.90738"
+       y="653.5498"
+       width="319.9386"
+       height="173.64191"
+       id="rect8" />
+    <rect
+       x="622.61798"
+       y="572.34448"
+       width="141.15253"
+       height="150.82051"
+       id="rect6" />
+    <rect
+       x="500.80145"
+       y="440.85995"
+       width="237.83234"
+       height="177.89085"
+       id="rect5" />
+    <rect
+       x="168.22289"
+       y="320.97699"
+       width="193.35963"
+       height="125.68376"
+       id="rect4" />
+    <rect
+       x="252.94293"
+       y="43.752289"
+       width="649.44806"
+       height="147.66399"
+       id="rect2" />
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0.01130446)">
+    <rect
+       style="fill:#7d6aa6;fill-opacity:1;stroke-width:0.264583"
+       id="rect1"
+       width="297"
+       height="56.43362"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:#7d6aa6;fill-opacity:1;stroke-width:0.265018"
+       id="rect1-8"
+       width="296.96805"
+       height="56.625469"
+       x="0.041104391"
+       y="153.36601" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,44.133983,6.1498173)"
+       id="text1"
+       style="font-size:24px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';white-space:pre;shape-inside:url(#rect2);fill:#000000;fill-opacity:1"><tspan
+         x="252.94336"
+         y="104.41033"
+         id="tspan3"><tspan
+           style="font-size:66.6667px"
+           id="tspan1">Cabecera</tspan></tspan></text>
+    <rect
+       style="fill:#c1e0f7;fill-opacity:1;stroke-width:0.226177"
+       id="rect3"
+       width="70.982727"
+       height="48.759666"
+       x="3.0695844"
+       y="4.0927796" />
+    <rect
+       style="fill:#c1e0f7;fill-opacity:1;stroke-width:0.22386"
+       id="rect3-2"
+       width="69.535706"
+       height="48.759666"
+       x="219.98032"
+       y="4.1595287" />
+    <rect
+       style="fill:#c1e0f7;fill-opacity:1;stroke-width:0.0812923"
+       id="rect3-0"
+       width="24.070023"
+       height="18.575422"
+       x="83.870628"
+       y="18.98999" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-28.48896,-68.616113)"
+       id="text4"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:66.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect4);fill:#000000;fill-opacity:1"><tspan
+         x="168.22266"
+         y="381.63494"
+         id="tspan7">Logo</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.1135298,0,0,0.12171712,26.031845,-35.231725)"
+       id="text5"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:66.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect5);fill:#000000;fill-opacity:1"
+       x="87.400002"
+       y="0"><tspan
+         x="520.81678"
+         y="501.51775"
+         id="tspan10"><tspan
+           style="text-align:center;text-anchor:middle"
+           id="tspan9">Menu 
+</tspan></tspan><tspan
+         x="566.58344"
+         y="584.85113"
+         id="tspan12"><tspan
+           style="text-align:center;text-anchor:middle"
+           id="tspan11">btn</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text6"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:66.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect6);fill:#000000;fill-opacity:1" />
+    <rect
+       style="fill:#1b998b;fill-opacity:1;stroke-width:0.264583"
+       id="rect7"
+       width="296.96765"
+       height="111.65783"
+       x="-0.011304463"
+       y="56.422314"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.24529901,0,0,0.26726962,176.22807,-167.46578)"
+       id="text7"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:66.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;white-space:pre;shape-inside:url(#rect8);fill:#000000;fill-opacity:1"><tspan
+         x="236.07697"
+         y="714.20916"
+         id="tspan13">Redes </tspan><tspan
+         x="205.74363"
+         y="797.54253"
+         id="tspan14">Sociales</tspan></text>
+  </g>
+</svg>
