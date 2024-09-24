@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="Componentes.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="99.348502"
+     inkscape:cy="385.54997"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 105 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="297 : 105 : 1"
+       inkscape:persp3d-origin="148.5 : 70 : 1"
+       id="perspective10" />
+    <rect
+       x="100.05561"
+       y="374.41304"
+       width="267.99347"
+       height="30.405591"
+       id="rect10" />
+    <rect
+       x="87.327687"
+       y="360.2709"
+       width="111.72287"
+       height="42.072853"
+       id="rect9" />
+    <rect
+       x="222.03153"
+       y="459.61941"
+       width="321.02648"
+       height="151.32085"
+       id="rect7" />
+    <rect
+       x="86.974136"
+       y="210.01071"
+       width="331.27951"
+       height="42.779961"
+       id="rect6" />
+    <linearGradient
+       id="swatch6"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="0"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="swatch5"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="0"
+         id="stop5" />
+    </linearGradient>
+    <linearGradient
+       id="swatch4"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="0"
+         id="stop4" />
+    </linearGradient>
+    <rect
+       x="17.402367"
+       y="254.26791"
+       width="205.92799"
+       height="41.572323"
+       id="rect2" />
+    <rect
+       x="17.402367"
+       y="254.26791"
+       width="205.92799"
+       height="41.572323"
+       id="rect2-1" />
+    <rect
+       x="86.974136"
+       y="210.01071"
+       width="331.27951"
+       height="42.779961"
+       id="rect6-0" />
+    <rect
+       x="100.05561"
+       y="374.41302"
+       width="267.99347"
+       height="30.40559"
+       id="rect10-9" />
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#1b998b;fill-opacity:1;stroke:#c10000;stroke-width:0.194505;stroke-opacity:0"
+       id="rect1"
+       width="60.482983"
+       height="22.498823"
+       x="3.2207439"
+       y="2.1354859"
+       ry="6.9714665" />
+    <rect
+       style="fill:#1b998b;fill-opacity:1;stroke:#000000;stroke-width:0.52916667;stroke-opacity:1;stroke-dasharray:none"
+       id="rect1-5"
+       width="57.622627"
+       height="13.023884"
+       x="3.6025963"
+       y="75.478477"
+       ry="4.0355697" />
+    <rect
+       style="fill:#c1e0f7;fill-opacity:1;stroke:#c10000;stroke-width:0.194505;stroke-opacity:0"
+       id="rect1-6"
+       width="60.482983"
+       height="22.498823"
+       x="2.9467335"
+       y="27.832186"
+       ry="6.9714665" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,1.5347921,-58.577897)"
+       id="text2"
+       style="font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;white-space:pre;shape-inside:url(#rect2);fill:#000000;fill-opacity:1;stroke:#c10000;stroke-opacity:0"><tspan
+         x="30.3928"
+         y="278.53095"
+         id="tspan3">Boton sin foco</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,2.1811512,-32.45175)"
+       id="text2-1"
+       style="font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;white-space:pre;shape-inside:url(#rect2-1);fill:#000000;fill-opacity:1;stroke:#c10000;stroke-opacity:0"><tspan
+         x="25.7528"
+         y="278.53095"
+         id="tspan4">Boton con foco</tspan></text>
+    <ellipse
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       id="path2"
+       ry="2.3256435"
+       rx="2.4680691"
+       cy="58.190155"
+       cx="9.2147579" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.17517894,0,0,0.23724898,-7.405952,5.101372)"
+       id="text6"
+       style="font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;white-space:pre;shape-inside:url(#rect6);fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.00000006;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"><tspan
+         x="115.78748"
+         y="234.27313"
+         id="tspan5">radio no seleccionado</tspan></text>
+    <ellipse
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       id="path2-9"
+       ry="2.3256435"
+       rx="2.4680691"
+       cy="68.809601"
+       cx="9.2208252" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.17517894,0,0,0.23724898,-11.141658,15.533733)"
+       id="text6-1"
+       style="font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;white-space:pre;shape-inside:url(#rect6-0);fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.00000006;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"><tspan
+         x="135.56084"
+         y="234.27313"
+         id="tspan6">radio seleccionado</tspan></text>
+    <ellipse
+       style="fill:#1b998b;fill-opacity:1;stroke:#000000;stroke-width:3.20746e-09;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       id="path6"
+       ry="1.6837983"
+       rx="1.9644303"
+       cy="68.801849"
+       cx="9.214118" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-68.923958,-44.185417)"
+       id="text7"
+       style="font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;white-space:pre;shape-inside:url(#rect7);fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.00000006;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"><tspan
+         x="283.7582"
+         y="483.88251"
+         id="tspan8">Bloque de texto</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#1b998b;stroke-width:0.52916667;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       id="rect8"
+       width="6.1979113"
+       height="7.4546928"
+       x="5.433857"
+       y="91.886452"
+       ry="1.2135531" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#1b998b;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       id="rect8-2"
+       width="6.1979113"
+       height="7.4546928"
+       x="5.3578124"
+       y="102.65833"
+       ry="1.2135531" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text8"
+       style="font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;white-space:pre;shape-inside:url(#rect9);fill:#000000;fill-opacity:0;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.15173999,0,0,0.22358181,-2.611895,8.873689)"
+       id="text9"
+       style="font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;white-space:pre;shape-inside:url(#rect10);fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"><tspan
+         x="103.71829"
+         y="398.67548"
+         id="tspan9">Checkbox sin marcar</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.15173999,0,0,0.22358181,-4.2470784,19.504798)"
+       id="text9-9"
+       style="font-size:26.6667px;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;white-space:pre;shape-inside:url(#rect10-9);fill:#000000;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"><tspan
+         x="114.49164"
+         y="398.67548"
+         id="tspan10">Checkbox marcado</tspan></text>
+  </g>
+</svg>
