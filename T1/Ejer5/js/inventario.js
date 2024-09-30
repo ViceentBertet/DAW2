@@ -1,6 +1,6 @@
 const CABECERA = ["NOMBRE", "PRECIO", "STOCK"]
 let producto1 = ["Manzana", 5, 12];
-let producto2 = ["Peras", 4, 18]
+let producto2 = ["Pera", 4, 18]
 var productos = [producto1, producto2];
 
 export function mostrarInventario() {
@@ -36,11 +36,12 @@ export function eliminarProducto(){
     } while (!verificar);
     for(let i = 0; i < productos.length; i++) {
         if (productos[i][0].toLowerCase() == nom.toLowerCase()){
-            let indice = i;
+            indice = i;
             break;
         }
     }
-    //TODO como especificar que producto queremos borrar
+    productos.splice(indice, 1);
+    alert("El producto ha sido eliminado");
 }
 export function actualizarProducto(){
     let verificar;
@@ -53,11 +54,24 @@ export function actualizarProducto(){
     } while (!verificar);
     for(let i = 0; i < productos.length; i++) {
         if (productos[i][0].toLowerCase() == nom.toLowerCase()){
-            let indice = i;
+            indice = i;
             break;
         }
     }
-    //TODO como especificar que producto queremos actualizar
+    opcion = prompt("¿Qué quieres modificar, precio o stock?(1/2)");
+    switch(opcion) {
+        case 1:
+            newPrecio = prompt(`El precio actual es de ${productos[indice][1]}, introduce el nuevo precio:`);
+            productos[indice][1] = newPrecio;
+            alert("Se ha cambiado el precio correctamente");
+            break;
+        case 2:
+            newStock = prompt(`El stock actual es de ${productos[indice][2]}, introduce el nuevo stock:`);
+            productos[indice][2] = newStock;
+            alert("Se ha cambiado el stock correctamente");
+            break;
+        default:alert("ERROR: Dato no comprendido, no se ha actualizado el producto");
+    }
 }
 export function calcularValor(){
     let valorTotal = 0;
