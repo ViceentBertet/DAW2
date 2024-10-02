@@ -10,5 +10,5 @@
         echo $num . "<br>";
         $suma += $num;
     }
-    echo "<br><br><b>SUMA " . $suma . "</b>"
+    echo "<br><br><b>SUMA " . $suma . "</b>";
 ?>
