@@ -2,6 +2,7 @@ const CABECERAS = ["Nombre", "Apellidos", "Email", "DNI", "Password", "Repetir p
 var errores = [];
 
 function verificarTexto(input, texto) {
+    console.log("Verificar texto");
     const REGEX = new RegExp(texto);
     let nombre = input.value;
     let resultado = REGEX.test(nombre);
@@ -14,6 +15,8 @@ function isCorrect(pwd, rPwd) {
     errores[errores.length] = resultado;
 }
 function mostrarMensaje() {
+    console.log("Mostrar mensaje");
+
     let mensaje = " ";
     for (let i = 0; i < errores.length; i++) {
         if (!errores[i]) mensaje += CABECERAS[i] + " ";
