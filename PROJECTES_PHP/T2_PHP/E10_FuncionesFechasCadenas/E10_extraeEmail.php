@@ -6,9 +6,9 @@
         $arroba = strpos($email,'@');
         $punto = strpos($email,'.');
         if (!$arroba || !$punto) {
-           echo "No es una dirección de email valida<br>";
+           echo "No es una dirección de email valida<br><br>";
            if (!$arroba) {
-               echo "Le falta el @";
+               echo "Le falta el @<br>";
            }
            if (!$punto) {
                echo "Le falta el .";
@@ -20,6 +20,6 @@
             
         }
     }
-    comprobarEmail("hola@gmail.com");
+    comprobarEmail("holagmailcom");
 ?>
 
