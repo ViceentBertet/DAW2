@@ -23,4 +23,14 @@ function mostrarMensaje() {
     }
     if (mensaje === " ") alert("Se ha registrado correctamente")
     else alert("Hay errores en los siguientes campos:" + mensaje);
+
+}
+function colores() {
+    let inputs = document.getElementsByTagName("input");
+
+    if (mensaje === " ") {
+        for (const element of object) {
+            
+        }
+    }
 }
