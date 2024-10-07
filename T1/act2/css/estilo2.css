@@ -1,0 +1,91 @@
+body {
+    margin:0;
+    padding:0;
+}
+header {
+    position: absolute;
+    top:0;
+    text-align: center;
+    background-color: #1e90ff;
+    color:white;
+    height: 125px;
+    width: 100%;
+}
+nav {
+    width:350px;
+    margin:auto;
+}
+header ul {
+    position: absolute;
+    top: 30px;
+}
+header li {
+    list-style: none;
+    float:left;
+    margin:10px;
+    font-size: 20px;
+}
+header li a{
+    color:blue;
+}
+#bio {
+    position:absolute;
+    top:125px;
+}
+#bio, #projects, #contact {
+    margin-left:10px;
+}
+
+#bio p {
+    margin-left:0;
+    color:gray;
+    font-style: italic;
+}
+
+#projects {
+    position:absolute;
+    top:225px;
+    width:100%;
+}
+#projects h2 {
+    margin-bottom:2px;
+}
+.project {
+    background-color:#f9f9f9;
+    border-left:1px solid lightgray;
+    border-right:1px solid lightgray;
+    border-bottom:1px solid lightgray;
+    border-top:1px solid gray;
+    margin-bottom:15px;
+    width:98%;
+    padding:5px;
+}
+.project h3{
+    color:#1e90ff;
+    font-size: 25px;
+    margin-bottom:0px;
+}
+
+#contact {
+    position:absolute;
+    top:575px;
+    width: 100%;
+}
+#contact h2 {
+    font-size: 30px;
+    margin:4px;
+}
+#contact input {
+    width:98%;
+    height:30px;
+    font-size: 15px;
+    margin-bottom:5px;
+}
+#contact button {
+    margin-top: 10px;
+    background-color: #1e90ff;
+    color:white;
+    border:none;
+    padding:10px;
+    width:75px;
+}
