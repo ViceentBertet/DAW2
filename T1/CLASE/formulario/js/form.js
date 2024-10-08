@@ -1,6 +1,6 @@
 const CABECERAS = ["Nombre", "Apellidos", "Email", "DNI", "Password", "Repetir passwd", "IP Equipo"];
 var errores = [];
-
+var mensaje = " ";
 function verificarTexto(input, texto) {
     console.log("Verificar texto");
     const REGEX = new RegExp(texto);
@@ -17,20 +17,29 @@ function isCorrect(pwd, rPwd) {
 function mostrarMensaje() {
     console.log("Mostrar mensaje");
 
-    let mensaje = " ";
+    
     for (let i = 0; i < errores.length; i++) {
         if (!errores[i]) mensaje += CABECERAS[i] + " ";
     }
     if (mensaje === " ") alert("Se ha registrado correctamente")
     else alert("Hay errores en los siguientes campos:" + mensaje);
-
+    colores();
 }
 function colores() {
     let inputs = document.getElementsByTagName("input");
 
     if (mensaje === " ") {
-        for (const element of object) {
-            
+        for (let i = 0; i < inputs.length; i++){
+            inputs[i].className += " bien";
+        }
+    } else {
+
+        for (let i = 0; i < inputs.length; i++){
+            if (!errores[i]) {
+                inputs[i].className += " mal";
+            } else {
+                inputs[i].className += " bien";
+            }
         }
     }
 }
