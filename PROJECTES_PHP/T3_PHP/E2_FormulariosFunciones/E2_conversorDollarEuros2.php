@@ -1,10 +1,10 @@
 <html>
     <head>
-        <title>title</title>
+        <title>Conversión con control</title>
         <meta charset="UTF-8">
     </head>
     <body>
-        <h3>Conversión sin control de errores</h3>
+        <h3>Conversión con control de errores</h3>
         
         <?php
             $cant = $_GET['euros'];
@@ -19,6 +19,5 @@
                 echo "Resultado de la conversión = $dolars US Dollars";
             }
         ?>
-        
     </body>
 </html>

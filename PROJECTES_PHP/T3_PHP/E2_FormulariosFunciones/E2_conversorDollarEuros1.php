@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>title</title>
+        <title>Conversión sin control</title>
         <meta charset="UTF-8">
     </head>
     <body>
@@ -13,6 +13,5 @@
             echo "Cantidad = $cant Euros<br>";
             echo "Resultado de la conversión = $dolars US Dollars";
         ?>
-        
     </body>
 </html>
