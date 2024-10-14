@@ -6,7 +6,9 @@
     margin:15px;
     margin-bottom:50px;
 }
-
+#principal {
+    text-align:center;
+}
 #rojo {
     background-color:red;
 }
@@ -22,9 +24,6 @@
 .sombra {
     box-shadow: 7px 7px 15px black;
 }
-.sombraInterior {
-    box-shadow: 7px 7px 15px black inset;
-}
 .circulo {
     border-radius: 50%;
 }
@@ -32,7 +31,6 @@ button {
     width:60px;
     position:relative;
     top: 320px;
-    left: 125px;
 }
 .fijo {
     box-shadow: 7px 7px 15px black inset;
