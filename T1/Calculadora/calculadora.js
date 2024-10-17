@@ -1,4 +1,7 @@
 let pantalla;
+let punto = false;
+let operador = false;
+
 validarCaracter(10);
 window.onload = function() {
     pantalla = document.querySelectorAll("input")[0];
@@ -10,6 +13,7 @@ function cargarEventos() {
         e.addEventListener("mousedown",sombra);
         e.addEventListener("mouseup",sombra);
         e.addEventListener("click", anyadirNum);
+        e.addEventListener()
     });
 }
 function sombra(){
@@ -24,26 +28,34 @@ function anyadirNum() {
 }
 function validarCaracter(n){
     if (!isNaN(n)) {
+        operador = false;
         return true;
-    } 
-    if (isNaN(pantalla.value[pantalla.value.length])){
-        return false;
     } 
     if (tieneFuncion(n)) {
         return false;
-    } 
-    return true;
+    }
+    if (!operador) {
+        operador = true;
+        return true;
+    }
+    return false;
 }
 function tieneFuncion(n) {
-    if (n === "C") { 
+    if (n === "C") {
+        punto = false;
+        operador = false;
         pantalla.value = "0";
         return true;
     } 
-    if (n === "( )") { 
-        pantalla.value = "(" + pantalla.value +")";
+    if (n === "( )") {
+        if (!isNaN(pantalla.value[pantalla.value.length - 1])) {
+            pantalla.value = "(" + pantalla.value +")";
+        }
         return true;
     } 
     if (n === "«" || pantalla.value === "«") {
+        if (pantalla.value[pantalla.value.length - 1] == ".") punto = false;
+        if (isNaN(pantalla.value[pantalla.value.length - 1])) operador = false;
         if (pantalla.value.length > 1) {
             console.log(pantalla.value.length);
             pantalla.value = pantalla.value.substring(0, pantalla.value.length - 1);
@@ -52,23 +64,20 @@ function tieneFuncion(n) {
             pantalla.value = 0;
         }
         return true;
-    } /*
+    } 
     if (n === ".") {
-        let ultimaPosicion = pantalla.value.lastIndexOf(".");
-        if (ultimaPosicion === -1 && !isNaN(pantalla.value[pantalla.value.length])) {
+        if (!punto) {
+            punto = true;
             pantalla.value += n;
-        } else if (isNaN(pantalla.value[pantalla.value.length])) return false;
-        else {
-            let linea = pantalla.value.substring(ultimaPosicion) + 1;
-            for (let i = 0; i < linea.length;i++) {
-                if (isNaN(linea[i]) && !linea[i + 1]) {
-
-                }
-            }
         }
         return true;
-    }*/
+    }
     if (n === "=") {
+        /*
+        No funciona:
+                1. No detecta ()x la x despues de un parentesis
+                2. % funciona para proporcionar un resto y no un porcentaje
+        */
         pantalla.value = eval(pantalla.value.replace("x","*"));
         return true;
     } 
