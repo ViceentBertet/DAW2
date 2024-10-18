@@ -12,15 +12,21 @@ function cargarEventos() {
     botones.forEach(e => {
         e.addEventListener("mousedown",sombra);
         e.addEventListener("mouseup",sombra);
-        e.addEventListener("click", anyadirNum);
-        e.addEventListener()
+        e.addEventListener("click", teclaPulsada);
+        document.addEventListener("keydown", teclaPulsada)
     });
 }
 function sombra(){
     this.classList.toggle("sombra");
 }
+function teclaPulsada(e) {
+   if(e.key) anyadirNum(e.key);
+   else anyadirNum(this.innerText);
+
+}
 function anyadirNum() {
     let n = this.innerText;
+
     if (pantalla.value === "0") pantalla.value = n;
     else if (validarCaracter(n)){
         pantalla.value += n;
@@ -78,7 +84,7 @@ function tieneFuncion(n) {
                 1. No detecta ()x la x despues de un parentesis
                 2. % funciona para proporcionar un resto y no un porcentaje
         */
-        pantalla.value = eval(pantalla.value.replace("x","*"));
+        pantalla.value = eval(pantalla.value.replaceAll("x","*"));
         return true;
     } 
     return false;
