@@ -1,0 +1,24 @@
+
+#padre {
+    height: 100px;
+    width: 100%;
+    display:flex;
+    align-items:stretch;
+    border:1px solid black;
+}
+#uno {
+    background-color: blue;
+    flex-shrink: 1;
+}
+#dos {
+    background-color: green;
+    flex-shrink:2;
+}
+#tres {
+    background-color: red;
+    flex-shrink:3;
+
+}
+div {
+    height: 100px;
+}
