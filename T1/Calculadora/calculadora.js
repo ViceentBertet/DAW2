@@ -1,6 +1,7 @@
 let pantalla;
 let punto = false;
 let operador = false;
+const OPERADORES = "+-/x%";
 
 validarCaracter(10);
 window.onload = function() {
@@ -20,14 +21,17 @@ function sombra(){
     this.classList.toggle("sombra");
 }
 function teclaPulsada(e) {
+    console.log(e.key)
    if(e.key) anyadirNum(e.key);
    else anyadirNum(this.innerText);
 
 }
-function anyadirNum() {
-    let n = this.innerText;
+function anyadirNum(n) {
+    if (n === "Backspace" || n === "Delete") n = "«";
+    if (n === "Enter") n = "=";
+    if (n === "*") n = "x";
 
-    if (pantalla.value === "0") pantalla.value = n;
+    if (pantalla.value === "0" && !isNaN(n)) pantalla.value = n;
     else if (validarCaracter(n)){
         pantalla.value += n;
     }
@@ -40,8 +44,9 @@ function validarCaracter(n){
     if (tieneFuncion(n)) {
         return false;
     }
-    if (!operador) {
+    if (!operador && OPERADORES.includes(n)) {
         operador = true;
+        punto = false;
         return true;
     }
     return false;
@@ -61,9 +66,13 @@ function tieneFuncion(n) {
     } 
     if (n === "«" || pantalla.value === "«") {
         if (pantalla.value[pantalla.value.length - 1] == ".") punto = false;
-        if (isNaN(pantalla.value[pantalla.value.length - 1])) operador = false;
+        if (isNaN(pantalla.value[pantalla.value.length - 1])) {
+            operador = false;
+            if (pantalla.value.indexOf()){
+                punto = true;
+            }
+        }
         if (pantalla.value.length > 1) {
-            console.log(pantalla.value.length);
             pantalla.value = pantalla.value.substring(0, pantalla.value.length - 1);
             
         } else {
@@ -71,7 +80,7 @@ function tieneFuncion(n) {
         }
         return true;
     } 
-    if (n === ".") {
+    if (n == ".") {
         if (!punto) {
             punto = true;
             pantalla.value += n;
@@ -79,14 +88,12 @@ function tieneFuncion(n) {
         return true;
     }
     if (n === "=") {
-        /*
-        No funciona:
-                1. No detecta ()x la x despues de un parentesis
-                2. % funciona para proporcionar un resto y no un porcentaje
-        */
+        if (pantalla.value.indexOf("%")) {
+            pantalla.value = pantalla.value.replaceAll("%", "x0.");
+        }
         pantalla.value = eval(pantalla.value.replaceAll("x","*"));
         return true;
-    } 
+    }
+
     return false;
-    
 }
