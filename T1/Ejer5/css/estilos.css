@@ -5,7 +5,7 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 header {
-    position:fixed;
+    position:sticky;
     top:0;
     left:0;
     height: 50px;
@@ -53,6 +53,9 @@ a:hover {
     display: flex;
     height: 430px;
     & section {
+        position: sticky;
+        top:20px;
+        left:0px;
         font-size: 15px;
         font-weight: 1000;
         background-color: #ecf0f1;
@@ -96,7 +99,7 @@ a:hover {
 }
 .itemArticulo:hover {
     transition: transform 1s;
-    transform: translate(0, -5px);
+    transform: translate(0, -10px);
 }
 #padreServicios {
     margin:auto;
