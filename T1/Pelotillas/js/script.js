@@ -10,8 +10,23 @@ window.onload = function() {
 function cargarEventos() {
     jugar.addEventListener("mouseup", sombra);
     jugar.addEventListener("mousedown", sombra);
+    jugar.addEventListener("click",jugarJuego);
     uno.addEventListener("click", seleccionar);
     dos.addEventListener("click", seleccionar);
+}
+/**********************JUGAR***************************/
+
+function jugarJuego() {
+    let nPelotas = obtenerNumero();
+    console.log(nPelotas);
+}
+/**********************UTILIDADES***************************/
+
+function obtenerNumero(){
+    let option = document.querySelectorAll("option");
+    let nPelotas;
+    option.forEach(e => {if (e.selected) nPelotas =  e.value;});
+    return nPelotas;
 }
 function sombra() {
     this.classList.toggle("sombra");
