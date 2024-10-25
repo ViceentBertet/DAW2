@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #padre {
+            display: grid;
+            grid-template-areas: 
+                "uno dos tres"
+                "cuatro cuatro cinco"
+                "seis seis siete"
+                "ocho nueve siete";
+            grid-template-columns:auto;
+            grid-template-rows: repeat(4, 100px);
+            
+            align-items: stretch;
+        }
+        #uno {
+            grid-area: uno;
+            background-color: red;
+        }
+        #dos{
+            grid-area: dos;
+            background-color: blue;
+            color:white;
+            padding: 10px;
+        }
+        #tres{
+            grid-area: tres;
+            background-color: green;
+        }
+        #qua {
+            grid-area: cuatro;
+            background-color: yellow;
+
+        }
+        #cinco {
+            grid-area: cinco;
+
+            background-color: purple;
+
+        }
+        #seis {
+            background-color: blueviolet;
+            grid-area: seis;
+
+        }
+        #siete {
+            background-color: lightgoldenrodyellow;
+            grid-area: siete;
+
+        }
+        #ocho {
+            background-color: lightblue;
+            grid-area: ocho;
+
+        }
+        #nueve {
+            background-color: burlywood;
+            grid-area: nueve;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="padre">
+        <div id="uno" class="rectangulo">
+
+        </div>
+        
+        <div id="dos" class="rectangulo">
+            Hola holita movidas
+        </div>
+        
+        <div id="tres" class="rectangulo">
+            
+        </div>
+        
+        <div id="qua" class="rectangulo">
+            
+        </div>
+        <div id="cinco" class="rectangulo">
+
+        </div>
+        
+        <div id="seis" class="rectangulo">
+            
+        </div>
+        
+        <div id="siete" class="rectangulo">
+            
+        </div>
+        
+        <div id="ocho" class="rectangulo">
+            
+        </div>
+        <div id="nueve" class="rectangulo">
+
+        </div>
+    </div>
+</body>
+</html>
