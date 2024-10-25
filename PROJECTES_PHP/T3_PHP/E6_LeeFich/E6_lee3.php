@@ -1,5 +1,4 @@
 <?php
-
     echo "<b>utiliza fread()</b><br><br>
                 <b>Nota:vemos como fread() si que requiere apertura y cierre del fichero.</b><br><br>";
     $ruta = "./ficheros/E6_mensajes2.txt";

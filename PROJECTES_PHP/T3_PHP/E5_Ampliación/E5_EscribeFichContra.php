@@ -42,11 +42,12 @@
     $contrasenyas = generarArray($nBasicos, $nEspeciales, $nPwd);
     $fitx = fopen($ruta, "a+");
     if ($fitx) {
-        fwrite($fitx, "");
         for ($i = 0; $i < count($contrasenyas); $i++) {
             echo $contrasenyas[$i] . "<br>";
-            
+            $string = $contrasenyas[$i] . "\t";
+            fwrite($fitx, $string);
          }
+        fwrite($fitx,"<br>\n");
     }
     fclose($fitx);
 ?>

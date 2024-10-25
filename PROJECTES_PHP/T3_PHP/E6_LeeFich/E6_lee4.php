@@ -9,7 +9,9 @@ if (file_exists($ruta)) {
     $gestor = fopen($ruta, "r");
     echo "Visualizamos con readfile()<br>";
     readfile($ruta);
-    echo "<b>" . fgets($gestor) . "</b><br><br>";
-    fpassthru($ruta);
+    echo "<br><br><b>" . fgets($gestor , 27) . "</b><br><br>";
+ 
+    echo "Resto con fpassthru():<br>";
+    echo fgets($gestor, fpassthru($gestor));
     fclose($gestor);
 } else echo "No existe $ruta";

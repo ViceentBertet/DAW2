@@ -1,10 +1,10 @@
 <html>    
     <head>
-        <title>E4_formGeneraContrasenyaVarias</title>
+        <title>E5_FormEscribeFichContra.php</title>
     </head>
     <body>
-        <form action="E4_generaContrasenyaVarias.php" >
-            Nombre del archivo (sin extensión)<input type="text" name="ruta" value="" /><br>
+        <form action="E5_EscribeFichContra.php" >
+            Nombre del archivo <input type="text" name="ruta" value="" /><br>
             Nº de contraseñas <input type="text" name="nPwd" value="" /><br>
             Long.de Básicos<input type="text" name="bas" value="" /><br>
             Long. de Especiales<input type="text" name="esp" value="" /><br><br>
