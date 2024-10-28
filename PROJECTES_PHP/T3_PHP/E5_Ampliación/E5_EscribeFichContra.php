@@ -28,6 +28,31 @@
     }
         return $contrasenyas;
     }
+    function manipularFichero($ruta, $contrasenyas) {
+        $fitx = fopen($ruta, "a+");
+        $correcto = true;
+        if ($fitx) {
+            for ($i = 0; $i < count($contrasenyas); $i++) {
+                while (!feof($fitx)) {
+                    $linea = explode("\t", fgets($fitx));
+                    if (in_array($contrasenyas[$i], $linea)) {
+                        echo "La contraseña: " . $contrasenyas[$i] . " no se puede escribir porque ya existe<br>";
+                        $correcto = false;
+                        break;
+                    }
+                }
+                if ($correcto) {
+                    $string = $contrasenyas[$i] . "\t";
+                    fwrite($fitx, $string);
+                    echo "La contraseña: " . $contrasenyas[$i] . " se ha excrito correctamente<br>";
+                }
+                rewind($fitx);
+                $correcto = true;
+            }
+            fwrite($fitx,"<br>\n");
+        }
+        fclose($fitx);
+    }
     $ruta = "./" . $_GET['ruta'] . ".txt";
     $nPwd = $_GET['nPwd'];
     $nBasicos = $_GET['bas'];
@@ -40,14 +65,5 @@
     if ($nEspeciales > 8){$nEspeciales = 8;}
    
     $contrasenyas = generarArray($nBasicos, $nEspeciales, $nPwd);
-    $fitx = fopen($ruta, "a+");
-    if ($fitx) {
-        for ($i = 0; $i < count($contrasenyas); $i++) {
-            echo $contrasenyas[$i] . "<br>";
-            $string = $contrasenyas[$i] . "\t";
-            fwrite($fitx, $string);
-         }
-        fwrite($fitx,"<br>\n");
-    }
-    fclose($fitx);
+    manipularFichero($ruta, $contrasenyas);
 ?>
