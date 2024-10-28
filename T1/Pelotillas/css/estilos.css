@@ -78,6 +78,7 @@ select {
     max-width: 150px;
     min-height: 20px;
     max-height: 150px;
+    border-radius: 50%;
 }
 #menu {
     width: 400px;
@@ -92,14 +93,16 @@ select {
     margin:auto;
     margin-top:20px;
     margin-bottom:20px;
-
 }
 .rojo {
-     background-color: red;
+    background-color: red;
+    z-index: 100;
 }
 .verde {
     background-color: green;
+    z-index: 100;
 }
 .azul {
     background-color: blue;
+    z-index: 100;
 }
