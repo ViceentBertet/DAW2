@@ -8,6 +8,14 @@
     <script src="js/script.js"></script>
 </head>
 <body>
+    <div id="protector" class="oculto">
+        <div id="x" class="oculto">X</div>
+        <div id="anuncio">
+            Podras cerrar el anuncio en
+            <div id="num">5</div>
+            segundos
+        </div>
+    </div>
     <header>
         <img src="media/img/yt.png" alt="playLatino">
         <input type="text" placeholder="Buscar en playLatino">
@@ -15,59 +23,60 @@
     </header>
     <main>
         <div>
+            <div id="tactil">
+                <div id="izq"></div>
+                <div id="der"></div>
+            </div>
             <div id="repro">
                 <video src="media/Carlos Vives, Shakira - La Bicicleta.mp4" poster="media/posters/capt2.png"></video>
             </div>
-            <div id="botones">
+            <div id="barra" class="oculto">
+                <progress id="progreso" value="0" max="100"></progress>
+                <div id="texto"></div>
+            </div>
+            <div id="botones" class="oculto">
                 <div>
                     <div class="boton">
                         <img src="media/img/silenciar.png" alt="Silenciar">
                     </div>
-                    Silenciar
                 </div>
                 <div>
                     <div class="boton">
                         &lt;&lt;
                     </div>
-                    -10 seg
                 </div>
                 <div>
-                    <div class="boton play">
+                    <div class="boton play" id="play">
                     </div>
-                    Play/Pause
                 </div>
                 <div>
                     <div class="boton">
                         &gt;&gt;
                     </div>
-                    +10 seg.
                 </div>
                 <div>
                     <div class="boton">
                         <img src="media/img/atras.png" alt="Reiniciar">
                     </div>
-                    Reiniciar
                 </div>
                 <div>
                     <div class="boton">
                         -
                     </div>
-                    Bajar Vol.
                 </div>
                 <div>
                     <div class="boton">
                         +
                     </div>
-                    Subir Vol.
                 </div>
             </div>
         </div>
         <div id="lista">
-            <video src="media/Cali Y El Dandee - Por Fin Te Encontré ft. Juan Magan, Sebastian Yatra (Video Oficiel).mp4" poster="media/posters/capt1.png"></video>
-            <video src="media/Despacito Luis Fonsi ft Daddy Yankee (Video Oficial).mp4" poster="media/posters/capt3.png"></video>
-            <video src="media/Enrique Iglesias - Bailando ft. Sean Paul, Descemer Bueno, Gente De Zona.mp4" poster="media/posters/capt4.png"></video>
-            <video src="media/Gol   Cali   El Dandee Selección Española.mp4" poster="media/posters/capt5.png"></video>
-            <video src="media/Wisin - Adrenalina (Official Video) ft. Jennifer Lopez, Ricky Martin.mp4"poster="media/posters/capt6.png"></video>
+            <video class="quitarControles" src="media/Cali Y El Dandee - Por Fin Te Encontré ft. Juan Magan, Sebastian Yatra (Video Oficiel).mp4" poster="media/posters/capt1.png"></video>
+            <video class="quitarControles"  src="media/Despacito Luis Fonsi ft Daddy Yankee (Video Oficial).mp4" poster="media/posters/capt3.png"></video>
+            <video class="quitarControles"  src="media/Enrique Iglesias - Bailando ft. Sean Paul, Descemer Bueno, Gente De Zona.mp4" poster="media/posters/capt4.png"></video>
+            <video class="quitarControles"  src="media/Gol   Cali   El Dandee Selección Española.mp4" poster="media/posters/capt5.png"></video>
+            <video class="quitarControles"  src="media/Wisin - Adrenalina (Official Video) ft. Jennifer Lopez, Ricky Martin.mp4"poster="media/posters/capt6.png"></video>
         </div>
     </main>
     

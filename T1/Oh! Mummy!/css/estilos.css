@@ -1,0 +1,49 @@
+body {
+    margin:0;
+    padding:0;
+    background-color: yellow;
+}
+#main {
+    display:grid;
+    grid-template-columns: repeat(21, 50px);
+    grid-template-rows: repeat(13, 50px);
+    width: 1050px;
+    height:650px;
+    background-color: white;
+}
+.camino {
+    background-color: black;
+}
+.muro {
+    background-color:brown;
+}
+#inicio {
+    width:50px;
+    height: 50px;
+    background-color: black;
+}
+.pers-abj{
+    background-image: url("/img/pers-abj.png");
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 50px;
+
+}
+.pers-arr{
+    background-image: url("/img/pers-arr.png");
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 50px;
+}
+.pers-der{
+    background-image: url("/img/pers-der.png");
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 50px;
+}
+.pers-izq{
+    background-image: url("/img/pers-izq.png");
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 50px;
+}
