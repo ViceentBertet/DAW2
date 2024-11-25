@@ -1,7 +1,7 @@
 let mandos = "wasd";
 let cuadros;
 let iniciar = true;
-let posPers = 8;
+let posPers = 10;
 let ultLetra = "s";
 window.onload = function() {
     cargarMapa();
@@ -15,10 +15,14 @@ function cargarEventos() {
  * Asigna a los cuadros correspondientes su valor
  */
 function cargarMapa() {
-    cuadros = main.querySelectorAll("div");
     let fila = 0;
     let columna = 0;
     let pos = 0;
+    for(let i = 0; i < 13*21; i++) {
+        let div = document.createElement('div');
+        main.appendChild(div);
+    }
+    cuadros = main.querySelectorAll("div");
     for (let i = 0; i < cuadros.length; i += 21) {
         for (let j = 0; j < 21; j++) {
             if (fila % 3 != 0 && columna % 4 != 0) {
@@ -53,6 +57,8 @@ function moverPersonaje(letra) {
         // Se controla que en el caso de haber pasado por encima, se borren los pasos y aparezca el personaje
         if (cuadros[posPers].classList.contains("pasos-h"))cuadros[posPers].classList.remove("pasos-h");
         if (cuadros[posPers].classList.contains("pasos-v"))cuadros[posPers].classList.remove("pasos-v");
+
+        comprobarMuros();
     } 
 }
 function moverArriba() {
@@ -96,6 +102,7 @@ function moverAbajo() {
         posPers = newPos;
     } else {
         inicio.classList.toggle("pers-abj");
+        inicio.classList.toggle("camino");
         iniciar = false;
     }
     ultLetra = "s";
@@ -126,4 +133,8 @@ function cambiarAnterior(){
         cuadros[posPers].classList.toggle("pers-der");
         cuadros[posPers].classList.add("pasos-h");
     }
+}
+
+function comprobarMuros() {
+    
 }
