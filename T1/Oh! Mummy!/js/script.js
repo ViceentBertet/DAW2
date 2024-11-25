@@ -39,44 +39,47 @@ function teclaPresionada(e) {
     }
 }
 function moverPersonaje(letra) {
-    cambiarAnterior();
-    if (letra == "w") { //Arriba
-        moverArriba();
-    } else if (letra == "a"){ // Izquierda
-        moverIzquierda();
-    } else if (letra == "s"){ //Abajo
-        moverAbajo();
-    } else { // Derecha
-        moverDerecha();
-    }
+    if (iniciar && letra == "s" || !iniciar) {
+        cambiarAnterior(letra);
+        if (letra == "w") { //Arriba
+            moverArriba();
+        } else if (letra == "a"){ // Izquierda
+            moverIzquierda();
+        } else if (letra == "s"){ //Abajo
+            moverAbajo();
+        } else { // Derecha
+            moverDerecha();
+        }
+        // Se controla que en el caso de haber pasado por encima, se borren los pasos y aparezca el personaje
+        if (cuadros[posPers].classList.contains("pasos-h"))cuadros[posPers].classList.remove("pasos-h");
+        if (cuadros[posPers].classList.contains("pasos-v"))cuadros[posPers].classList.remove("pasos-v");
+    } 
 }
 function moverArriba() {
-    if (!iniciar) {
-        let newPos = posPers;
-        if (posPers - 21 > -1) {
-            newPos = posPers - 21;
-        }
-        if (cuadros[newPos].classList.contains("muro")) {
-            newPos = posPers;
-        }
-        cuadros[newPos].classList.toggle("pers-arr");
-        posPers = newPos;
+    let newPos = posPers;
+    if (posPers - 21 > -1) {
+        newPos = posPers - 21;
     }
+    if (cuadros[newPos].classList.contains("muro")) {
+        newPos = posPers;
+    }
+    cuadros[newPos].classList.toggle("pers-arr");
+    posPers = newPos;
+    
     ultLetra = "w";
 
 }
 function moverIzquierda() {
-    if (!iniciar) {
-        let newPos = posPers;
-        if (posPers - 1 > -1) {
-            newPos = posPers - 1;
-        }
-        if (cuadros[newPos].classList.contains("muro")) {
-            newPos = posPers;
-        }
-        cuadros[newPos].classList.toggle("pers-izq");
-        posPers = newPos;
+    let newPos = posPers;
+    if (posPers - 1 > -1) {
+        newPos = posPers - 1;
     }
+    if (cuadros[newPos].classList.contains("muro") || posPers % 21 == 0) {
+        newPos = posPers;
+    }
+    cuadros[newPos].classList.toggle("pers-izq");
+    posPers = newPos;
+    
     ultLetra = "a";
 
 }
@@ -98,22 +101,29 @@ function moverAbajo() {
     ultLetra = "s";
 }
 function moverDerecha() {
-    if (!iniciar) {
-        let newPos = posPers;
-        if (posPers + 1 < cuadros.length) {
-            newPos = posPers + 1;
-        }
-        if (cuadros[newPos].classList.contains("muro")) {
-            newPos = posPers;
-        }
-        cuadros[newPos].classList.toggle("pers-der");
-        posPers = newPos;
+    let newPos = posPers;
+    if (posPers + 1 < cuadros.length) {
+        newPos = posPers + 1;
     }
+    if (cuadros[newPos].classList.contains("muro")|| newPos % 21 == 0) {
+        newPos = posPers;
+    }
+    cuadros[newPos].classList.toggle("pers-der");
+    posPers = newPos;
     ultLetra = "d";
 }
 function cambiarAnterior(){
-    if (ultLetra == "w") cuadros[posPers].classList.toggle("pers-arr");
-    else if (ultLetra == "a") cuadros[posPers].classList.toggle("pers-izq");
-    else if (ultLetra == "s") cuadros[posPers].classList.toggle("pers-abj");
-    else cuadros[posPers].classList.toggle("pers-der");
+    if (ultLetra == "w") {
+        cuadros[posPers].classList.toggle("pers-arr");
+        cuadros[posPers].classList.add("pasos-v");
+    } else if (ultLetra == "a") {
+        cuadros[posPers].classList.toggle("pers-izq");
+        cuadros[posPers].classList.add("pasos-h");
+    } else if (ultLetra == "s") {
+        cuadros[posPers].classList.toggle("pers-abj");
+        if (!iniciar) cuadros[posPers].classList.add("pasos-v");
+    } else {
+        cuadros[posPers].classList.toggle("pers-der");
+        cuadros[posPers].classList.add("pasos-h");
+    }
 }

@@ -27,12 +27,11 @@ body {
     background-position-x: center;
     background-position-y: center;
     background-size: 50px;
-
 }
 .pers-arr{
     background-image: url("/img/pers-arr.png");
-    background-position-x: center;
-    background-position-y: center;
+    
+    background-position: center, center;
     background-size: 50px;
 }
 .pers-der{
@@ -45,5 +44,19 @@ body {
     background-image: url("/img/pers-izq.png");
     background-position-x: center;
     background-position-y: center;
+    background-size: 50px;
+}
+.pasos-v {
+    background-image: url("/img/pasos-v.png");
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+.pasos-h {
+    background-image: url("/img/pasos-h.png");
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
     background-size: 50px;
 }
