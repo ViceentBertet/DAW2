@@ -1,6 +1,0 @@
-@echo off
-echo Fecha actual del sistema:
-date /T
-echo.
-echo Listando contenido de la carpeta actual:
-dir
