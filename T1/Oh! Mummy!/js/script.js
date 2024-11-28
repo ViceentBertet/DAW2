@@ -3,6 +3,10 @@ let cuadros;
 let iniciar = true;
 let posPers = 10;
 let ultLetra = "s";
+const POSMUROS = [22, 26, 30, 34, 38,
+                 85, 89, 93, 97, 101, 
+                 148, 152, 156, 160, 164,
+                 211, 215, 219, 223, 227];
 window.onload = function() {
     cargarMapa();
     cargarEventos();
@@ -57,7 +61,6 @@ function moverPersonaje(letra) {
         // Se controla que en el caso de haber pasado por encima, se borren los pasos y aparezca el personaje
         if (cuadros[posPers].classList.contains("pasos-h"))cuadros[posPers].classList.remove("pasos-h");
         if (cuadros[posPers].classList.contains("pasos-v"))cuadros[posPers].classList.remove("pasos-v");
-
         comprobarMuros();
     } 
 }
@@ -136,5 +139,24 @@ function cambiarAnterior(){
 }
 
 function comprobarMuros() {
-    
+    for (let i = 0; i < POSMUROS.length; i++){
+        if (comprobarCuadro(POSMUROS[i]- 20) && comprobarCuadro(POSMUROS[i] - 19)) { //Comprobar arriba
+            if (comprobarCuadro(POSMUROS[i] + 42) && comprobarCuadro(POSMUROS[i] + 43)) { //Comprobar abajo
+                if (comprobarCuadro(POSMUROS[i] - 21) && comprobarCuadro(POSMUROS[i] - 1) && comprobarCuadro(POSMUROS[i] + 20) && comprobarCuadro(POSMUROS[i] + 41)) { //Comprobar columna izquierda
+                    if (comprobarCuadro(POSMUROS[i] - 18) && comprobarCuadro(POSMUROS[i] + 3) && comprobarCuadro(POSMUROS[i] + 24) && comprobarCuadro(POSMUROS[i] + 44)) {
+                        cuadros[POSMUROS[i]].classList.add("vacio");
+                        cuadros[POSMUROS[i]].classList.add("muro");
+
+                    }
+                }
+            }
+        }
+    }
+}
+function comprobarCuadro(pos) {
+    if (cuadros[pos].classList.contains("pasos-v") || cuadros[pos].classList.contains("pasos-h")) {
+        console.log("si");
+        return true;
+    }
+    return false;
 }
