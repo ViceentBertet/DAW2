@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            body {
+                margin:0;
+                padding:0;
+                display: flex;
+                flex-direction: column;
+                height:100%;
+            }
+            header {
+                background-color:red;
+                flex-grow:1;
+            }
+            
+            main {
+                background-color:green;
+                flex-grow:15;
+                flex-wrap: wrap;
+                display:flex;
+                flex-direction: column;
+                align-items:flex-end;
+                div{
+                    width:33.33333333333%;
+                }
+                #uno {
+                    background-color:aquamarine;
+                    /* flex-grow:2;*/
+                    height:30%;
+                }
+                #dos {
+                    background-color:coral;
+                    /*flex-grow:4;*/
+                    height:70%;
+                }
+                #tres {
+                    background-color: darkgray;
+                    height:70%;
+                }
+                #cuatro {
+                    background-color: blueviolet;
+                    height:30%;
+                }
+                #cinco {
+                    background-color: firebrick;
+                    height:10%;
+                    margin-top:auto;
+                }
+
+            }
+
+            footer {
+                background-color:blue;
+                flex-grow:1;
+            }
+            .item {
+                width:100%;
+                justify-content: stretch;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="item">
+
+        </header>
+        <main class="item">
+            <div id="uno">
+
+            </div>
+            <div id="dos">
+
+            </div>
+            <div id="tres">
+
+            </div>
+            <div id="cuatro">
+
+            </div>
+            <div id="cinco">
+
+            </div>
+        </main>
+        <footer class="item">
+
+        </foteer>
+    </body>
+</html>
