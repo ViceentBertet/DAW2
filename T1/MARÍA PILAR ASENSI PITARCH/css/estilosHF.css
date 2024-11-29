@@ -5,14 +5,6 @@
     --color4:#EDD9C2;
     --color5:#E5AA5C;
 }
-@font-face {
-    font-family: lato;
-    src:url("../recursos/fonts/Lato/Lato-Thin.ttf");
-}
-@font-face {
-    font-family: latoBold;
-    src:url("../recursos/fonts/Lato/Lato-Bold.ttf");
-}
 body {
     padding:0;
     margin:0;
@@ -53,21 +45,11 @@ li {
         height: 20px;
     }
 }
-.carousel-item img {
-    height: 460px;
-}
-#saberMas {
-    font-family: latoBold;
-    color:var(--color2, blue);
-    font-size: 18px;
-    margin-top:10px;
-    margin-bottom:10px;
-    padding:10px;
-    background-color: var(--color4, salmon);
-    border:1px solid var(--color5, yellow);
-    height: 305px;
-    img {
-        float:right;
-        width:500px;
-    }
+footer {
+    height: 75px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:15px;
+    border-top:1px solid var(--color2, blue);
 }
