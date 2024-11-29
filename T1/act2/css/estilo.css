@@ -1,0 +1,62 @@
+h1 {
+    color:blue;
+    text-align:center;
+}
+h3 {
+    color:green;
+}
+
+#grande {
+    padding:20px;
+    border:1px solid black;
+    width:500px;
+    margin:auto;
+}
+table {
+    border-collapse:collapse;
+    width:450px;
+    margin:auto;
+}
+#head {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: cadetblue;
+    height:100px;
+    line-height: 100px;
+    text-align: center; 
+}
+#main {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: gray;
+    height:100px;
+    line-height: 100px;
+    padding-left: 25px;
+}
+#foot {
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: salmon;
+    text-align:center;
+    height:100px;
+    line-height: 100px;
+}
+ul {margin-left: 17px;}
+ul li {
+    color:gold;
+    list-style-type:square;
+}
+ol { 
+    list-style: none; 
+    counter-reset: num;
+} 
+
+ol li { 
+    counter-increment: num;
+    color:purple;
+} 
+
+ol li::before { 
+    content: "0"counter(num) ". "; 
+    color: purple; 
+} 
