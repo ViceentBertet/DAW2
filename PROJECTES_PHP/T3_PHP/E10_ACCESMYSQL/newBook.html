@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Entrada de libros en BD bookorama</title>
+</head>
+<body>
+    <h1>Entrada de libros en BD bookorama</h1>
+    <form action="E10_newBook.php" method="post">
+        <table border="0">
+        <tr>
+            <td>ISBN</td>
+            <td><input type="text" name="isbn" maxlength="13" size="13"><br /></td>
+        </tr>
+        <tr>
+            <td>Author</td>
+            <td> <input type="text" name="author" maxlength="30" size="30"><br /></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td> <input type="text" name="title" maxlength="60" size="30"><br></td>
+        </tr>
+        <tr>
+            <td>Price $</td>
+            <td><input type="text" name="price" maxlength="7" size="7"><br /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Register"></td>
+        </tr>
+        </table>
+    </form>
+</body>
+</html>
