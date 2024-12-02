@@ -10,7 +10,6 @@
         echo "Error: No se pudo conectar a MYSQL" . PHP.EOL;
         echo "Error de depuracion: " . mysqli_connect_errno() . "<br>";
     } else {
-        echo "Realizando ACTUALIZACIÓN...<br>";
         $query = "DELETE FROM articulo"
                 . " WHERE idArticulo=14";
         mysqli_query($link, $query);

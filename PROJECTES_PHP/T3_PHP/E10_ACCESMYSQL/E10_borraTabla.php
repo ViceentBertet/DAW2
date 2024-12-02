@@ -11,7 +11,6 @@
         echo "Error de depuracion: " . mysqli_connect_errno() . "<br>";
     } else {
         $tabla_borrada = "articulo2";
-        echo "Realizando ACTUALIZACIÓN...<br>";
         $query = "DROP TABLE $tabla_borrada";
         $resultat = mysqli_query($link, $query);
         if ($resultat) {
