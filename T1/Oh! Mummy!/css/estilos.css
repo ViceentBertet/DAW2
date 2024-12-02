@@ -74,44 +74,46 @@ body {
 }
 .muro {
     background-color:brown;
+    overflow:visible;
+    z-index: 10;
 }
 #inicio {
     width:50px;
     height: 50px;
 }
 .pers-abj{
-    background-image: url("/img/pers-abj.png");
+    background-image: url("../img/pers-abj.png");
     background-position-x: center;
     background-position-y: center;
     background-size: 50px;
 }
 .pers-arr{
-    background-image: url("/img/pers-arr.png");
+    background-image: url("../img/pers-arr.png");
     
     background-position: center, center;
     background-size: 50px;
 }
 .pers-der{
-    background-image: url("/img/pers-der.png");
+    background-image: url("../img/pers-der.png");
     background-position-x: center;
     background-position-y: center;
     background-size: 50px;
 }
 .pers-izq{
-    background-image: url("/img/pers-izq.png");
+    background-image: url("../img/pers-izq.png");
     background-position-x: center;
     background-position-y: center;
     background-size: 50px;
 }
 .pasos-v {
-    background-image: url("/img/pasos-v.png");
+    background-image: url("../img/pasos-v.png");
     background-position-x: center;
     background-position-y: center;
     background-repeat: no-repeat;
     background-size: 25px;
 }
 .pasos-h {
-    background-image: url("/img/pasos-h.png");
+    background-image: url("../img/pasos-h.png");
     background-position-x: center;
     background-position-y: center;
     background-repeat: no-repeat;
@@ -122,5 +124,32 @@ body {
 }
 .vacio {
     background-color: blue;
+}
+.tesoro {
+    background-image: url("../img/tesoro.png");
+    background-position: center;
     background-size: 150px;
+}
+.llave {
+    background-image: url("../img/llave.png");
+    background-position: center;
+    background-size: 150px;
+}
+.sarcofago {
+    background-image: url("../img/sarcofago.png");
+    background-position: center;
+    background-size: 150px;
+}
+.pergamino {
+    background-image: url("../img/pergamino.png");
+    background-position: center;
+    background-size: 150px;
+}
+.momia {
+
+}
+.imagen {
+    width:150px;
+    height:100px;
+    background-color:red;
 }

@@ -3,15 +3,17 @@ let cuadros;
 let iniciar = true;
 let posPers = 10;
 let ultLetra = "s";
+let puntos = 0;
+
 const POSMUROS = [22, 26, 30, 34, 38,
                  85, 89, 93, 97, 101, 
                  148, 152, 156, 160, 164,
                  211, 215, 219, 223, 227];
+const PREMIOS = ['vacio', 'tesoro', 'llave', 'sarcofago', 'pergamino', 'momia'];
 window.onload = function() {
     cargarMapa();
     cargarEventos();
 }
-
 function cargarEventos() {
     document.addEventListener("keypress", teclaPresionada);
 }
@@ -69,7 +71,7 @@ function moverArriba() {
     if (posPers - 21 > -1) {
         newPos = posPers - 21;
     }
-    if (cuadros[newPos].classList.contains("muro")) {
+    if (!cuadros[newPos].classList.contains("camino")) {
         newPos = posPers;
     }
     cuadros[newPos].classList.toggle("pers-arr");
@@ -83,7 +85,7 @@ function moverIzquierda() {
     if (posPers - 1 > -1) {
         newPos = posPers - 1;
     }
-    if (cuadros[newPos].classList.contains("muro") || posPers % 21 == 0) {
+    if (!cuadros[newPos].classList.contains("camino") || posPers % 21 == 0) {
         newPos = posPers;
     }
     cuadros[newPos].classList.toggle("pers-izq");
@@ -98,7 +100,7 @@ function moverAbajo() {
         if (posPers + 21 < cuadros.length) {
             newPos = posPers + 21;
         }
-        if (cuadros[newPos].classList.contains("muro")) {
+        if (!cuadros[newPos].classList.contains("camino")) {
             newPos = posPers;
         }
         cuadros[newPos].classList.toggle("pers-abj");
@@ -115,7 +117,7 @@ function moverDerecha() {
     if (posPers + 1 < cuadros.length) {
         newPos = posPers + 1;
     }
-    if (cuadros[newPos].classList.contains("muro")|| newPos % 21 == 0) {
+    if (!cuadros[newPos].classList.contains("camino")|| newPos % 21 == 0) {
         newPos = posPers;
     }
     cuadros[newPos].classList.toggle("pers-der");
@@ -140,23 +142,60 @@ function cambiarAnterior(){
 
 function comprobarMuros() {
     for (let i = 0; i < POSMUROS.length; i++){
-        if (comprobarCuadro(POSMUROS[i]- 20) && comprobarCuadro(POSMUROS[i] - 19)) { //Comprobar arriba
-            if (comprobarCuadro(POSMUROS[i] + 42) && comprobarCuadro(POSMUROS[i] + 43)) { //Comprobar abajo
-                if (comprobarCuadro(POSMUROS[i] - 21) && comprobarCuadro(POSMUROS[i] - 1) && comprobarCuadro(POSMUROS[i] + 20) && comprobarCuadro(POSMUROS[i] + 41)) { //Comprobar columna izquierda
-                    if (comprobarCuadro(POSMUROS[i] - 18) && comprobarCuadro(POSMUROS[i] + 3) && comprobarCuadro(POSMUROS[i] + 24) && comprobarCuadro(POSMUROS[i] + 44)) {
-                        cuadros[POSMUROS[i]].classList.add("vacio");
-                        cuadros[POSMUROS[i]].classList.add("muro");
-
+        if (cuadros[POSMUROS[i]].classList.contains("muro")) {
+            if (comprobarCuadro(POSMUROS[i]- 20) && comprobarCuadro(POSMUROS[i] - 19)) { //Comprobar arriba
+                if (comprobarCuadro(POSMUROS[i] + 42) && comprobarCuadro(POSMUROS[i] + 43)) { //Comprobar abajo
+                    if (comprobarCuadro(POSMUROS[i] - 21) && comprobarCuadro(POSMUROS[i] - 1) && comprobarCuadro(POSMUROS[i] + 20) && comprobarCuadro(POSMUROS[i] + 41)) { //Comprobar columna izquierda
+                        if (comprobarCuadro(POSMUROS[i] - 18) && comprobarCuadro(POSMUROS[i] + 3) && comprobarCuadro(POSMUROS[i] + 24) && comprobarCuadro(POSMUROS[i] + 44)) {
+                            let premioActual = PREMIOS[getRandomInt(0,6)];
+                            cuadros[POSMUROS[i]].classList.remove("muro");
+                            generarImagen(i, premioActual);
+                            accionPremio(premioActual);
+                        }
                     }
                 }
             }
-        }
+        } 
     }
+    
 }
 function comprobarCuadro(pos) {
-    if (cuadros[pos].classList.contains("pasos-v") || cuadros[pos].classList.contains("pasos-h")) {
-        console.log("si");
+    if (cuadros[pos].classList.contains("pasos-v") || cuadros[pos].classList.contains("pasos-h") || cuadros[pos].classList.contains("pers-abj") || cuadros[pos].classList.contains("pers-arr")|| cuadros[pos].classList.contains("pers-izq") || cuadros[pos].classList.contains("pers-der")) {
         return true;
     }
     return false;
+}
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+}
+function accionPremio(premio, pos) {
+    if (premio == "vacio") {
+        
+
+    } else if (premio == "tesoro") {
+        puntos+=100;
+        let lAux = 0;
+        lAux += puntos;
+
+        let tablaScore = score.querySelectorAll("div")[0];
+        tablaScore.innerText = lAux.toString().padStart(8, '0');
+    }
+}
+function generarImagen(pos, premio) {
+    let top= -600;
+    let left = -400;
+    for (let i = 0; i < pos; i++) {
+        left += 200;
+        if ((i + 1) % 5 == 0) {
+            left -= 800;
+            top += 150;
+        }
+    }
+    let img = document.createElement("img");
+    img.src = "./img/" + premio + ".png";
+    console.log(img.src);
+    img.classList.add("imagen");
+    cuadros[POSMUROS[pos]].appendChild(img);
 }
