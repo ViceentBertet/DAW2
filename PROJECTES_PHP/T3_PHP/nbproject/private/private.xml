@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/DAW2/PROJECTES_PHP/T3_PHP/E10_ACCESMYSQL/PDO/E10_borraArtic_PDO.php</file>
+            <file>file:/C:/DAW2/PROJECTES_PHP/T3_PHP/E10_ACCESMYSQL/PDO/E10_actualizaArticulo_PDO.php</file>
+            <file>file:/C:/DAW2/PROJECTES_PHP/T3_PHP/E10_ACCESMYSQL/PDO/E10_borraTabla_PDO.php</file>
+            <file>file:/C:/DAW2/PROJECTES_PHP/T3_PHP/E10_ACCESMYSQL/PDO/E10_SelectArtPosic_PDO.php</file>
+            <file>file:/C:/DAW2/PROJECTES_PHP/T3_PHP/E10_ACCESMYSQL/PDO/E10_conectaClientesDb_PDO.php</file>
+            <file>file:/C:/DAW2/PROJECTES_PHP/T3_PHP/E10_ACCESMYSQL/PDO/E10_insertaArticulo_PDO.php</file>
+            <file>file:/C:/DAW2/PROJECTES_PHP/T3_PHP/E10_ACCESMYSQL/PDO/E10_insertArtMultiTrans_PDO.php</file>
+        </group>
+>>>>>>> d34c637c2e4a18ad794488f0542ad1638fabf723
     </open-files>
 </project-private>
