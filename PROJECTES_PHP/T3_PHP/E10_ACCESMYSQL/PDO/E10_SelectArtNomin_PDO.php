@@ -7,19 +7,20 @@ $port = 3306;
 $cadena_conexion = "mysql:host=$hostname;dbname=$database;port=$port;";
 try {
     $pdo = new PDO($cadena_conexion, $usuario, $pwd);
-    $id = 1;
-    $query = 'SELECT * FROM articulo WHERE idArticulo=?';
+    $query = 'SELECT * FROM articulo';
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$id]);
+    $stmt->execute();
     $n_filas = $stmt->rowCount();
     printf("Filas seleccionadas %d<br><br>", $n_filas);
-    if ($n_filas > 0) {
-        echo "Visualizar datos:<br>";
-        $datos = $stmt->fetchAll();
-        foreach ($datos as $registro) {
-            print_r($registro);
-        }
+    echo "Visualizar datos:<br>";
+    $datos = $stmt->fetchAll();
+    foreach ($datos as $registro) {
+        echo $registro[0] . "<br>";
+        echo $registro[1] . "<br>";
+        echo $registro[2] . "<br>";
+        echo $registro[3] . "<br><br>";
     }
+    
     $pdo = null; //Así se cierra la conexión
 } catch (PDOException $e) {
     echo "Error con la base de datos: <b>$database</b><br>" . $e->getMessage(); 
