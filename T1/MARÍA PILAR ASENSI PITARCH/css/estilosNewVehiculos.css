@@ -1,0 +1,54 @@
+:root {
+    --color1:#1F8FAF;
+    --color2:#0C3A63;
+    --color3:#f4f6f6;
+    --color4:#EDD9C2;
+    --color5:#E5AA5C;
+}
+@font-face {
+    font-family: lato;
+    src:url("../recursos/fonts/Lato/Lato-Bold.ttf");
+    font-weight: bold;
+}
+aside {
+    float:left;
+    background-color: white;
+    border: 1px solid lightgray;
+    padding:20px;
+    color:var(--color2, blue);
+}
+.listaColor {
+    display:flex;
+    justify-content: space-around;
+    margin-bottom:10px;
+    gap:10px;
+}
+.color {
+    width:40px;
+    height:40px;
+    border:1px solid black;
+}
+.azul {
+    background-color: blue;
+}
+.negro {
+    background-color: black;
+}
+.rojo {
+    background-color: red;
+}
+.blanco {
+    background-color: white;
+}
+.amarillo {
+    background-color: yellow;
+}
+.gris-claro {
+    background-color: gainsboro;
+}
+.gris {
+    background-color: gray;
+}
+.naranja {
+    background-color: orange;
+}

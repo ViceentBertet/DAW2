@@ -7,7 +7,7 @@
 }
 @font-face {
     font-family: lato;
-    src:url("../recursos/fonts/Lato/Lato-Thin.ttf");
+    src:url("../recursos/fonts/Lato/Lato-Regular.ttf");
     font-weight: normal;
 }
 @font-face {
@@ -15,24 +15,73 @@
     src:url("../recursos/fonts/Lato/Lato-Bold.ttf");
     font-weight: bold;
 }
+body {
+    font-family: lato;
+}
 #presentacion {
     margin-top:50px;
-    width:900px;
+    width:850px;
     margin:auto;
-    display:flex;
-    justify-content: space-between;
+    display:grid;
+    grid-template-areas: 
+            "a b b b";
     img {
+        grid-area: a;
         width:400px;
     }
+    div {
+        grid-area: b;
+        text-align: center;
+    }
     h3 {
-        font-family: lato;
         color: var(--color5, yellow);
     }
+    pre {
+        font-family: lato;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        color: var(--color2 , darkblue);
+    }
 }
-pre {
-    font-size: 18px;
-    font-family: lato;
+
+#extras {
+    height: 100px;
+    width: 850px;
+    margin:auto;
+    margin-top:20px;
+    display:flex;
+    color:var(--color2, blue);
     font-weight: bold;
-    text-align: center;
-    color: var(--color2 , darkblue);
+    align-items: center;
+    justify-content: space-around;
+    strong {
+        color:var(--color1, blue);
+    }
+}
+#caract {
+    width:900px;
+    margin:auto;
+    display:grid;
+    grid-template-areas: 
+            "c d d e";
+    h4 {
+        font-weight: bolder;
+        color:var(--color5, yellow);
+        text-align: center;
+    }
+    li {
+        font-size: 18px;
+        font-weight: normal;
+        color: var(--color1);
+    }
+}
+#uno {
+    grid-area: c;
+}
+#dos {
+    grid-area: d;
+}
+#tres {
+    grid-area: e;
 }
