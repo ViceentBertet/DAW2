@@ -7,6 +7,6 @@
     . 'por lo que se pierde el valor de la variable...<br><br>';
     unset($_SESSION["sess_var"]);
     echo 'Pulsa SIGUIENTE PÁGINA, se ejecutrará page3...<br>'
-    . '<a href="E9_page3.php">Siguiente página</a>';
+    . '<a href="E11_page3.php">Siguiente página</a>';
 ?>
 
