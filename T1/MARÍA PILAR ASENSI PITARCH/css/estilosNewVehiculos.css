@@ -52,3 +52,81 @@ aside {
 .naranja {
     background-color: orange;
 }
+.pelota {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--color1, blue);
+    position: relative;
+    margin-bottom: -15px;
+}
+#pel1 {
+    top:-12px;
+    float: left;
+}
+#pel2 {
+    top:-19px;
+    left:173px;
+}
+.linea {
+    width: 200px;
+    height: 7px;
+    background-color: var(--color5, orange);
+}
+#precios{
+    display: flex;
+    justify-content: space-between;
+}
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--color1, lightblue);
+    font-size: 15px;
+}
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+}
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+.container input:checked ~ .checkmark {
+    background-color: var(--color2, blue);
+}
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+.container .checkmark:after {
+    left: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
