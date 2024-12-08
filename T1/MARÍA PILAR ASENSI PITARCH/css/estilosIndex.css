@@ -8,19 +8,21 @@
 @font-face {
     font-family: lato;
     src:url("../recursos/fonts/Lato/Lato-Regular.ttf");
+    font-weight: normal;
+
 }
 @font-face {
-    font-family: latoBold;
+    font-family: lato;
     src:url("../recursos/fonts/Lato/Lato-Bold.ttf");
+    font-weight: bold;
 }
-
 .carousel-item img {
     height: 400px;
 }
 #saberMas {
+    font-weight: bold;
     display:flex;
     justify-content: space-between;
-    font-family: latoBold;
     color:var(--color2, blue);
     font-size: 18px;
     margin-top:10px;
@@ -45,4 +47,3 @@
         width:400px;
     }
 }
-

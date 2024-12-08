@@ -9,28 +9,26 @@
     font-family: lato;
     src:url("../recursos/fonts/Lato/Lato-Regular.ttf");
     font-weight: normal;
+
 }
 @font-face {
     font-family: lato;
     src:url("../recursos/fonts/Lato/Lato-Bold.ttf");
     font-weight: bold;
 }
-#cat {
+#ofe {
     border-bottom:4px solid var(--color5);
 }
-#stock {
-    height: 150px;
-    width: 200px;
+.caja {
+    height: 100px;
+    width: 270px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     padding: 5px;
     margin-bottom:400px;
-    
-    h3{
-        color: var(--color2);
-    }
+    color: var(--color1, lightblue);
     a {
-        color:var(--color1);
+        color: var(--color1, lightblue);
         text-decoration: none;
     }
 }

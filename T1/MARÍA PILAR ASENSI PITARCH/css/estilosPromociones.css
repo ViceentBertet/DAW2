@@ -1,0 +1,73 @@
+:root {
+    --color1:#1F8FAF;
+    --color2:#0C3A63;
+    --color3:#f4f6f6;
+    --color4:#EDD9C2;
+    --color5:#E5AA5C;
+}
+@font-face {
+    font-family: lato;
+    src:url("../recursos/fonts/Lato/Lato-Regular.ttf");
+    font-weight: normal;
+}
+@font-face {
+    font-family: lato;
+    src:url("../recursos/fonts/Lato/Lato-Bold.ttf");
+    font-weight: bold;
+}
+#ofe {
+    border-bottom:4px solid var(--color5);
+}
+#medio {
+    display: grid;
+    grid-template-areas: 
+    "a b c"
+    "d e f";
+    gap:10px;
+}
+.caja {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:calc(850px/3 - 10px);
+    height: calc(850px/3 - 10px);
+    img {
+        width: 200px;
+    }
+}
+#caja1 {
+    grid-area: a;
+}
+#caja2 {
+    grid-area: b;
+}
+#caja3 {
+    grid-area: c;
+}
+#caja4 {
+    grid-area: d;
+}
+#caja5 {
+    grid-area: e;
+}
+#caja6 {
+    grid-area: f;
+}
+.btn-coches {
+    position:relative;
+    left: 60px;
+    width: 135px;
+    height: 25px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9fefa;
+    border: 1px solid var(--color5, salmon);
+    border-radius: 15px;
+    a {
+        text-decoration: none;
+        color:var(--color2, blue);
+    }
+}

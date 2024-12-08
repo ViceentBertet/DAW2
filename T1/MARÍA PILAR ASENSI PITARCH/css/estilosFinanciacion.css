@@ -9,28 +9,35 @@
     font-family: lato;
     src:url("../recursos/fonts/Lato/Lato-Regular.ttf");
     font-weight: normal;
+
 }
 @font-face {
     font-family: lato;
     src:url("../recursos/fonts/Lato/Lato-Bold.ttf");
     font-weight: bold;
 }
-#cat {
+#ofe {
     border-bottom:4px solid var(--color5);
 }
-#stock {
-    height: 150px;
-    width: 200px;
+#medio {
+    text-align: center;
+    font-family: lato;
+    color:var(--color2, blue);
+}
+#grande {
+    width: 850px;
+}
+.fuerte {
+    font-weight: bold;
+}
+#tarjetas {
     display: flex;
-    flex-direction: column;
-    padding: 5px;
-    margin-bottom:400px;
-    
-    h3{
-        color: var(--color2);
+    margin-bottom: 15px;
+    div {
+        display: flex;
+        align-items: center;
     }
-    a {
-        color:var(--color1);
-        text-decoration: none;
+    img {
+        width: 200px;
     }
 }
