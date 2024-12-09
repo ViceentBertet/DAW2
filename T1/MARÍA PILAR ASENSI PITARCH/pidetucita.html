@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pide tu cita</title>
+    <link rel="stylesheet" href="css/estilosHF.css">
+    <link rel="stylesheet" href="css/estilosPidetucita.css">
+</head>
+<body>
+    <div id="total">
+        <header>
+            <img src="recursos/img/logo.png" alt="Logo PAP">
+            <ul>
+                <li><a href="catalogo.html" id="cat">Catálogo</a></li>
+                <li><a href="ofertas.html" id="ofe">Ofertas y Financiación</a></li>
+                <li><a href="clientes.html" id="cli">Clientes</a></li>
+                <li><a href="quienSomos.html" id="qui">Quiénes Somos</a></li>
+                <li><a href="contacta.html" id="con">Contacto</a></li>
+                <li><a href="inicioSesion.html" id="ini">Inicio de Sesión</a></li>
+                <li><img src="recursos/img/lupa.png"><input type="text"></li>
+            </ul>
+        </header>
+        <div id="medio">
+            <div class="caja">
+                <h3 id="titulo">PIDE TU CITA ONLINE</h3>
+                <form action="scriptdeconfianza.php" method="post">
+                    <div>
+                        <label for="ubi">
+                            <img src="recursos/img/ubicacion2.png" id="imgUbi" alt="ubicacion">
+                        </label>
+                        <label for="usu">
+                            <img src="recursos/img/avatar.png" id="imgUsu" alt="Usuario">
+                        </label>
+                        <label for="cal">
+                            <img src="recursos/img/calendario.png" id="imgCal" alt="Calendario">
+                        </label>
+                        <label for="corr">
+                            <img src="recursos/img/correo.png" id="imgMail"alt="Correo">
+                        </label>
+                    </div>
+                    <div>
+                        <input type="text" name="ubi" id="ubi">
+                
+                
+                        <input type="radio" name="usar" id="usar">
+                        <label for="usar" id="textoUbi">USAR MI UBICACION</label>
+                    
+                       
+                        <input type="text" name="usu" id="usu">
+                    
+                        
+                        <input type="date" name="cal" id="cal">
+                        <label for="hor">
+                            <img src="recursos/img/reloj.png" id="imgRel"alt="Reloj">
+                        </label>
+                        <input type="datetime" name="hor" id="hor">
+                        <input type="text" name="corr" id="corr">
+                        <button type="submit" id="submit">PEDIR CITA</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+          <footer>
+            <img src="recursos/img/insta.png" alt="Instagram">
+            <img src="recursos/img/facebook.png" alt="Facebook">
+            <img src="recursos/img/yt.png" alt="Youtube">
+            <img src="recursos/img/linkedn.png" alt="LinkedIn">
+          </footer>
+    </div>
+</body>
+</html>
