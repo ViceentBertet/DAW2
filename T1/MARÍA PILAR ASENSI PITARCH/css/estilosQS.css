@@ -1,0 +1,81 @@
+:root {
+    --color1:#1F8FAF;
+    --color2:#0C3A63;
+    --color3:#f4f6f6;
+    --color4:#EDD9C2;
+    --color5:#E5AA5C;
+}
+@font-face {
+    font-family: lato;
+    src:url("../recursos/fonts/Lato/Lato-Regular.ttf");
+    font-weight: normal;
+}
+@font-face {
+    font-family: lato;
+    src:url("../recursos/fonts/Lato/Lato-Bold.ttf");
+    font-weight: bold;
+}
+#qui {
+    border-bottom:4px solid var(--color5);
+}
+#medio {
+    color:var(--color2,blue);
+    h3 {
+        color: var(--color2, blue);
+    }
+}
+footer {
+    position:fixed;
+    bottom:0px;
+    background-color: whitesmoke;
+}
+#inicio {
+    text-align: center;
+    img {
+        width: 100%;
+    }    
+}
+#mision {
+    margin:50px 0;
+    display: flex;
+    justify-content: space-between;
+    div{
+        width: 45%;
+        text-align: center;
+    }
+    img {
+        width: 100%;
+    }
+}
+#ubi {
+    width: 300px;
+    margin: auto;
+    img {
+        width: 300px;
+        border: 1px solid var(--color5, salmon);
+    }
+}
+#cont-bolas {
+    margin-top:70px;
+    margin-bottom:150px;
+
+    display: flex;
+    justify-content: space-between;
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.bola {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color4, pink);
+    border-radius: 50%;
+    border:1px solid var(--color5);
+    img {
+        width: 30px;
+        margin: auto;
+    }
+}

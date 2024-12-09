@@ -23,9 +23,9 @@
         </header>
         <div id="medio">
             <div class="caja">
-                <h3 id="titulo">PIDE TU CITA ONLINE</h3>
-                <form action="scriptdeconfianza.php" method="post">
-                    <div>
+                <h4>PIDE TU CITA ONLINE</h4>
+                <form method="post">
+                    <div id="imagenes">
                         <label for="ubi">
                             <img src="recursos/img/ubicacion2.png" id="imgUbi" alt="ubicacion">
                         </label>
@@ -39,24 +39,35 @@
                             <img src="recursos/img/correo.png" id="imgMail"alt="Correo">
                         </label>
                     </div>
-                    <div>
-                        <input type="text" name="ubi" id="ubi">
-                
-                
-                        <input type="radio" name="usar" id="usar">
-                        <label for="usar" id="textoUbi">USAR MI UBICACION</label>
-                    
-                       
-                        <input type="text" name="usu" id="usu">
-                    
-                        
-                        <input type="date" name="cal" id="cal">
-                        <label for="hor">
-                            <img src="recursos/img/reloj.png" id="imgRel"alt="Reloj">
-                        </label>
-                        <input type="datetime" name="hor" id="hor">
-                        <input type="text" name="corr" id="corr">
-                        <button type="submit" id="submit">PEDIR CITA</button>
+                    <div id="inputs">
+                        <div>
+                            <input type="text" value="  " name="ubi" id="ubi">
+                        </div>
+                        <div>
+                            <label class="container">USAR MI UBICACIÓN
+                                <input type="radio" name="radio">
+                                <span class="checkmark"></span>
+                              </label>
+                        </div>
+                        <div>
+                            <input type="text" name="usu" id="usu">
+                        </div>
+                        <div>                       
+                            <div>
+                                <input type="date" name="cal" id="cal">
+                                <label for="hor">
+                                    <img src="recursos/img/reloj.png" id="imgRel"alt="Reloj">
+                                </label>
+                                <input type="datetime" name="hor" id="hor">
+                                
+                            </div>                            
+                        </div>
+                        <div>
+                            <input type="text" name="corr" id="corr">
+                        </div>
+                        <div>
+                            <button type="submit" id="submit">PEDIR CITA</button>
+                        </div>
                     </div>
                 </form>
                 

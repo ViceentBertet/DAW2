@@ -1,0 +1,95 @@
+:root {
+    --color1:#1F8FAF;
+    --color2:#0C3A63;
+    --color3:#f4f6f6;
+    --color4:#EDD9C2;
+    --color5:#E5AA5C;
+}
+@font-face {
+    font-family: lato;
+    src:url("../recursos/fonts/Lato/Lato-Regular.ttf");
+    font-weight: normal;
+
+}
+@font-face {
+    font-family: lato;
+    src:url("../recursos/fonts/Lato/Lato-Bold.ttf");
+    font-weight: bold;
+}
+#ini {
+    border-bottom:4px solid var(--color5);
+}
+.caja {
+    border-radius: 15px;
+    padding: 40px;
+    width: 300px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 70px;
+    margin-bottom: 200px;
+    color: var(--color2,blue);
+    input{
+        margin:10px 0;
+        height: 23px;
+        border: 1px solid var(--color5, salmon);
+        width: 100%;
+    }
+    p {
+        border-top:4px solid white;
+        padding-top:10px;
+        text-align: center;
+    }
+}
+.btn-form {
+    margin: auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid var(--color5, salmon);
+    border-radius: 15px;
+    width: 200px;
+    height: 25px;
+    a {
+        text-decoration: none;
+        color: var(--color2,blue);
+    }
+}
+#bolas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:var(--color5, salmon);
+}
+.bola {
+    position: relative;
+    top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color2, blue);
+    border-radius: 50%;
+    text-align: center;
+    color: var(--color5, salmon);
+}
+form {
+    & > div {
+        margin: 30px 0;
+        gap:5px;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+    img {
+        width: 30px;
+    }
+}
+#btn-sig {
+    position:relative;
+    left: 60px;
+}
