@@ -1,0 +1,16 @@
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+#rel {
+    margin-top:200px;
+    width: 200px;
+}
+#reloj {
+    font-size: 23px;
+    position:relative;
+    top:-105px;
+    text-align: center;
+}
