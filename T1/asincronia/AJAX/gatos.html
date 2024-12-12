@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX XML Example</title>
+  <script>
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://api.thecatapi.com/v1/images/search?format=xml', true);
+        xhr.send();
+        
+        xhr.addEventListener("readystatechange", mostrar);
+
+
+
+        function mostrar() {
+            if(xhr.status == 200 && xhr.readyState == 4) {
+                let img = document.createElement('img');
+                img.src = xhr.responseText.split('"')[7];
+                img.style.width = "300px";
+                document.body.appendChild(img);
+            }
+           
+        }
+  </script>
+</head>
+
+<body>
+ 
+</body>
+</html>

@@ -11,9 +11,9 @@ try {
         [20, 'art1', 20, 20],
         [21, 'art', 21,21]
     ];
-    $insert_query = 'INSERT INTO articulo '
-            . '(idArticulo, Descripcion, Precio, Stock) '
-            . 'VALUES (?,?,?,?)';
+    $insert_query = 'UPDATE articulo '
+            . 'SET descripcion=?, precio=?, stock=? '
+            . 'WHERE idArticulo=?';
     $stmt = $pdo->prepare($insert_query);
     $pdo->beginTransaction();
     foreach ($matDatos as $row) {
