@@ -1,5 +1,4 @@
 let distritoAnterior = "NO";
-let limite = 100000;
 let idealista = true;
 let links = ["https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/precio-de-compra-en-idealista/records?order_by=distrito&limit=88",
     "https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/precio-de-compra-en-fotocasa/records?order_by=distrito&limit=88"
@@ -12,7 +11,6 @@ window.onload = function (){
 }
 function llamarAjax() {
     let cont = 0;
-    
     let xhr = [new XMLHttpRequest(), new XMLHttpRequest()];
     for (link of links) {
         ajax(link, xhr[cont]);
@@ -38,19 +36,23 @@ function crearTabla(results) {
     } else web = "FotoCasa";
     for (zona of results) {
         if (zona.distrito != distritoAnterior) {
+            distritoAnterior = zona.distrito;
+            let esta = false;
             contSummary++;
             /*probar a buscar summary con mismo nombre*/
-            if (contSummary < limite) crearSummary(zona.distrito);
+            let det = document.querySelectorAll('details');
+            for (desplegable of det) {
+                if (desplegable.querySelector('summary').innerText == zona.distrito) esta = true;
+            }
+            if (!esta) crearSummary(zona.distrito);
             agregar();
             document.querySelectorAll('details')[contSummary].append(tabla);
-            distritoAnterior = zona.distrito;
         }
         let tendencia = calcularTendencia();
         
         let datos = [zona.barrio, zona.precio_2022_euros_m2,zona.precio_2010_euros_m2,zona.max_historico_euros_m2, zona.ano_max_hist,tendencia];
         if (!datos.includes(null))tabla.appendChild(crearFila(datos, false));
     }
-    limite = contSummary + 1;
     document.querySelectorAll('details')[contSummary].append(tabla);
 }
 function agregar() {
