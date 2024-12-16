@@ -4,7 +4,7 @@
     </head>
     <body>
         <form action='ppal.php' method='POST'>
-            <table border = '1' style='text-align:center; margin: auto;'>
+            <table border='1' style='text-align:center; margin: auto;'>
             <thead>
                 <tr>
                     <th>USUARIO</th>

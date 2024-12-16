@@ -151,10 +151,7 @@
 
              try {
                 $pdo = new PDO($cadena_conexion, $usuario, $pwd);
-                $matDatos = [
-                    [20, 'art1', 20, 20],
-                    [21, 'art', 21,21]
-                ];
+            
                 $insert_query = "INSERT INTO $nom_tabla"
                         . "(NomAlum, MediaPri, MediaSeg, MediaCiclo) "
                         . "VALUES (?,?,?,?)";
@@ -212,12 +209,12 @@
             echo '<b>Escribe Matriz MEDIAS en tabla MEDIAS de la BD</b><br><br>';
             $nom_tabla = "MEDIAS";
             $matriz = [
-                ["PILAR","9","7","7.3"],
-                ["HUGO","8","7.4","7.5"],
-                ["JESUS","7","6.2","6.3"],
-                ["RICARDO","6","5.8","5.8"],
-                ["ARTURO","5","8","7.6"],
-                ["MELISSA","5","6.8","6.5"]];
+                ["PILAR",9,7,7.3],
+                ["HUGO",8,7.4,7.5],
+                ["JESUS",7,6.2,6.3],
+                ["RICARDO",6,5.8,5.8],
+                ["ARTURO",5,8,7.6],
+                ["MELISSA",5,6.8,6.5]];
             fEscribeMediasaBD($matriz, $nom_tabla);
             echo '<br><br><b>Escribe Matriz MEDIAS en NOTASCICLO.dat...</b><br><br>';
             $ruta2 = "./NOTASCICLO.dat";
