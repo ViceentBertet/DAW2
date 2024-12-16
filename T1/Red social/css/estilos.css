@@ -8,6 +8,8 @@ body {
     flex-direction: column;
 }
 #usuarios {
+    position: absolute;
+    bottom: 0;
     align-self: center;
     color: white;
     margin:5px;
@@ -23,5 +25,47 @@ body {
     user-select: none;
 }
 #info {
+    width: 600;
+    margin: auto;
+    margin-top: 40px;
 
+    font-size: 25px;
+    color: white;
+    display: grid;
+    background-color: #282828;
+
+    align-items: center;
+    grid-template-columns: repeat(2, "320px");
+    grid-template-rows: repeat(3, "320px");
+    grid-template-areas: 
+        "a c"
+        "b d"
+        "e f";
+    gap:20px;
+    padding: 30px;
+    border-radius: 15px;
+    div {
+        text-align: center;
+    }
+    img {
+        margin: 10px;
+        grid-area: a;
+        border-radius: 50%;
+        width: 300px;
+    }
+}
+#nom {
+    grid-area: b;
+}
+#edad {
+    grid-area: c;
+}
+#ciudad {
+    grid-area: d;
+}
+#web {
+    grid-area: e;
+}
+#email {
+    grid-area: f;
 }
