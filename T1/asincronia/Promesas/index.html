@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch()</title>
+    <script type="module">
+        let url = "https://valencia.opendatasoft.com/api/explore/v2.1/catalog/datasets/recarrega-vehicles-electrics-recarga-vehiculos-electricos/records?limit=100";
+        
+        fetch(url)
+            .then(e => e.json())
+            .then(e => console.log(e.results));
+        
+        dos(await uno(await fetch(url)));
+        async function uno(e) {
+            return e.json()
+        }
+        async function dos(e) {
+            console.log(e.results)
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
