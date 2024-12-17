@@ -134,7 +134,7 @@ function mostrarFotos() {
         cont.classList.add("cont-fotos");
         document.body.appendChild(cont);
         for (album of albums) {
-            let linkAlbum = API_USERS + "/albums/" + album.id + "/photos"
+            let linkAlbum = API_USERS + "/albums/" + album.id + "/photos/";
             fetch(linkAlbum).then(e => e.json()).then(fotos => {
                 for (foto of fotos) {
                     let img = document.createElement('img');
@@ -162,7 +162,7 @@ function cargarEventosFotos() {
 function abrirPublicacion(){
     protector.classList.remove('ocultar');
     document.body.style.overflowY = "hidden";
-    let id = this.id.slice("-");
+    let id = this.id.split("-");
     let idUsu = document.querySelector('select').value;
     let link = API_USERS + "/users/" + idUsu + "/albums";
     fetch(link).then(e => e.json()).then(albums => {
@@ -170,13 +170,11 @@ function abrirPublicacion(){
         publi.id = "publicacion";
         publi.classList.add("publi");
         document.body.appendChild(publi);
-        let linkAlbum = API_USERS + "/albums/" + id[0]+ "/photos"
+        let linkAlbum = API_USERS + "/albums/" + id[0]+ "/photos/";
         fetch(linkAlbum).then(e => e.json()).then(fotos => {
             for (foto of fotos) {
                 if (foto.id == id[1]) {
-                    let img = document.createElement('img');
-                    img.src = foto.url;
-                    publi.appendChild(img);
+                    crearInterfazPublicacion(foto.url, foto.title);
                     break;
                 } 
             }
@@ -184,15 +182,62 @@ function abrirPublicacion(){
         
     });
 }
+function crearInterfazPublicacion(url, title) {
+    let img = document.createElement('img');
+    let h3 = document.createElement('h3');
+    let titulo = document.createElement('div');
+    let comment = document.createElement('div');
+    let iconos = document.createElement('div');
+    let iconoLike = document.createElement('div');
+    let iconoChat = document.createElement('div');
+    let iconoVolver = document.createElement('div');
+
+
+    titulo.id = "tit";
+    img.src = url;
+    h3.innerText = title;
+    comment.innerText = "Todavía no hay comentarios";
+    iconoLike.classList.add("nolike");
+    iconoChat.classList.add("comment");
+    iconoVolver.classList.add("volver");
+    iconoLike.classList.add("boton");
+    iconoChat.classList.add("boton");
+    iconoVolver.classList.add("boton");
+    iconos.classList.add("iconos");
+
+    iconos.appendChild(iconoLike);
+    iconos.appendChild(iconoChat);
+    iconos.appendChild(iconoVolver);
+
+    titulo.appendChild(h3);
+
+    publicacion.appendChild(img);
+    publicacion.appendChild(titulo);
+    publicacion.appendChild(comment);
+    publicacion.appendChild(iconos);
+    
+    cargarEventosPubli();
+}
+function cargarEventosPubli() {
+    let botones = publicacion.querySelectorAll(".boton");
+    botones[0].addEventListener("click", darLike);
+    botones[2].addEventListener("click", cerrarPublicacion);
+    for (boton of botones){
+        boton.addEventListener("mouseup", sombra);
+        boton.addEventListener("mousedown", sombra);
+
+    }
+}
+function sombra() {
+    this.classList.toggle("sombra");
+}
 function cerrarPublicacion(){
     protector.classList.add('ocultar');
     document.body.style.overflowY = "auto";
+    publicacion.remove();
 }
-/**
- * Nos devuelve un int de x a y incluyendolos
- */
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min);
-  }
+function darLike() {
+    this.classList.toggle("like");
+    this.classList.toggle("nolike");
+
+}
