@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana;
+}
+header {
+    background-color: black;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    text-align: right;
+    color:whitesmoke;
+    height: 100px;
+    p {
+        font-size: 15px;
+    }
+    ul {
+        margin-right: 10px;
+        padding-left: 5px;
+        border-bottom: 1px solid #7F598A;
+    }
+    li {
+        display: inline-block;
+        font-size: 15px;
+    }
+    a {
+        color: #7F598A;
+        transition: color .5s;
+        text-decoration: none;
+    }
+    a:hover {
+        transition: color .5s;
+        color:whitesmoke;
+    }
+}
