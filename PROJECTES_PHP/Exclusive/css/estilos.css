@@ -4,32 +4,49 @@ body {
     font-family: Verdana;
 }
 header {
-    background-color: black;
+    background-color: #7F598A;
     display: flex;
     justify-content: end;
     align-items: center;
     text-align: right;
     color:whitesmoke;
-    height: 100px;
+    height: 120px;
     p {
         font-size: 15px;
     }
     ul {
-        margin-right: 10px;
         padding-left: 5px;
-        border-bottom: 1px solid #7F598A;
     }
     li {
         display: inline-block;
         font-size: 15px;
+        margin-right: 20px;
     }
     a {
-        color: #7F598A;
-        transition: color .5s;
+        color: whitesmoke;
         text-decoration: none;
     }
-    a:hover {
-        transition: color .5s;
-        color:whitesmoke;
+    a:after {
+        display:block;
+        content: '';
+        border-bottom: solid 3px whitesmoke;  
+        transform: scaleX(0);  
+        transition: transform 250ms ease-in-out;
     }
+    a:hover:after { transform: scaleX(1); }
+    a.fromRight:after{ transform-origin:100% 50%; }
+    a.fromLeft:after{  transform-origin:  0% 50%; }
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    margin:120px 0;
+    img {
+        width: 300px;
+        border-radius: 50%;
+        box-shadow: 0px 0px 15px black;
+    }
+}
+#serv {
+    
 }
