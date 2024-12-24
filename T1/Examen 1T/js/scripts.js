@@ -50,7 +50,7 @@ function admitirSoltar(ev) {
  */
 function selectOption() {
     let img = this.querySelectorAll("img")[0];
-    if (!this.querySelectorAll("img")[0]) {
+    if (!this.querySelector("img")) {
         img = click;
     }
     let clon = img.cloneNode();
@@ -63,14 +63,14 @@ function selectOption() {
  * Para saber que imagen queremos dropear
  */
 function seleccionarImg() {
-    click = this.querySelectorAll("img")[0];
+    click = this.querySelector("img");
 }
 /**
  * La maquina elige una opción
  */
 function elegir() {
     opcionMaquina = OPCIONES[getRandomInt(5)];
-    enemigo.querySelectorAll("img")[0].src = "img/" + opcionMaquina + ".png";
+    enemigo.querySelector("img").src = "img/" + opcionMaquina + ".png";
 
 }
 /**
