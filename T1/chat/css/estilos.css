@@ -23,6 +23,11 @@ body {
     border: 1px solid whitesmoke;
     border-radius: 20px;
     margin-bottom: 10px;
+    overflow: scroll;
+}
+#chat::-webkit-scrollbar {
+    width: 10px;
+    height: 100%;
 }
 #controles {
     display: flex;
@@ -48,8 +53,11 @@ body {
     padding: 10px;
     max-width: 120px;
     color: whitesmoke;
+    margin-bottom:10px;
+    overflow-wrap: break-word;
 }
 .deTi {
+    float:right;
     background-color: lightseagreen;
 }
 .deEl {

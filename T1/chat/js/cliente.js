@@ -21,11 +21,15 @@ function sendMessage() {
     document.getElementById("msj").value = "";
 }
 function addMessage(message, eresTu) {
-    let node = document.createElement("p");
-    node.innerText = message;
+    let node = document.createElement("div");
+    let node2= document.createElement("div");
     
-    node.classList.add("msj");
-    if (eresTu) node.classList.add("deTi");
-    else node.classList.add("deEl");
+    node2.innerText = message;
+    
+    node2.classList.add("msj");
+    if (eresTu) node2.classList.add("deTi");
+    else node2.classList.add("deEl");
+    
+    node.appendChild(node2);
     document.getElementById("chat").appendChild(node);
 }
