@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Verdana;
+    color: #7F598A;
 }
 header {
     background-color: #7F598A;
@@ -44,9 +45,109 @@ header {
     img {
         width: 300px;
         border-radius: 50%;
-        box-shadow: 0px 0px 15px black;
+        box-shadow: 0px 0px 15px #7F598A;
     }
 }
+h3 {
+    text-align: center;
+    margin-bottom: 30px;
+}
 #serv {
-    
+    display: flex;
+    justify-content: space-around;
+    height: 200px;
+    width:95%;
+    margin: auto;
+    margin-bottom: 100px;
+    & > div {
+        width: 25%;
+        height: 290px;
+        padding:15px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 15px;
+        border: 2px solid #7F598A;
+        transition: transform .5s;
+        text-align: center;
+    }
+    & > div:hover {
+        transition: transform .5s;
+        transform: scale(1.1); 
+    }
+}
+.bola {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto;
+    margin-bottom: 35px;
+    border-radius: 50%;
+    border: 2px solid #7F598A;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 57px;
+}
+#bola1 {
+    background-image: url("../img/servicio1.png");
+}
+#bola2 {
+    background-image: url("../img/servicio2.png");
+}
+#bola3 {
+    background-image: url("../img/servicio3.png");
+}
+#cortes {
+    width: 500px;
+    display:grid;
+    grid-template-areas: 
+        "1 1 2 2 2"
+        "1 1 3 3 4"
+        "5 5 6 6 7"
+        "5 5 6 9 7"
+        "8 8 9 9 7";
+    grid-template-rows: repeat(5, 100px);
+    grid-template-columns: repeat(5, 100px);
+}
+#c1 {
+    grid-area: 1;
+    background-color: orange;
+}
+#c2 {
+    grid-area: 2;
+    background-color: blue;
+}
+#c3 {
+    grid-area: 3;
+    background-color: violet;
+}
+#c4 {
+    grid-area: 4;
+    background-color: gray;
+}
+#c5 {
+    grid-area: 5;
+    background-color: whitesmoke;
+}
+#c6 {
+    grid-area: 6;
+    background-color: yellow;
+}
+#c7 {
+    grid-area: 7;
+    background-color: yellowgreen;
+}
+#c8 {
+    grid-area: 8;
+    background-color: green;
+}
+#c9 {
+    grid-area: 9;
+    background-color: lightgoldenrodyellow;
+}
+
+@media (max-with: 800px) {
+    #serv > div {
+        width: 100%;
+        
+    }
 }
