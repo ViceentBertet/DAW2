@@ -1,16 +1,21 @@
-var http = require('http');
+const express = require('express');
+const bodyParser = require('body-parser');
+//const mysql = require('mysql2');
 
-var server = http.createServer();
+const port = 3000;
 
-//Crear función que delvuelve el mensaje
-function mensaje(petic, resp) {
-    resp.writeHead(200, {'contente-type': 'text/plain'});
-    resp.write("Hola Mundo");
-    resp.end();
-}
+//Declaramos la aplicación
+const app = express();
 
-server.on('request', mensaje);
+require("./routes/usuarios.routes.js")(app);
 
-server.listen(3000, function() {
-    console.log("La Aplicación está funcionando en el puerto 3000");
-});
+// Configurar body-parser
+//app.use(bodyParser.json());
+
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+
+//Arrancamos el servidor
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
