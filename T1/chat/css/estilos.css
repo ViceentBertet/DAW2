@@ -1,0 +1,57 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #222;
+    font-family: 'Verdana';
+}
+#container {
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 20px;
+}
+#chat {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 90%;
+    height: 200px;
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+#controles {
+    display: flex;
+    justify-content: space-between;
+}
+#msj {
+    padding: 5px 15px;
+    width: 60%;
+    border:0;
+    border-radius: 15px;
+}
+#boton {
+    width: 25%;
+    border:0;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    color:#333;
+}
+.msj {
+    border-radius: 15px;
+    height: fit-content;
+    width: fit-content;
+    padding: 10px;
+    max-width: 120px;
+    color: whitesmoke;
+}
+.deTi {
+    background-color: lightseagreen;
+}
+.deEl {
+    background-color: #222;
+}
