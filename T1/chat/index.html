@@ -8,15 +8,16 @@
     <script src="js/cliente.js"></script>
 </head>
 <body>
-    <div id="pedirNombre">
-        Introduce tu nombre:
-        <input type="text" name="nombre" id="nombre">
-        <button id="enviarNombre">Aceptar</button>
+    <div id="pedirNombre" class="contenedor">
+        <h2>Introduce tu nombre:</h2>
+        <input type="text" name="nombre" id="nombre" placeholder="Escribelo aquí...">
+        <button id="enviarNombre" >Aceptar</button>
     </div>
-    <div id="container">
+    <div id="protector"></div>
+    <div id="cont-chat" class="contenedor">
         <div id="chat"></div>
         <div id="controles">
-            <input id="msj" type="text" placeholder="Escribe tu mensaje">
+            <input id="msj" type="text" placeholder="Escribe un mensaje...">
             <button id="boton">Enviar</button>
         </div>
     </div>

@@ -14,6 +14,8 @@ ws.addEventListener("message", function(event) {
 function guardarNombre() {
     nom = nombre.value;
     pedirNombre.classList.toggle('ocultar');
+    protector.classList.toggle('ocultar');
+
 }
 
 function actualizarScroll() {
@@ -21,10 +23,8 @@ function actualizarScroll() {
     div.scrollTop = '9999';
 }
 function sendMessage() {
-
-    const message = [document.getElementById("msj").value, nom];
-
-    if (!message) return false;
+    if (!msj.value) return false;
+    const message = [msj.value, nom];
     
     ws.send(JSON.stringify({type: "message", data: message}));
 
@@ -32,16 +32,28 @@ function sendMessage() {
     document.getElementById("msj").value = "";
 }
 function addMessage(message, eresTu) {
-    let node = document.createElement("div");
-    let node2= document.createElement("div");
+    let div = document.createElement("div");
+    let user = document.createElement("div");
+    let comment = document.createElement("div");
+    let msj = message[0];
+    let nom = message[1];
+
+    comment.innerText = msj;
     
-    node2.innerText = message;
+    user.classList.add("username");
+    comment.classList.add("msj");
+    if (eresTu) {
+        user.innerText = "tú";
+        user.classList.add("der");
+        comment.classList.add("deTi");
+    } else {
+        user.innerText = nom.toString().toLowerCase();
+        comment.classList.add("deEl")
+    };
     
-    node2.classList.add("msj");
-    if (eresTu) node2.classList.add("deTi");
-    else node2.classList.add("deEl");
-    
-    node.appendChild(node2);
-    document.getElementById("chat").appendChild(node);
+    div.classList.add("cont-msj");
+    div.appendChild(user);
+    div.appendChild(comment);
+    document.getElementById("chat").appendChild(div);
     actualizarScroll();
 }
