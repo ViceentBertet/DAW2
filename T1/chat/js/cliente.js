@@ -1,7 +1,9 @@
+const ws = new WebSocket("ws://localhost:3000");
+let nom;
 window.onload = () => {
     boton.addEventListener("click", sendMessage);
+    enviarNombre.addEventListener("click", guardarNombre);
 };
-const ws = new WebSocket("ws://localhost:3000");
 ws.addEventListener("message", function(event) {
     const data = JSON.parse(event.data);
     
@@ -9,12 +11,21 @@ ws.addEventListener("message", function(event) {
         addMessage(data.data, false);
     }
 });
+function guardarNombre() {
+    nom = nombre.value;
+    pedirNombre.classList.toggle('ocultar');
+}
 
+function actualizarScroll() {
+    let div = document.getElementById("chat");
+    div.scrollTop = '9999';
+}
 function sendMessage() {
-    const message = document.getElementById("msj").value;
+
+    const message = [document.getElementById("msj").value, nom];
 
     if (!message) return false;
-
+    
     ws.send(JSON.stringify({type: "message", data: message}));
 
     addMessage(message, true);
@@ -32,4 +43,5 @@ function addMessage(message, eresTu) {
     
     node.appendChild(node2);
     document.getElementById("chat").appendChild(node);
+    actualizarScroll();
 }
