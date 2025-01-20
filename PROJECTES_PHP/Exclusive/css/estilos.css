@@ -41,7 +41,8 @@ header {
     justify-content: center;
     margin:120px 0;
     img {
-        width: 500px;
+        width: 95%;
+        max-width: 500px;
         border-radius: 50%;
         box-shadow: 0px 0px 15px #7F598A;
     }
@@ -96,6 +97,7 @@ h2 {
 #bola3 {
     background-image: url("../img/servicio3.png");
 }
+
 .container {
     width: 1000px;
     height: 1000px;
@@ -111,22 +113,30 @@ h2 {
     gap: 10px; /* Espacio entre las imágenes */
     margin: auto;
 }
-.item1 { grid-area: a; background: lightblue; }
-.item2 { grid-area: b; background: lightcoral; }
-.item3 { grid-area: c; background: lightgreen; }
-.item4 { grid-area: d; background: lightgoldenrodyellow; }
-.item5 { grid-area: e; background: lightpink; }
-.item6 { grid-area: f; background: lightgray; }
-.item7 { grid-area: g; background: lightseagreen; }
+#item1 { grid-area: a; background-image: url("../img/corte1.jpg"); }
+#item2 { grid-area: b; background-image: url("../img/corte2.webp"); }
+#item3 { grid-area: c; background-image: url("../img/corte3.jpg"); }
+#item4 { grid-area: d; background-image: url("../img/corte4.jpg"); }
+#item5 { grid-area: e; background-image: url("../img/corte5.png"); }
+#item6 { grid-area: f; background-image: url("../img/corte6.jpeg"); }
+#item7 { grid-area: g; background-image: url("../img/corte7.jpg"); }
+.item {
+    border-radius: 15px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0px 0px 5px #7F598A;
+}
+
 
 @media (max-width: 1200px) {
     #serv > div {
-        height: 400px;
+        height: 340px;
     }
 }
 @media (max-width: 700px) {
     h2 {
-        margin-bottom:330px;
+        margin-bottom:370px;
     }
     #serv {
         flex-direction: column;
