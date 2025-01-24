@@ -30,11 +30,19 @@ Usuario.buscarPorID = (request, result) => {
 
 /*************************** POST *******************************/
 Usuario.insertar = (request, result) => {
-    console.log(request.body);
-
+    const datos = request.body;
+    sql.query(`INSERT INTO usuario (nom, pwd, email) VALUES (${datos["nom"]}, ${datos["pwd"]}, ${datos["email"]};`, (err, res) => {
+        console.log(res);
+        if(res) {
+            console.log("Con éxito"); 
+            result.json("Usuario metido con éxito");
+        } else {
+            console.log("Sin éxito");
+            result.json("Uy! Ha habido un error");
+        };
+    });
 };
-
-
 /*************************** PUT *******************************/
+
 /*************************** DELETE *******************************/
 module.exports = Usuario;
