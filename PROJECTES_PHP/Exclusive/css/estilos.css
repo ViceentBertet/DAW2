@@ -185,7 +185,22 @@ h2 {
     justify-content: space-evenly;
     align-items: center;
 }
+.productos {
+    color: blue;
+    width: 900px;
+    margin:auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(300px, auto);
+    div {
+        width: 300px;
+        img {
+            width: 150px;
+            height: 150px;
 
+        }
+    }
+}
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {
     /*      index.html      */
@@ -214,7 +229,7 @@ h2 {
         }
     }
     /*      productos.php y administrar.php     */
-
+    
 }
 /*      PANTALLA PEQUEÑA      */
 @media (max-width: 600px) {
