@@ -1,3 +1,8 @@
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}*/
 body {
     margin: 0;
     padding: 0;
@@ -186,18 +191,21 @@ h2 {
     align-items: center;
 }
 .productos {
-    color: blue;
-    width: 900px;
+    width: 940px;
     margin:auto;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 300px);
     grid-template-rows: minmax(300px, auto);
+    gap: 20px;
+    margin-bottom: 150px;
     div {
-        width: 300px;
+        padding: 10px;
+        border-radius: 15px;
+        border: 1px solid #7F598A;
+
         img {
             width: 150px;
             height: 150px;
-
         }
     }
 }
