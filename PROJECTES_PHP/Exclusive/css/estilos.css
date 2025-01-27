@@ -191,23 +191,34 @@ h2 {
     align-items: center;
 }
 .productos {
-    width: 940px;
+    width: 950px;
     margin:auto;
     display: grid;
     grid-template-columns: repeat(3, 300px);
     grid-template-rows: minmax(300px, auto);
-    gap: 20px;
+    gap: 25px;
     margin-bottom: 150px;
     div {
         padding: 10px;
         border-radius: 15px;
         border: 1px solid #7F598A;
-
         img {
             width: 150px;
             height: 150px;
+            margin: auto;
         }
     }
+}
+.descrip {
+    font-size: 13px;
+}
+.precio {
+    float:right;
+    font-weight: bold;
+    font-size: 16px;
+}
+#nProd {
+    margin-left: 10px;
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {
@@ -237,6 +248,13 @@ h2 {
         }
     }
     /*      productos.php y administrar.php     */
+    .productos {
+        width: 625px;
+        grid-template-columns: repeat(2, 300px);
+        margin: auto;
+        margin-bottom: 150px;
+
+    }
     
 }
 /*      PANTALLA PEQUEÑA      */
@@ -278,5 +296,19 @@ h2 {
         }
     }
     /*      productos.php y administrar.php     */
+    .productos {
+        display:flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 150px;
 
+        div {
+            width: 70%;
+            margin: auto;
+            img {
+                width: 150px;
+                text-align: center;
+            }
+        }
+    }
 }
