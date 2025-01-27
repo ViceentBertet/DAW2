@@ -4,6 +4,10 @@ body {
     font-family: Verdana;
     color: #7F598A;
 }
+html {
+    min-height: 100%;
+    position: relative;
+}
 header {
     background-color: #7F598A;
     display: flex;
@@ -36,6 +40,17 @@ header {
     a.fromRight:after{ transform-origin:100% 50%; }
     a.fromLeft:after{  transform-origin:  0% 50%; }
 }
+footer {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    height: 150px;
+}
+/*      index.html      */
 .logo {
     display: flex;
     justify-content: center;
@@ -87,6 +102,9 @@ h2 {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 57px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #bola1 {
     background-image: url("../img/servicio1.png");
@@ -99,21 +117,21 @@ h2 {
 }
 
 .container {
+    margin: 90%;
     max-width: 1000px;
-    max-height: 1000px;
-    width: 90%;
     height: 1000px;
     margin: auto;
     display: grid;
     grid-template-areas:
-        "a a a b b"
-        "a a a b b"
-        "d e e g g"
-        "d f f f f";
-    grid-template-rows: repeat(4, 1fr);
-    grid-template-columns: repeat(5, 1fr);
+            "c c c b b a a"
+            "c c c b b a a"
+            "d d g g e e e"
+            "d d f f e e e";
+    grid-template-rows: repeat(4, 250px);
+    grid-template-columns: repeat(7, 140px);
     gap: 10px; /* Espacio entre las imágenes */
     margin: auto;
+    margin-bottom: 100px;
 }
 #item1 { grid-area: a; background-image: url("../img/corte1.jpg"); }
 #item2 { grid-area: b; background-image: url("../img/corte2.webp"); }
@@ -129,15 +147,94 @@ h2 {
     background-position: center;
     box-shadow: 0px 0px 5px #7F598A;
 }
+.ubi {
+    padding: 40px;
+    border-radius: 15px;
+    background-color: #7F598A;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 920px;
+    height: 550px;
+    margin: auto;
+    margin-bottom: 200px;
 
+    color: white;
+    div:first-child {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        & > * {
+            border-radius: 15px;
+            width: 400px;
+            height: 400px;
+        }
+    }
+    div:last-child {
+        text-align: justify;
+        width: 90%;
+        margin: auto;
+    }
+}
+/*      productos.php y administrar.php     */
+.enlaces {
+    width: 100%;
+    height: 320px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.productos {
+    color: blue;
+    width: 900px;
+    margin:auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(300px, auto);
+    div {
+        width: 300px;
+        img {
+            width: 150px;
+            height: 150px;
 
+        }
+    }
+}
+/*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {
+    /*      index.html      */
     #serv > div {
         height: 340px;
     }
+    .container {
+        width: 600px;
+        height: 750px;
+        grid-template-rows: repeat(4, 175px);
+        grid-template-columns: repeat(7, 85px);
+        margin-bottom: 100px;
+
+    }
+    .ubi {
+        width: calc(600px - 80px);
+        height: 350px;
+        margin: auto;
+        margin-bottom: 200px;
+
+        div:first-child {
+            & > *  {
+                width: 225px;
+                height: 225px;
+            }
+        }
+    }
+    /*      productos.php y administrar.php     */
+    
 }
-@media (max-width: 700px) {
-    h2 {
+/*      PANTALLA PEQUEÑA      */
+@media (max-width: 600px) {
+    /*      index.html      */
+    h2:first-of-type {
         margin-bottom:370px;
     }
     #serv {
@@ -153,6 +250,25 @@ h2 {
         margin-bottom: 15px;
     }
     .container {
+        width: 450px;
         height: 500px;
+        grid-template-rows: repeat(4, 125px);
+        grid-template-columns: repeat(7, 60px);
+        margin-bottom: 100px;
+
     }
+    .ubi {
+        width: calc(400px - 80px);
+        margin: auto;
+        margin-bottom: 200px;
+
+        div:first-child {
+            & > *  {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    }
+    /*      productos.php y administrar.php     */
+
 }
