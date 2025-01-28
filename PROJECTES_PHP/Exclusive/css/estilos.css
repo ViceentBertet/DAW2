@@ -248,13 +248,22 @@ h2 {
     text-align: center;
     select {
         text-align: center;
-        width: 100%;
+        width: 175px;
         background-color: white;
         border: none;
         border-radius: 15px;
         height: 30px;
         font-size: 15px;
-        margin: 10px 0;
+        margin-bottom: 10px;
+    }
+    input {
+        border: none;
+        border-radius: 15px;
+        height: 30px;
+        font-size: 15px;
+        width: 175px;
+        margin-bottom: 30px;
+
     }
     button {
         background-color: white;
@@ -265,6 +274,11 @@ h2 {
         width: 175px;
         margin-bottom: 10px;
     }
+}
+#type {
+    margin-top: 40px;
+    margin-bottom: 55px;
+
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {

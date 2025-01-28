@@ -21,6 +21,7 @@ function addTipo() {
         select.appendChild(option); 
     });
     select.name = "type";
+    select.id = "type";
     let buttons = createButtons();    
 
     form.appendChild(select);
@@ -38,10 +39,7 @@ function addPrecio(){
     let form = document.createElement("form");
     form.method = "get";
     form.action = "./porPrecio.php";
-    let input = document.createElement("input");
-    input.type = "number";
-    input.name = "price";
-    input.autocomplete = "off";
+    
     let select = document.createElement('select');
     for (let i = 0; i < OPCIONES_OPERADORES.length; i++) {
         let option = document.createElement("option");
@@ -50,10 +48,14 @@ function addPrecio(){
         select.appendChild(option); 
     };
     select.name = "operator";
+    let input = document.createElement("input");
+    input.type = "number";
+    input.name = "price";
+    input.autocomplete = "off";
     let buttons = createButtons();
 
-    form.appendChild(input);
     form.appendChild(select);
+    form.appendChild(input);
     form.appendChild(buttons[0]);
     ventana.appendChild(titulo);
     ventana.appendChild(form);
