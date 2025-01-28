@@ -245,12 +245,7 @@ h2 {
     border-radius: 15px;
     background-color: #7F598A;
     color:white;
-    h3 {
-        text-align: center;
-    }
-    form {
-        text-align: center;
-    }
+    text-align: center;
     select {
         text-align: center;
         width: 100%;
@@ -259,7 +254,7 @@ h2 {
         border-radius: 15px;
         height: 30px;
         font-size: 15px;
-        margin: 40px 0;
+        margin: 10px 0;
     }
     button {
         background-color: white;
@@ -268,6 +263,7 @@ h2 {
         height: 30px;
         font-size: 15px;
         width: 175px;
+        margin-bottom: 10px;
     }
 }
 /*      MEDIA PANTALLA      */
