@@ -1,0 +1,51 @@
+<?php
+    function crearConexion() {
+        $hostname = 'localhost';
+        $usuario = 'root';
+        $pwd = '';
+        $database = 'exclusivebddpruebas';
+        $port = 3306;
+        $cadena_conexion = "mysql:host=$hostname;dbname=$database;port=$port;";
+        return new PDO($cadena_conexion, $usuario, $pwd);
+    }
+    
+    function selectAll() {
+        $pdo = crearConexion();
+        $query = 'SELECT * FROM producto';
+        return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+    }
+
+    function selectByType($tipo) {
+        $pdo = crearConexion();
+        $query = "SELECT * FROM producto where tpo_prod = '" . $tipo . "'";
+        return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+    }
+
+    function selectByPrice($precio, $operador) {
+        $pdo = crearConexion();
+        $query = "SELECT * FROM producto where precio " . $operador . " '" . $precio. "'";
+        return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+    }
+    
+    function mostrarProductos($stmt , $n_filas) {
+    ?>
+        <p id="nProd">Productos encontrados: <?=$n_filas?></p>
+        <div class='productos'>
+    <?php
+        while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+    ?>
+        <div>
+            <h3><?=$registro['nom']?></h3>
+            <img src="<?=$registro['img']?>" alt="<?=$registro['nom']?>">
+            <p class="descrip"><?=$registro['descrip']?></p>
+            <p class="precio"><?=$registro['precio']?> €</p>
+        </div>
+    <?php
+            }
+    ?>
+    </div>
+        <?php
+        $pdo = null; //Así se cierra la conexión
+    
+    }
+?>
