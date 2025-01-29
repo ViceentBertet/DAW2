@@ -1,5 +1,4 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -11,14 +10,14 @@ $msj = $_POST['msj'];
 
 $mail = new PHPMailer();
 $mail->isSMTP();
-$mail->SMTPDebug = 2; //Muestra mensajes de depuración
+$mail->SMTPDebug = 2;
 $mail->SMTPAuth = true;
 $mail->SMTPSecure = 'tls';
 $mail->Host = 'smtp.gmail.com';
 $mail->Port = 587;
 
-$mail->Username = 'perellobertetjosepvicent@gmail.com'; // Correo
-$mail->Password = ''; // Contraseña
+$mail->Username = 'perellobertetjosepvicent@gmail.com';
+$mail->Password = '';
 
 $mail->setFrom('perellobertetjosepvicent@gmail.com', 'Test');
 $mail->Subject = $asunto;
@@ -26,7 +25,7 @@ $mail->Subject = $asunto;
 $mail->msgHTML($msj);
 
 $mail->addAddress($dest, 'Test');
-$mail->Timeout = 60; // Tiempo en segundos
+$mail->Timeout = 60;
 
 $result = $mail->send();
 
@@ -36,3 +35,4 @@ echo "ERROR EN EL ENVIO: <br>" . $mail->ErrorInfo;
 echo 'Correo enviado correctamente';
 }
 ?>
+
