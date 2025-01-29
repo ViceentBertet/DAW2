@@ -2,11 +2,8 @@ const OPCIONES_TIPO = ["Belleza", "Piel", "Fragancia", "Cabello", "Herramientas"
 const VALORES_OPERADORES = ["=", "<", ">"];
 const OPCIONES_OPERADORES = ["Igual que", "Menor que", "Mayor que "]
 
-window.onload = function(){
-    tipo.addEventListener("click", addTipo);
-    precio.addEventListener("click", addPrecio)
-}
 function addTipo() {
+    protector.classList.remove("ocultar");
     let ventana = createWindow();
     let titulo = document.createElement("h3");
     titulo.innerText = "Selecciona el tipo";
@@ -33,6 +30,7 @@ function addTipo() {
     cerrar.addEventListener("click", closeWindow);
 }
 function addPrecio(){
+    protector.classList.remove("ocultar");
     let ventana = createWindow();
     let titulo = document.createElement("h3");
     titulo.innerText = "Selecciona el precio y el operador";
@@ -62,7 +60,6 @@ function addPrecio(){
     ventana.appendChild(buttons[1]);
     document.body.appendChild(ventana);
     cerrar.addEventListener("click", closeWindow);
-
 }
 function createWindow() {
     let div = document.createElement("div");
@@ -72,9 +69,7 @@ function createWindow() {
 }
 function closeWindow() {
     ventana.remove();
-}
-function crearSelect(opciones) {
-    
+    protector.classList.add("ocultar");
 }
 function createButtons() {
     let button = document.createElement("button");
