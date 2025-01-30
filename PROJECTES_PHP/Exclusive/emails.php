@@ -10,8 +10,8 @@
         $nomRemit = "Exclusive";
         $asunto = "Cita";
         $msj = [
-            "Usted ha registrado una cita para el $dia a las $hora horas. ¡Te esperamos!",
-            "$email ha registrado una cita para el $dia a las $hora horas. ¡Manos a la obra!"
+            "Usted ha registrado una cita para el $diaCita a las $hora horas. ¡Te esperamos!",
+            "$email ha registrado una cita para el $diaCita a las $hora horas. ¡Manos a la obra!"
         ];
         $destino = [$email, CORREO_EMPRESA];
         $nomDest = ['Cliente', 'Trabajador'];

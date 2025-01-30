@@ -8,7 +8,7 @@
                 <input type="email" name="email" placeholder="Introduce tu email">
                 <div>
                     Hora:
-                    <input type="number" name="hora" max="18" min="9" placeholder="Debe ser de 9 a 18">
+                    <input type="number" name="hora" max="18" min="9">
                     Día:
                     <select name="dia_cita">
                         <option value="Lunes">Lunes</option>
