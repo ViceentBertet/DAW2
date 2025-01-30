@@ -4,7 +4,7 @@ USE ExclusiveBDDpruebas;
 CREATE TABLE Usuario (
     email VARCHAR(32) PRIMARY KEY,
     nom VARCHAR(32),
-    prov VARCHAR(32),
+    pwd VARCHAR(32),
     tpo_usu ENUM('Cliente', 'Empleado', 'Admin')
 );
 CREATE TABLE Producto (

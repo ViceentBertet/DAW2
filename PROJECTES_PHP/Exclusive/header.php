@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,6 +16,6 @@
             <li><a href="index.php">Inicio</a></li>
             <li><a href="productos.php">Productos</a></li>
             <li><a href="pedirCita.php">Pide cita</a></li>
-            <li><a href="#">Inicia sesión</a></li>
+            <li><a href="iniciaSesion.php">Inicia sesión</a></li>
         </ul>
     </header>

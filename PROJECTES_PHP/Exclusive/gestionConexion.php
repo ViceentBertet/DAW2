@@ -9,7 +9,6 @@
         $cadena_conexion = "mysql:host=$hostname;dbname=$database;port=$port;charset=$caracteres;";
         return new PDO($cadena_conexion, $usuario, $pwd);
     }
-    
     function selectAll() {
         $pdo = crearConexion();
         $query = 'SELECT * FROM producto';
@@ -47,5 +46,18 @@
     </div>
         <?php
         $pdo = null;
+    }
+    function buscaUsuarios($usu, $pwd) {
+        $pdo = crearConexion();
+        $query = "SELECT * FROM usuario WHERE email = '" . $usu . "' AND pwd = '" . $pwd . "'";
+        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stmt->execute();
+        $n_filas = $stmt->rowCount();
+        if ($n_filas == 1) {
+            while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { 
+                return $registro;
+            }
+        }
+        return false;
     }
 ?>

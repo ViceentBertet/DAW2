@@ -13,6 +13,10 @@ html {
     min-height: 100%;
     position: relative;
 }
+a {
+    color: #7F598A;
+    text-decoration: none;
+}
 header {
     background-color: #7F598A;
     display: flex;
@@ -32,7 +36,6 @@ header {
     }
     a {
         color: whitesmoke;
-        text-decoration: none;
     }
     a:after {
         display:block;
@@ -192,8 +195,6 @@ h2 {
     font-size: 25px;
 
     a {
-        text-decoration: none;
-        color: #7F598A;
         font-size: 25px;
     }
     .bola {
@@ -295,6 +296,7 @@ button {
 /*      FORMULARIOS         */
 .formulari {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: calc(100vh - 150px - 120px);
@@ -305,7 +307,6 @@ button {
         flex-direction: column;
         justify-content: center;
     }
-    
     & > div {
         width: 500px;
         height: 300px;
@@ -314,7 +315,7 @@ button {
         color: whitesmoke;
         text-align: center;
     }
-    input[type="email"] {
+    input[type="email"], input[type="text"], input[type="password"] {
         width: 60%;
         margin-left:  20%;
         margin-right:  20%;
