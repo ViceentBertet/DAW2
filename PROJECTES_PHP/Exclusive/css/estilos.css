@@ -246,39 +246,83 @@ h2 {
     background-color: #7F598A;
     color:white;
     text-align: center;
-    select {
-        text-align: center;
-        width: 175px;
-        background-color: white;
-        border: none;
-        border-radius: 15px;
-        height: 30px;
-        font-size: 15px;
-        margin-bottom: 10px;
-    }
-    input {
-        border: none;
-        border-radius: 15px;
-        height: 30px;
-        font-size: 15px;
-        width: 175px;
-        margin-bottom: 30px;
-
-    }
-    button {
-        background-color: white;
-        border: none;
-        border-radius: 15px;
-        height: 30px;
-        font-size: 15px;
-        width: 175px;
-        margin-bottom: 10px;
-    }
+    
+   
+}
+select {
+    text-align: center;
+    width: 175px;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+input {
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+    font-size: 15px;
+    width: 155px;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+button {
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+    font-size: 15px;
+    width: 175px;
+    margin-bottom: 10px;
 }
 #type {
     margin-top: 40px;
     margin-bottom: 55px;
+}
+.ocultar{
+    display:none;
+}
+#protector{
+    position:absolute;
+    top:0;
+    z-index: 99;
+    width: 100vw;
+    height: 100vh;
+}
 
+/*      FORMULARIOS         */
+.formulari {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 150px - 120px);
+    form {
+        height: calc(100% - 60px);
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    & > div {
+        width: 500px;
+        height: 300px;
+        background-color: #7F598A;
+        border-radius: 15px;
+        color: whitesmoke;
+        text-align: center;
+    }
+    input[type="email"] {
+        width: 60%;
+        margin-left:  20%;
+        margin-right:  20%;
+        text-align: center;
+    }
+    input[type="number"] {
+        width: auto;
+    }
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {

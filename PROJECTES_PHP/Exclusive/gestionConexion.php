@@ -5,7 +5,8 @@
         $pwd = '';
         $database = 'exclusivebddpruebas';
         $port = 3306;
-        $cadena_conexion = "mysql:host=$hostname;dbname=$database;port=$port;";
+        $caracteres = "utf8mb4";
+        $cadena_conexion = "mysql:host=$hostname;dbname=$database;port=$port;charset=$caracteres;";
         return new PDO($cadena_conexion, $usuario, $pwd);
     }
     
@@ -45,7 +46,6 @@
     ?>
     </div>
         <?php
-        $pdo = null; //Así se cierra la conexión
-    
+        $pdo = null;
     }
 ?>
