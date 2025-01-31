@@ -1,10 +1,17 @@
 <?php 
     include("header.php");
     include('gestionConexion.php');
+
+    function mostrarMensaje() {
+?>
+        <p>Bienvenido/a <?=$_SESSION['nom']?></p>
+        <a href="administrar.php">Pulsa aquí para gestionar perfil</a>
+<?php
+    }
 ?>
      <main class="formulari">
 <?php
-        if (!isset($_POST["usu"]) && !isset($_POST['pwd'])) {
+        if (!isset($_POST["usu"]) && !isset($_POST['pwd']) && !isset($_SESSION["nom"])) {
 ?>
 
         <div>
@@ -18,21 +25,23 @@
         </div>
 <?php
     } else {
-        $existe = buscaUsuarios($_POST['usu'], $_POST['pwd']);
-        if ($existe) {
-            $_SESSION['usu'] = $existe['email'];
-            $_SESSION['nom'] = $existe['nom'];
-            $_SESSION['tpo_usu'] = $existe['tpo_usu'];
-?>
-            <p>Bienvenido/a <?=$_SESSION['nom']?>. Has iniciado sesión correctamente.</p>
-            <a href="administrar.php">Gestionar perfil</a>
-<?php
-            
-        } else {
+        if (!isset($_SESSION['usu'])) {
+            $usu = $_POST["usu"];
+            $pwd = $_POST['pwd'];
+            $existe = buscaUsuarios($usu, $pwd);
+            if ($existe) {
+                $_SESSION['usu'] = $existe['email'];
+                $_SESSION['nom'] = $existe['nom'];
+                $_SESSION['tpo_usu'] = $existe['tpo_usu'];
+                mostrarMensaje();
+            } else {
 ?>
         <p>Usuario no encontrado</p>
         <a href="iniaSesion.php">Volver a intentar</a>
 <?php
+            }
+        } else {
+            mostrarMensaje();
         }
 
 ?>

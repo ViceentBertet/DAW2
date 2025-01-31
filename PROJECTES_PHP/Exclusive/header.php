@@ -12,6 +12,13 @@
 </head>
 <body>
     <header>
+<?php
+        if(isset($_SESSION["nom"])) {
+?>
+        <p><?=$_SESSION["nom"]?></p>
+<?php
+    }
+?>
         <ul>
             <li><a href="index.php">Inicio</a></li>
             <li><a href="productos.php">Productos</a></li>

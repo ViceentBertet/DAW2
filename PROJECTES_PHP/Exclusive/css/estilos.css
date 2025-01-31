@@ -22,12 +22,13 @@ header {
     display: flex;
     justify-content: end;
     align-items: center;
-    text-align: right;
     color:whitesmoke;
     width: 100%;
     height: 120px;
     p {
+        margin-left: 20px;
         font-size: 15px;
+        width: calc(100% - 450px);
     }
     li {
         display: inline-block;
@@ -229,7 +230,7 @@ h2 {
     font-weight: bold;
     font-size: 16px;
 }
-#nProd {
+#nSelect {
     margin-left: 10px;
 }
 .ventana {
@@ -324,6 +325,51 @@ button {
     input[type="number"] {
         width: auto;
     }
+}
+/*      TABLAS              */
+table {
+    margin: auto;
+    border: 1px solid #7F598A;
+    border-collapse: collapse;
+    tr {
+        text-align: center;
+    }
+    th, td {
+        border: 1px solid #7F598A;
+        padding:10px;
+    }
+    tr:nth-child(even) {
+        background-color: #7F598A;
+        color: whitesmoke;
+    }
+}
+.opciones {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    margin-top:20px;
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        border: 1px solid black;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+    img {
+        width: 70%;
+    }
+}
+.ins {
+    background-color:greenyellow;
+}
+.act {
+    background-color: yellow;
+}
+.eli {
+    background-color: #ff3333;
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {

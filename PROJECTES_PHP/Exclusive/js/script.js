@@ -79,3 +79,12 @@ function createButtons() {
     button2.innerText = "Cerrar ventana";
     return [button, button2];
 }
+function addUsu() {
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = "Añadir usuario";
+    let form = document.createElement("form");
+    form.method = "get";
+    form.action = "./adminUsu.php";
+}
