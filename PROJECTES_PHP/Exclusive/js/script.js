@@ -79,16 +79,16 @@ function createButtons(msj) {
     button2.innerText = "Cerrar ventana";
     return [button, button2];
 }
-function addUsu() {
+function formUsu(accion) {
     protector.classList.remove("ocultar");
     let ventana = createWindow();
     let titulo = document.createElement("h3");
-    titulo.innerText = "Añadir usuario";
+    titulo.innerText = accion;
     let form = document.createElement("form");
     form.method = "post";
     form.action = "./adminUsu.php";
     form.classList.add("formUsu");
-
+    form.id = "formulario";
     let email = document.createElement('input');
     email.name = "email";
     email.id = "email";
@@ -107,6 +107,7 @@ function addUsu() {
     pwd.placeholder = "Contraseña";
 
     let tipo = document.createElement('select');
+    tipo.name = "tpo_usu";
     tipo.id = "tipo_usu";
 
     TIPO_USUS.forEach(opcion => {
@@ -115,10 +116,15 @@ function addUsu() {
         option.textContent = opcion;
         tipo.appendChild(option); 
     });
-    let buttons = createButtons("Añadir productos");
+    let buttons = createButtons(accion);
     buttons[0].id = "but1";
     buttons[1].id = "but2";
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
 
+    form.appendChild(input);
     form.appendChild(tipo);
     form.appendChild(email);
     form.appendChild(nom);
@@ -128,5 +134,65 @@ function addUsu() {
     ventana.appendChild(titulo);
     ventana.appendChild(form);
     document.body.appendChild(ventana);
-    cerrar.addEventListener("click", closeWindow);
+    but2.addEventListener("click", closeWindow);
+}
+function addUsu() {
+    formUsu("Añadir usuario");
+    let inputAdd = document.createElement("input");
+    inputAdd.value = 1;
+    inputAdd.classList.add("ocultar");
+    inputAdd.name = "accion";
+
+    formulario.appendChild(inputAdd);
+}
+
+function actUsu() {
+    formUsu("Actualizar usuario");
+    let inputAct = document.createElement("input");
+    inputAct.value = 2;
+    inputAct.classList.add("ocultar");
+    inputAct.name = "accion";
+    
+    formulario.appendChild(inputAct);
+}
+function formDelUsu(accion) {
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
+
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminUsu.php";
+    form.classList.add("formUsu");
+    form.id = "formulario";
+
+    let email = document.createElement('input');
+    email.name = "email";
+    email.id = "email";
+    email.type = "email";
+    email.placeholder = "Email";
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+
+    form.appendChild(input);
+    form.appendChild(email);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
+}
+function delUsu() {
+    formDelUsu("Eliminar usuario");
+    accion.value = 3;
+    formulario.appendChild(inputDel);
 }
