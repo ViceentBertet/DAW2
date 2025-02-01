@@ -15,7 +15,7 @@
 <?php
         if(isset($_SESSION["nom"])) {
 ?>
-        <p><?=$_SESSION["nom"]?></p>
+        <p><a href="administrar.php"><?=$_SESSION["nom"]?></a></p>
 <?php
     }
 ?>

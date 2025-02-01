@@ -30,24 +30,28 @@ header {
         font-size: 15px;
         width: calc(100% - 450px);
     }
+    a {
+        color: whitesmoke;
+    }
     li {
         display: inline-block;
         font-size: 15px;
         margin-right: 20px;
+        a {
+            color: whitesmoke;
+        }
+        a:after {
+            display:block;
+            content: '';
+            border-bottom: solid 3px whitesmoke;  
+            transform: scaleX(0);  
+            transition: transform 250ms ease-in-out;
+        }
+        a:hover:after { transform: scaleX(1); }
+        a.fromRight:after{ transform-origin:100% 50%; }
+        a.fromLeft:after{  transform-origin:  0% 50%; }
     }
-    a {
-        color: whitesmoke;
-    }
-    a:after {
-        display:block;
-        content: '';
-        border-bottom: solid 3px whitesmoke;  
-        transform: scaleX(0);  
-        transition: transform 250ms ease-in-out;
-    }
-    a:hover:after { transform: scaleX(1); }
-    a.fromRight:after{ transform-origin:100% 50%; }
-    a.fromLeft:after{  transform-origin:  0% 50%; }
+    
 }
 footer {
     position: absolute;
@@ -370,6 +374,47 @@ table {
 }
 .eli {
     background-color: #ff3333;
+}
+#cerrar {
+    font-size: 18px;
+    position: relative;
+    text-align: center;
+    top: -70px;
+}
+.formUsu {
+    width: 220px;
+    margin: auto;
+    display: grid;
+    grid-template-areas: 
+        "tpo nom"
+        "ema ema"
+        "pwd pwd"
+        "but1 but1"
+        "but2 but2";
+    grid-template-columns: repeat(2, 100px);
+    gap: 13px;
+    * {
+        width: auto;
+        margin: 0;
+    }
+}
+#email {
+    grid-area: ema;
+}
+#nom {
+    grid-area: nom;
+}
+#pwd {
+    grid-area: pwd;
+}
+#tipo_usu {
+    grid-area: tpo;
+}
+#but1 {
+    grid-area: but1;
+}
+#but2 {
+    grid-area: but2;
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {
