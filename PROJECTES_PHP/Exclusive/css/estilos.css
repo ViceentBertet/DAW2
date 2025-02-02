@@ -334,6 +334,7 @@ table {
     margin: auto;
     border: 1px solid #7F598A;
     border-collapse: collapse;
+    margin-bottom: 200px;
     tr {
         text-align: center;
     }
@@ -409,11 +410,50 @@ table {
 #tipo_usu {
     grid-area: tpo;
 }
+.formProd {
+    width: 220px;
+    margin: auto;
+    display: grid;
+    grid-template-areas: 
+        "id nom"
+        "desc desc"
+        "img tipo"
+        "precio stock"
+        "but1 but1"
+        "but2 but2";
+    grid-template-columns: repeat(2, 100px);
+    gap: 7px;
+    * {
+        width: auto;
+        margin: 0;
+    }
+}
 #but1 {
     grid-area: but1;
 }
 #but2 {
     grid-area: but2;
+}
+#id {
+    grid-area: id;
+}
+#nom {
+    grid-area: nom;
+}
+#descrip {
+    grid-area: desc;
+}
+#img {
+    grid-area: img;
+}
+#tipo {
+    grid-area: tipo;
+}
+#precio {
+    grid-area: precio;
+}
+#stock {
+    grid-area: stock;
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {

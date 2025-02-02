@@ -8,8 +8,16 @@
 ?>
         <div>
             <h3>Pedir cita</h3>
-            <form method="POST" action="emails.php">
-                <input type="email" name="email" placeholder="Introduce tu email">
+            <form method="POST" action="pedirCita.php">
+                <input type="email" name="email" placeholder="Introduce tu email" autocomplete="off"
+<?php
+        if (isset($_SESSION['usu'])) {
+?>
+            value="<?=$_SESSION['usu']?>"
+<?php
+        }
+?>
+                >
                 <div>
                     Hora:
                     <input type="number" name="hora" max="18" min="9">
@@ -44,17 +52,12 @@
         }
         if ($correcto[0] && $correcto[1] ) {
 ?>
-            <div class="formulari">
-                <p>Se ha registrado correctamente la cita.</p>
-                <p>Puede consultar la cita en su correo</p>
-                <p><a href="pedirCita.php">Pulsa aquí para volver</a></p>
-            </div>
+            <p>Se ha registrado correctamente la cita.</p>
+            <p>Puede consultar la cita en su correo</p>
 <?php
         } else {
 ?>
-            <div class="formulari">
-                <p>No se ha podido registrar la cita</p>
-            </div>
+            <p>No se ha podido registrar la cita</p>
 <?php
         }
     }

@@ -194,5 +194,128 @@ function formDelUsu(accion) {
 function delUsu() {
     formDelUsu("Eliminar usuario");
     accion.value = 3;
-    formulario.appendChild(inputDel);
+}
+function formProd(accion) {
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
+
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminProd.php";
+    form.classList.add("formProd");
+    form.id = "formulario";
+
+    let id = document.createElement('input');
+    id.name = "id";
+    id.id = "id";
+    id.placeholder = "ID";
+
+    let nom = document.createElement('input');
+    nom.name = "nom";
+    nom.id = "nom";
+    nom.placeholder = "Nom";
+
+    let descrip = document.createElement('input');
+    descrip.name = "descrip";
+    descrip.id = "descrip";
+    descrip.placeholder = "Descripción";
+
+    let img = document.createElement('input');
+    img.name = "img";
+    img.id = "img";
+    img.type = "file";
+
+    let select = document.createElement('select');
+    OPCIONES_TIPO.forEach(opcion => {
+        const option = document.createElement("option");
+        option.value = opcion;
+        option.textContent = opcion;
+        select.appendChild(option); 
+    });
+    select.name = "tipo";
+    select.id = "tipo";
+
+    let precio = document.createElement('input');
+    precio.name = "precio";
+    precio.id = "precio";
+    precio.placeholder = "Precio";
+
+    let stock = document.createElement('input');
+    stock.name = "stock";
+    stock.id = "stock";
+    stock.placeholder = "Stock";
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+
+    form.appendChild(input);
+    form.appendChild(id);
+    form.appendChild(nom);
+    form.appendChild(descrip);
+    form.appendChild(img);
+    form.appendChild(select);
+    form.appendChild(stock);
+    form.appendChild(precio);
+    
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
+}
+function addProd() {
+    formProd("Añadir producto");
+    accion.value = 1;
+}
+function actProd() {
+    formProd("Actualizar producto");
+    accion.value = 2;
+}
+function formDelProd(accion) {
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
+
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminProd.php";
+    form.classList.add("formUsu");
+    form.id = "formulario";
+
+    let email = document.createElement('input');
+    email.name = "id";
+    email.id = "email";
+    email.placeholder = "ID Producto";
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+
+    form.appendChild(input);
+    form.appendChild(email);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
+}
+function delProd() {
+    formDelProd("Borrar producto");
+    accion.value = 3;
 }

@@ -9,6 +9,7 @@
         $cadena_conexion = "mysql:host=$hostname;dbname=$database;port=$port;charset=$caracteres;";
         return new PDO($cadena_conexion, $usuario, $pwd);
     }
+    /*      GESTIÓN DE PRODUCTOS    */
     function selectAll() {
         $pdo = crearConexion();
         $query = 'SELECT * FROM producto';
@@ -26,8 +27,58 @@
         $query = "SELECT * FROM producto where precio $operador '$precio'";
         return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
     }
-    
-    
+    function anyadirProd($id, $nom, $descrip, $img, $precio, $stock, $tipo) {
+        $pdo = crearConexion();
+        $rutaImg = subirImagen($img);
+        if ($rutaImg) {
+            $query = "INSERT INTO producto (ID_prod, nom, descrip, img, precio, stock, tpo_prod)" . 
+            "VALUES ('$id', '$nom', '$descrip', '$rutaImg', " . floatval($precio) . ", " . intval($stock) . ", '$tipo');";
+            $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+            $stmt->execute();
+            $n_filas = $stmt->rowCount();
+            if ($n_filas == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function subirImagen($img) {
+        $dir = "img/";
+        print_r($img);
+        $archivo = $dir . basename($img["name"]);
+        if (file_exists($archivo) || move_uploaded_file($_FILES["imagen"]["tmp_name"], $archivo)) {
+            return $archivo;
+        }
+        return false;
+    }
+    function updateProd($id, $nom, $descrip, $img, $precio, $stock, $tipo) { 
+        $pdo = crearConexion();
+        $rutaImg = subirImagen($img);
+        if ($rutaImg) {
+            $query = "UPDATE producto" . 
+            "SET nom = '$nom', descrip = '$descrip', img = '$rutaImg', precio = " . floatval($precio) . ", stock = " . intval($stock) . ", tpo_prod = '$stock" . 
+            "WHERE ID_prod = '$id';";;
+            $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+            $stmt->execute();
+            $n_filas = $stmt->rowCount();
+            if ($n_filas == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function deleteProd($id) {
+        $pdo = crearConexion();
+        $query = "DELETE FROM producto WHERE ID_prod = '$id';";
+        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stmt->execute();
+        $n_filas = $stmt->rowCount();
+        if ($n_filas == 1) {
+            return true;
+        }
+        return false;
+    }
+    /*      GESTIÓN DE USUARIOS      */
     function buscaUsuarios($usu, $pwd) {
         $pdo = crearConexion();
         $query = "SELECT * FROM usuario WHERE email = '$usu' AND pwd = '$pwd'";
@@ -40,11 +91,6 @@
             }
         }
         return false;
-    }
-    function selectEmp() { 
-        $pdo = crearConexion();
-        $query = "SELECT * FROM usuario WHERE tpo_usu = 'Empleado'";
-        return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
     }
     function selectUsers() { 
         $pdo = crearConexion();
@@ -104,6 +150,37 @@
         ?>
         </div>
             <?php
+    }
+    function mostrarTablaProd($stmt , $n_filas) {
+?>
+        <p class="margen">Productos registrados: <?=$n_filas?></p>
+        <table>
+            <tr>
+                <th>ID PRODUCTO</th>
+                <th>NOMBRE</th>
+                <th>DESCRIPCIÓN</th>
+                <th>IMAGEN</th>
+                <th>PRECIO</th>
+                <th>STOCK</th>
+                <th>TIPO DE PRODUCTO</th>
+            </tr>
+<?php
+        while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+?>
+            <tr>
+                <td><?=$registro['ID_prod']?></td>
+                <td><?=$registro['nom']?></td>
+                <td><?=$registro['descrip']?></td>
+                <td><?=$registro['img']?></td>
+                <td><?=$registro['precio']?></td>
+                <td><?=$registro['stock']?></td>
+                <td><?=$registro['tpo_prod']?></td>
+            </tr>
+<?php
+        }
+?>
+        </table>
+<?php 
     }
     function mostrarUsers($stmt , $n_filas) {
 ?>
