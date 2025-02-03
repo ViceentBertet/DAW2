@@ -43,10 +43,9 @@
         return false;
     }
     function subirImagen($img) {
-        $dir = "img/";
-        print_r($img);
+        $dir = "img/";       
         $archivo = $dir . basename($img["name"]);
-        if (file_exists($archivo) || move_uploaded_file($_FILES["imagen"]["tmp_name"], $archivo)) {
+        if (file_exists($archivo) || move_uploaded_file($img["tmp_name"], $archivo)) {
             return $archivo;
         }
         return false;

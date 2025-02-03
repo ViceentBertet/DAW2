@@ -206,7 +206,8 @@ function formProd(accion) {
     form.action = "./adminProd.php";
     form.classList.add("formProd");
     form.id = "formulario";
-
+    form.enctype="multipart/form-data";
+    
     let id = document.createElement('input');
     id.name = "id";
     id.id = "id";
