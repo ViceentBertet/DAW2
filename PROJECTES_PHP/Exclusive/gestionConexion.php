@@ -120,6 +120,7 @@
         }
         return false;
     }
+
     function deleteUsu($email) {
         $pdo = crearConexion();
         $query = "DELETE FROM usuario WHERE email = '" . $email . "'";
