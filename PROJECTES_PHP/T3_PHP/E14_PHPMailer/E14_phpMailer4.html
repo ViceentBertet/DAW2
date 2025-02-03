@@ -7,12 +7,11 @@
     </head>
     <body>
         <h2>Formulario Envío Correo</h2>
-        <form action="E14_phpMailer3.php" method="POST" enctype="multipart/form-data">
-            Nombre: <input type="text" name="nom" value="" /><br>
-            Email: <input type="text" name="email" value="" /><br>
+        <form action="E14_phpMailer4.php" method="POST" enctype="multipart/form-data">
+            Destino: <input type="text" name="email" value="" /><br>
             Asunto: <input type="text" name="asunto" value="" /><br>
             Mensaje: <br><textarea name="msj"></textarea> <br>
-            Archivo Adjunto: <input type="file" name="fitx" />
+            Archivo Adjunto: <input type="file" name="fitx[]" multiple/>
             <button>Enviar</button>
         </form>
     </body>
