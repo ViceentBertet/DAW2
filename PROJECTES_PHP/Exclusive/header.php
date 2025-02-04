@@ -12,8 +12,9 @@
 </head>
 <body>
     <header>
-<?php
-        if(isset($_SESSION["nom"])) {
+    <img src="img/compra.png" alt="Carro de la compra">
+<?php   
+    if(isset($_SESSION["nom"])) {
 ?>
         <p><a href="administrar.php"><?=$_SESSION["nom"]?></a></p>
 <?php

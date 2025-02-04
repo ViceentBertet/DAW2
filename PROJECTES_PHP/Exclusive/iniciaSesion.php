@@ -37,7 +37,7 @@
             } else {
 ?>
         <p>Usuario no encontrado</p>
-        <a href="iniaSesion.php">Volver a intentar</a>
+        <a href="iniciaSesion.php">Volver a intentar</a>
 <?php
             }
         } else {
