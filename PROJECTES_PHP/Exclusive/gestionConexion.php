@@ -9,7 +9,7 @@
         $cadena_conexion = "mysql:host=$hostname;dbname=$database;port=$port;charset=$caracteres;";
         return new PDO($cadena_conexion, $usuario, $pwd);
     }
-    /*      GESTIÓN DE PRODUCTOS    */
+    /*      GESTIÓN DE PRODUCTOS   */
     function selectAll() {
         $pdo = crearConexion();
         $query = 'SELECT * FROM producto';
@@ -27,6 +27,8 @@
         $query = "SELECT * FROM producto where precio $operador '$precio'";
         return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
     }
+    /* TODO HACER mensaje para PRIMARY KEY 
+     */
     function anyadirProd($id, $nom, $descrip, $img, $precio, $stock, $tipo) {
         $pdo = crearConexion();
         $rutaImg = subirImagen($img);
@@ -138,7 +140,7 @@
         <?php
             while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
         ?>
-            <div>
+            <div id="<?=$registro['ID_prod']?>" onclick="mostrarProducto(this, '<?=$_SESSION['usu']?>')">
                 <h3><?=$registro['nom']?></h3>
                 <img src="<?=$registro['img']?>" alt="<?=$registro['nom']?>">
                 <p class="descrip"><?=$registro['descrip']?></p>
@@ -148,6 +150,8 @@
                 }
         ?>
         </div>
+        <div id="protector" class="ocultar"></div>
+
             <?php
     }
     function mostrarTablaProd($stmt , $n_filas) {

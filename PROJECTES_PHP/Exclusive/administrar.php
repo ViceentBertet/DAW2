@@ -20,7 +20,7 @@
 ?>
     </div>
     <div id="protector" class="ocultar"></div>
-    <div id="cerrar"><a href="cerrarSes.php">Cerrar sessión</a></div>
+    <div class="cerrarSes"><a href="cerrarSes.php">Cerrar sessión</a></div>
 <?php
     include("footer.php");
 ?>
