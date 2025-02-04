@@ -363,8 +363,33 @@ async function mostrarProducto(producto, iniciado) {
     let val = document.createElement("div");
     val.id = "val";
     let valData = await fetchVal(producto.id);
-    console.log(valData);
-   
+    valData = JSON.parse(valData);
+    valData.forEach(resenya => {
+        let msjValor = document.createElement('div');
+        msjValor.classList.add('valoracion');
+
+        let nom = document.createElement('p');
+        nom.id = "nomVal";
+        nom.innerText = resenya.nom;
+
+        let divMensaje = document.createElement('div');
+        let descrip = document.createElement('p');
+        descrip.innerText = resenya.descrip;
+
+        let eval = document.createElement('p');
+        eval.innerText = resenya.eval;
+        
+        if (eval.innerText == "Excelente" || eval.innerText == "Notable") eval.classList.add('verde');
+        else if (eval.innerText == "Bueno") eval.classList.add('naranja');
+        else eval.classList.add('rojo');
+
+        divMensaje.appendChild(descrip);
+        divMensaje.appendChild(eval);
+
+        msjValor.appendChild(nom);
+        msjValor.appendChild(divMensaje);
+        val.appendChild(msjValor);
+    });
 
     let div = document.createElement("div");
     div.classList.add("mostrarProducto");

@@ -406,9 +406,6 @@ table {
 #email {
     grid-area: ema;
 }
-#nom {
-    grid-area: nom;
-}
 #pwd {
     grid-area: pwd;
 }
@@ -508,7 +505,34 @@ table {
     }
 }
 .valoracion {
-
+    text-align: left;
+    font-size: 10px;
+    padding: 5px;
+    width: 500px;
+    margin: auto;
+    border: 1px solid whitesmoke;
+    border-radius: 15px;
+    p {
+        padding: 0;
+        margin: 2px;
+    }
+    #nomVal {
+        color: yellow;
+    }
+    div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.verde {
+    color:lawngreen;
+}
+.naranja {
+    color: orange;
+}
+.rojo {
+    color: red;
 }
 #id {
     grid-area: id;
