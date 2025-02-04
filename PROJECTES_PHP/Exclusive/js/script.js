@@ -1,7 +1,8 @@
 const OPCIONES_TIPO = ["Belleza", "Piel", "Fragancia", "Cabello", "Herramientas"];
 const VALORES_OPERADORES = ["=", "<", ">"];
-const OPCIONES_OPERADORES = ["Igual que", "Menor que", "Mayor que "]
-const TIPO_USUS = ['Cliente', 'Empleado', 'Admin']
+const OPCIONES_OPERADORES = ["Igual que", "Menor que", "Mayor que "];
+const TIPO_USUS = ['Cliente', 'Empleado', 'Admin'];
+const URL_VALORACIONES = "JSON_VAL.php";
 function addTipo() {
     protector.classList.remove("ocultar");
     let ventana = createWindow();
@@ -322,9 +323,32 @@ function delProd() {
     formDelProd("Borrar producto");
     accion.value = 3;
 }
-function mostrarProducto(producto, iniciado) {
+async function mostrarProducto(producto, iniciado) {
     document.body.style.overflow = "hidden";
     protector.classList.remove("ocultar");
+    let formVal = document.createElement("form");
+    formVal.action = "#";
+    formVal.id = "formVal";
+
+    let chat = document.createElement('input');
+    chat.placeholder = "Introduce una reseña...";
+    chat.name = "valoracion";
+    let imgEnviar = document.createElement('img');
+    imgEnviar.src = "img/enviar.png";
+    imgEnviar.alt = "Enviar";
+
+    let button = document.createElement("button");
+    button.appendChild(imgEnviar);
+
+    let formCarrito = document.createElement("form");
+    formCarrito.id = "formCarrito";
+    formCarrito.action = "#";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.name = "producto";
+    input.value = producto.id;
+
     let titulo = producto.querySelector("h3").cloneNode(true);
     titulo.id = "tProd";
     let img = producto.querySelector("img").cloneNode(true);
@@ -335,20 +359,18 @@ function mostrarProducto(producto, iniciado) {
 
     let precio = producto.querySelectorAll("p")[1].cloneNode(true);
     precio.id = "precio";
+
     let val = document.createElement("div");
     val.id = "val";
-    let form = document.createElement("form");
-    form.action = "#";
-    let input = document.createElement("input");
-    input.classList.add("ocultar");
-    input.name = "producto";
-    input.value = producto.id;
+    let valData = await fetchVal(producto.id);
+    console.log(valData);
+   
 
     let div = document.createElement("div");
     div.classList.add("mostrarProducto");
     let accion = "Añadir al carrito"; 
-    if (iniciado == null || iniciado == undefined) {
-        form.action = "iniciaSesion.php";
+    if (iniciado == null) {
+        formCarrito.action = "iniciaSesion.php";
         accion = "Inicia sesión";
     }
     let buttons = createButtons(accion);
@@ -356,18 +378,35 @@ function mostrarProducto(producto, iniciado) {
     buttons[1].id = "but2";
     protector.classList.remove("ocultar");
 
-    form.appendChild(input);
-    form.appendChild(titulo);
-    form.appendChild(img);
-    form.appendChild(descrip);
-    form.appendChild(val);
-
-    form.appendChild(precio);
+    formCarrito.appendChild(input);
+    formCarrito.appendChild(titulo);
+    formCarrito.appendChild(img);
+    formCarrito.appendChild(descrip);
+    formCarrito.appendChild(val);
+    formCarrito.appendChild(precio);
+    formCarrito.appendChild(buttons[0]);
+    formCarrito.appendChild(buttons[1]);
     
-    form.appendChild(buttons[0]);
-    form.appendChild(buttons[1]);
-    div.appendChild(form);
+    formVal.appendChild(chat);
+    formVal.appendChild(button);
+
+    div.appendChild(formCarrito);
+    div.appendChild(formVal);
     document.body.appendChild(div);
     but2.addEventListener("click", closeWindow);
+}
+async function fetchVal(id) {
+    try {
+        let respuesta = await fetch(URL_VALORACIONES + "?prod=" + id);
+    
+        if (!respuesta.ok) {
+            console.log("ERROR: SOLICITANDO VALORACIONES");
+            return null;
+        }
 
+        return respuesta.text(); // Convierte la respuesta a JSON si es válida
+    } catch (e) {
+        console.log("ERROR: " + e);
+        return null;
+    } 
 }

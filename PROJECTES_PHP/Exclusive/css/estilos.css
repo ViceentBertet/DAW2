@@ -20,7 +20,7 @@ a {
 header {
     background-color: #7F598A;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     color:whitesmoke;
     width: 100%;
@@ -28,7 +28,7 @@ header {
     img {
         width: 50px;
         height: 50px;
-        margin-right: 10px;
+        margin: 0 10px;
     }
     p {
         margin-left: 20px;
@@ -436,54 +436,79 @@ table {
 .mostrarProducto {
     color: whitesmoke;
     position: fixed;
-    top: 500px;
+    top: 410px;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 660px;
-    width: 660px;
+    height: 540px;
+    width: 540px;
     z-index: 100;
     padding: 10px;
     background-color: #7F598A;
     border-radius: 15px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     font-size: 25px;
-    text-align: center;
-    
-    form {
-        display: grid;
-        grid-template-columns: repeat(4, 150px);
-        grid-template-rows: repeat(4, 150px);
-        gap: 20px;
-        grid-template-areas: 
-            "img img tit tit"
-            "img img desc desc"
-            "val val val val"
-            "precio precio but1 but2";
-        img {
-            width: 300px;
-            height: 300px;
-        }
-        #precio {
-            margin: 0;
-            margin-bottom: 10px;
-            padding: 0;
-            font-size: 20px;
-            align-self: end;
-
-        }
-        button {
-            width: 150px;
-            align-self: end;
-
-        }
+    text-align: center;   
+}
+#formCarrito {
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+    grid-template-rows: repeat(4, 120px);
+    gap: 20px;
+    grid-template-areas: 
+        "img img tit tit"
+        "img img desc desc"
+        "val val val val"
+        "precio precio but1 but2";
+    img {
+        width: 240px;
+        height: 240px;
+        border-radius: 15px;
     }
-    
+    #precio {
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0;
+        font-size: 20px;
+        align-self: end;
+
+    }
+    button {
+        width: 120px;
+        align-self: end;
+
+    }
 }
 #val {
     grid-area: val;
-    border: 1px solid whitesmoke;
+    border: 1px solid #f5f5f5;
     padding: 10px;
     border-radius: 15px;
+}
+#formVal {
+    position: relative;
+    top: -130px;
+    display: flex;
+    gap: 10px;
+    width: 500px;
+    margin: 0 20px;
+    input {
+        width: calc(100% - 50px);
+    }
+    button {
+        border: none;
+        background: none;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+
+    }
+    img {
+        width: 30px;
+        height: 30px;
+    }
+}
+.valoracion {
+
 }
 #id {
     grid-area: id;

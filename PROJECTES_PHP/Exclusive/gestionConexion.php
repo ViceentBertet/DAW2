@@ -133,15 +133,27 @@
         }
         return false;
     }
-   
+    /*          VALORACIONES        */
+    function selectIdValNom($id){
+        $pdo = crearConexion();
+        $query = "SELECT v.ID_val, u.nom, v.ID_prod, v.descrip, v.eval FROM valoracion v JOIN usuario u ON v.email = u.email WHERE v.ID_PROD = '$id';";
+        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    /*      MOSTRAR REGISTROS       */
     function mostrarProductos($stmt , $n_filas) {
         ?>
             <p class="margen">Productos encontrados: <?=$n_filas?></p>
             <div class='productos'>
         <?php
+            $usu = null;
+            if (isset($_SESSION['usu'])) {
+                $usu = $_SESSION['usu'];
+            }
             while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
         ?>
-            <div id="<?=$registro['ID_prod']?>" onclick="mostrarProducto(this, '<?=$_SESSION['usu']?>')">
+            <div id="<?=$registro['ID_prod']?>" onclick="mostrarProducto(this, '<?=$usu?>')">
                 <h3><?=$registro['nom']?></h3>
                 <img src="<?=$registro['img']?>" alt="<?=$registro['nom']?>">
                 <p class="descrip"><?=$registro['descrip']?></p>
