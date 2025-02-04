@@ -2,6 +2,7 @@
     include("header.php");
     include("gestionConexion.php");
 
+<<<<<<< HEAD
     if ($_SESSION['tpo_usu'] != "Cliente") {
         if (isset($_POST["accion"])) {
             $accion = $_POST['accion'];
@@ -15,6 +16,20 @@
                 $correcto = deleteProd($_POST['id']);
             }
             if ($correcto) {
+=======
+    if (isset($_POST["accion"])) {
+        $accion = $_POST['accion'];
+        
+        $correcto = "";
+        if ($accion == 1) {
+            $correcto = anyadirProd($_POST['id'], $_POST['nom'], $_POST['descrip'], $_FILES['img'], $_POST['precio'], $_POST['stock'], $_POST['tipo']);
+        } else if ($accion == 2) {
+            $correcto = updateProd($_POST['id'], $_POST['nom'], $_POST['descrip'], $_FILES['img'], $_POST['precio'], $_POST['stock'], $_POST['tipo']);
+        } else {
+            $correcto = deleteProd($_POST['id']);
+        }
+        if ($correcto) {
+>>>>>>> d71cbb446bd4cc83ca592a7ec4b8a79242043d4f
 ?>
                 <p class="margen">La operación se ha realizado con exito</p>
 <?php

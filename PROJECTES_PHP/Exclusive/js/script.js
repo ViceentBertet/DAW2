@@ -23,9 +23,10 @@ function addTipo() {
 
     form.appendChild(select);
     form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+
     ventana.appendChild(titulo);
     ventana.appendChild(form);
-    ventana.appendChild(buttons[1]);
     document.body.appendChild(ventana);
     cerrar.addEventListener("click", closeWindow);
 }
@@ -55,9 +56,9 @@ function addPrecio(){
     form.appendChild(select);
     form.appendChild(input);
     form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
     ventana.appendChild(titulo);
     ventana.appendChild(form);
-    ventana.appendChild(buttons[1]);
     document.body.appendChild(ventana);
     cerrar.addEventListener("click", closeWindow);
 }
@@ -65,10 +66,12 @@ function createWindow() {
     let div = document.createElement("div");
     div.id = "ventana";
     div.classList.add("ventana");
+    document.body.style.overflow = "hidden";
     return div;
 }
 function closeWindow() {
     ventana.remove();
+    document.body.style.overflow = "";
     protector.classList.add("ocultar");
 }
 function createButtons(msj) {
@@ -196,7 +199,6 @@ function delUsu() {
     accion.value = 3;
 }
 function formProd(accion) {
-    protector.classList.remove("ocultar");
     let ventana = createWindow();
     let titulo = document.createElement("h3");
     titulo.innerText = accion;
@@ -206,7 +208,8 @@ function formProd(accion) {
     form.action = "./adminProd.php";
     form.classList.add("formProd");
     form.id = "formulario";
-
+    form.enctype="multipart/form-data";
+    
     let id = document.createElement('input');
     id.name = "id";
     id.id = "id";
@@ -318,4 +321,53 @@ function formDelProd(accion) {
 function delProd() {
     formDelProd("Borrar producto");
     accion.value = 3;
+}
+function mostrarProducto(producto, iniciado) {
+    document.body.style.overflow = "hidden";
+    protector.classList.remove("ocultar");
+    let titulo = producto.querySelector("h3").cloneNode(true);
+    titulo.id = "tProd";
+    let img = producto.querySelector("img").cloneNode(true);
+    img.id = "img";
+    
+    let descrip = producto.querySelector("p").cloneNode(true);
+    descrip.id = "descrip";
+
+    let precio = producto.querySelectorAll("p")[1].cloneNode(true);
+    precio.id = "precio";
+    let val = document.createElement("div");
+    val.id = "val";
+    let form = document.createElement("form");
+    form.action = "#";
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.name = "producto";
+    input.value = producto.id;
+
+    let div = document.createElement("div");
+    div.classList.add("mostrarProducto");
+    let accion = "Añadir al carrito"; 
+    if (iniciado == null || iniciado == undefined) {
+        form.action = "iniciaSesion.php";
+        accion = "Inicia sesión";
+    }
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+    protector.classList.remove("ocultar");
+
+    form.appendChild(input);
+    form.appendChild(titulo);
+    form.appendChild(img);
+    form.appendChild(descrip);
+    form.appendChild(val);
+
+    form.appendChild(precio);
+    
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    div.appendChild(form);
+    document.body.appendChild(div);
+    but2.addEventListener("click", closeWindow);
+
 }

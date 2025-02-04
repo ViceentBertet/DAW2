@@ -245,20 +245,20 @@ h2 {
 .ventana {
     position: absolute;
     margin: 100px auto;
-    top: 50%;
+    top: 400px;
     transform: translateY(-75%);
     left: 0;
     right: 0;
     z-index: 100;
     padding: 20px;
-    height: calc(300px - 40px);
+    min-height: calc(300px - 40px);
+    height: fit-content;
     width: calc(300px - 40px);
     border-radius: 15px;
     background-color: #7F598A;
     color:white;
     text-align: center;
-    
-   
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 select {
     text-align: center;
@@ -334,6 +334,12 @@ button {
         width: auto;
     }
 }
+.cerrarSes {
+    position: relative;
+    top: -120px;
+    text-align: center;
+    font-size: 18px;
+}
 /*      TABLAS              */
 table {
     margin: auto;
@@ -379,12 +385,6 @@ table {
 }
 .eli {
     background-color: #ff3333;
-}
-#cerrar {
-    font-size: 18px;
-    position: relative;
-    text-align: center;
-    top: -70px;
 }
 .formUsu {
     width: 220px;
@@ -433,11 +433,57 @@ table {
         margin: 0;
     }
 }
-#but1 {
-    grid-area: but1;
+.mostrarProducto {
+    color: whitesmoke;
+    position: fixed;
+    top: 500px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 660px;
+    width: 660px;
+    z-index: 100;
+    padding: 10px;
+    background-color: #7F598A;
+    border-radius: 15px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    font-size: 25px;
+    text-align: center;
+    
+    form {
+        display: grid;
+        grid-template-columns: repeat(4, 150px);
+        grid-template-rows: repeat(4, 150px);
+        gap: 20px;
+        grid-template-areas: 
+            "img img tit tit"
+            "img img desc desc"
+            "val val val val"
+            "precio precio but1 but2";
+        img {
+            width: 300px;
+            height: 300px;
+        }
+        #precio {
+            margin: 0;
+            margin-bottom: 10px;
+            padding: 0;
+            font-size: 20px;
+            align-self: end;
+
+        }
+        button {
+            width: 150px;
+            align-self: end;
+
+        }
+    }
+    
 }
-#but2 {
-    grid-area: but2;
+#val {
+    grid-area: val;
+    border: 1px solid whitesmoke;
+    padding: 10px;
+    border-radius: 15px;
 }
 #id {
     grid-area: id;
@@ -459,6 +505,15 @@ table {
 }
 #stock {
     grid-area: stock;
+}
+#but1 {
+    grid-area: but1;
+}
+#but2 {
+    grid-area: but2;
+}
+#tProd {
+    grid-area: tit;
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {

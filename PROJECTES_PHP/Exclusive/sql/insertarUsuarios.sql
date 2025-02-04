@@ -1,4 +1,3 @@
--- Belleza
 INSERT INTO usuario (email, nom, pwd, tpo_usu)
 VALUES 
 ('cli@gmail.com', "Cliente de prueba", "1234", "Cliente"),
