@@ -27,7 +27,7 @@
         $query = "SELECT * FROM producto where precio $operador '$precio'";
         return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
     }
-    /* TODO HACER mensaje para PRIMARY KEY 
+    /* TODO HACER mensaje para error PRIMARY KEY 
      */
     function anyadirProd($id, $nom, $descrip, $img, $precio, $stock, $tipo) {
         $pdo = crearConexion();
@@ -112,7 +112,7 @@
     }
     function updateUsu($email, $nom, $pwd, $tpo_usu) { 
         $pdo = crearConexion();
-        $query = "UPDATE usuario SET nom = '" . $nom . "', pwd = '" . $pwd . "', tpo_usu = '" . $tpo_usu . "' WHERE email = '" . $email . "'";;
+        $query = "UPDATE usuario SET nom = '" . $nom . "', pwd = '" . $pwd . "', tpo_usu = '" . $tpo_usu . "' WHERE email = '" . $email . "'";
         $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         $stmt->execute();
         $n_filas = $stmt->rowCount();
@@ -141,19 +141,58 @@
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    function selectAllVal(){
+        $pdo = crearConexion();
+        $query = "SELECT * FROM valoracion ";
+        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        return $stmt;
+    }
+    function anyadirVal($id, $email, $prod, $descrip, $eval){
+        $pdo = crearConexion();
+        $query = "INSERT INTO valoracion (ID_val, email, ID_prod, descrip, eval) VALUES ('$id', '$email', '$prod', '$descrip', '$eval');";
+        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stmt->execute();
+        $n_filas = $stmt->rowCount();
+        if ($n_filas == 1) {
+            return true;
+        }
+        return false;
+    }
+    function updateVal($id, $email, $prod, $descrip, $eval) { 
+        $pdo = crearConexion();
+        $query = "UPDATE valoracion SET email = '$email', ID_prod = '$prod', descrip = '$descrip', eval = '$eval' WHERE ID_val= '$id';";
+        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stmt->execute();
+        $n_filas = $stmt->rowCount();
+        if ($n_filas == 1) {
+            return true;
+        }
+        return false;
+    }
+    function deleteVal($id, $email, $prod) {
+        $pdo = crearConexion();
+        $query = "DELETE FROM usuario WHERE ID_val = '$id' email = '$email' AND ID_prod = '$prod'";
+        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stmt->execute();
+        $n_filas = $stmt->rowCount();
+        if ($n_filas == 1) {
+            return true;
+        }
+        return false;
+    }
     /*      MOSTRAR REGISTROS       */
     function mostrarProductos($stmt , $n_filas) {
         ?>
             <p class="margen">Productos encontrados: <?=$n_filas?></p>
             <div class='productos'>
         <?php
-            $usu = null;
-            if (isset($_SESSION['usu'])) {
+            $usu = false;
+            if (isset($_SESSION['usu'])) {                
                 $usu = $_SESSION['usu'];
             }
             while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
         ?>
-            <div id="<?=$registro['ID_prod']?>" onclick="mostrarProducto(this, '<?=$usu?>')">
+            <div id='<?=$registro['ID_prod']?>' onclick='mostrarProducto(this, "<?=$usu?>")'>
                 <h3><?=$registro['nom']?></h3>
                 <img src="<?=$registro['img']?>" alt="<?=$registro['nom']?>">
                 <p class="descrip"><?=$registro['descrip']?></p>
@@ -216,6 +255,33 @@
                 <td><?=$registro['nom']?></td>
                 <td><?=$registro['pwd']?></td>
                 <td><?=$registro['tpo_usu']?></td>
+            </tr>
+<?php
+        }
+?>
+        </table>
+<?php 
+    }
+    function mostrarVal($stmt, $n_filas) {
+        ?>
+        <p class="margen">Valoraciones registradas: <?=$n_filas?></p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>USUARIO</th>
+                <th>PRODUCTO</th>
+                <th>DESCRIPCIÓN</th>
+                <th>EVALUACIÓN</th>
+            </tr>
+<?php
+        while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+?>
+            <tr>
+                <td><?=$registro['ID_val']?></td>
+                <td><?=$registro['email']?></td>
+                <td><?=$registro['ID_prod']?></td>
+                <td><?=$registro['descrip']?></td>
+                <td><?=$registro['eval']?></td>
             </tr>
 <?php
         }

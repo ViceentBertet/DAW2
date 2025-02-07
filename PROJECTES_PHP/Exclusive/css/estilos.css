@@ -481,6 +481,9 @@ table {
     padding: 10px;
     border-radius: 15px;
 }
+#cant {
+    position: absolute;
+}
 #formVal {
     position: relative;
     top: -130px;
@@ -563,6 +566,52 @@ table {
 }
 #tProd {
     grid-area: tit;
+}
+.formVal {
+    width: 220px;
+    margin: auto;
+    display: grid;
+    grid-template-areas:
+        "id prod" 
+        "ema ema"
+        "desc desc"
+        "eva eva"
+        "but1 but1"
+        "but2 but2";
+    grid-template-columns: repeat(2, 100px);
+    gap: 7px;
+    * {
+        width: auto;
+        margin: 0;
+    }
+    #but1 {
+        margin-top: 20px;
+    }
+}
+.formDelVal {
+    width: 220px;
+    margin: auto;
+    display: grid;
+    grid-template-areas:
+        "id prod" 
+        "ema ema"
+        "but1 but1"
+        "but2 but2";
+    grid-template-columns: repeat(2, 100px);
+    gap: 7px;
+    * {
+        width: auto;
+        margin: 0;
+    }
+    #but1 {
+        margin-top: 20px;
+    }
+}
+#prod {
+    grid-area: prod;
+}
+#eval {
+    grid-area: eva;
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {

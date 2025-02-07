@@ -293,13 +293,13 @@ function formDelProd(accion) {
     let form = document.createElement("form");
     form.method = "post";
     form.action = "./adminProd.php";
-    form.classList.add("formUsu");
+    form.classList.add("formDelVal");
     form.id = "formulario";
 
-    let email = document.createElement('input');
-    email.name = "id";
-    email.id = "email";
-    email.placeholder = "ID Producto";
+    let id = document.createElement('input');
+    id.name = "id";
+    id.id = "email";
+    id.placeholder = "ID producto";
 
     let buttons = createButtons(accion);
     buttons[0].id = "but1";
@@ -311,7 +311,7 @@ function formDelProd(accion) {
     input.name = "accion";
 
     form.appendChild(input);
-    form.appendChild(email);
+    form.appendChild(id);
     form.appendChild(buttons[0]);
     form.appendChild(buttons[1]);
     ventana.appendChild(titulo);
@@ -326,8 +326,14 @@ function delProd() {
 async function mostrarProducto(producto, iniciado) {
     document.body.style.overflow = "hidden";
     protector.classList.remove("ocultar");
+
+    let div = document.createElement("div");
+    div.classList.add("mostrarProducto");
+    div.id = "ventana";
+
     let formVal = document.createElement("form");
     formVal.action = "#";
+    formVal.method = "POST";
     formVal.id = "formVal";
 
     let chat = document.createElement('input');
@@ -364,44 +370,26 @@ async function mostrarProducto(producto, iniciado) {
     val.id = "val";
     let valData = await fetchVal(producto.id);
     valData = JSON.parse(valData);
-    valData.forEach(resenya => {
-        let msjValor = document.createElement('div');
-        msjValor.classList.add('valoracion');
-
-        let nom = document.createElement('p');
-        nom.id = "nomVal";
-        nom.innerText = resenya.nom;
-
-        let divMensaje = document.createElement('div');
-        let descrip = document.createElement('p');
-        descrip.innerText = resenya.descrip;
-
-        let eval = document.createElement('p');
-        eval.innerText = resenya.eval;
-        
-        if (eval.innerText == "Excelente" || eval.innerText == "Notable") eval.classList.add('verde');
-        else if (eval.innerText == "Bueno") eval.classList.add('naranja');
-        else eval.classList.add('rojo');
-
-        divMensaje.appendChild(descrip);
-        divMensaje.appendChild(eval);
-
-        msjValor.appendChild(nom);
-        msjValor.appendChild(divMensaje);
+    valData.forEach(valoracion => {
+        let msjValor = crearValoracion(valoracion);        
         val.appendChild(msjValor);
     });
 
-    let div = document.createElement("div");
-    div.classList.add("mostrarProducto");
     let accion = "Añadir al carrito"; 
-    if (iniciado == null) {
+    console.log(iniciado);
+    if (!iniciado) {
         formCarrito.action = "iniciaSesion.php";
         accion = "Inicia sesión";
+    } else {
+        let cantidad = document.createElement("input");
+        cantidad.type = "number";
+        cantidad.id = "cant";
+        formCarrito.appendChild(cantidad);
     }
+
     let buttons = createButtons(accion);
     buttons[0].id = "but1";
     buttons[1].id = "but2";
-    protector.classList.remove("ocultar");
 
     formCarrito.appendChild(input);
     formCarrito.appendChild(titulo);
@@ -429,9 +417,99 @@ async function fetchVal(id) {
             return null;
         }
 
-        return respuesta.text(); // Convierte la respuesta a JSON si es válida
+        return respuesta.text();
     } catch (e) {
         console.log("ERROR: " + e);
         return null;
     } 
+}
+function crearValoracion(valoracion) {
+    let msjValor = document.createElement('div');
+    msjValor.classList.add('valoracion');
+
+    let nom = document.createElement('p');
+    nom.id = "nomVal";
+    nom.innerText = valoracion.nom;
+
+    let divMensaje = document.createElement('div');
+    let descrip = document.createElement('p');
+    descrip.innerText = valoracion.descrip;
+
+    let eval = document.createElement('p');
+    eval.innerText = valoracion.eval;
+    
+    if (eval.innerText == "Excelente" || eval.innerText == "Notable") eval.classList.add('verde');
+    else if (eval.innerText == "Bueno") eval.classList.add('naranja');
+    else eval.classList.add('rojo');
+
+    divMensaje.appendChild(descrip);
+    divMensaje.appendChild(eval);
+
+    msjValor.appendChild(nom);
+    msjValor.appendChild(divMensaje);
+    return msjValor;
+}
+function formVal() {
+    
+}
+function addVal() {
+
+}
+function actVal() {
+
+}
+function formDelVal(accion) {
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
+
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminVal.php";
+    form.classList.add("formDelVal");
+    form.id = "formulario";
+
+    let id = document.createElement('input');
+    id.name = "id";
+    id.id = "id";
+    id.placeholder = "ID valoración";
+
+    let email = document.createElement('input');
+    email.name = "email";
+    email.id = "email";
+    email.placeholder = "Email";
+
+    let prod = document.createElement('input');
+    prod.name = "prod";
+    prod.id = "prod";
+    prod.placeholder = "ID producto";
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+
+    form.appendChild(input);
+    form.appendChild(id);
+    form.appendChild(email);
+    form.appendChild(prod);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
+}
+function delVal() {
+    formDelVal("Borrar valoración");
+    accion.value = 3;
+}
+function visualizarCarrito() {
+    let div = document.createElement("div");
+    div.id = "ventana";
 }
