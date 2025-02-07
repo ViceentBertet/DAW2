@@ -3,6 +3,8 @@ const VALORES_OPERADORES = ["=", "<", ">"];
 const OPCIONES_OPERADORES = ["Igual que", "Menor que", "Mayor que "];
 const TIPO_USUS = ['Cliente', 'Empleado', 'Admin'];
 const URL_VALORACIONES = "JSON_VAL.php";
+const OPCIONES_EVAL = ['Excelente', 'Notable', 'Bueno', 'Suficiente', 'Insuficiente'];
+
 function addTipo() {
     protector.classList.remove("ocultar");
     let ventana = createWindow();
@@ -323,7 +325,7 @@ function delProd() {
     formDelProd("Borrar producto");
     accion.value = 3;
 }
-async function mostrarProducto(producto, iniciado) {
+async function mostrarProducto(producto, iniciado, pagina) {
     document.body.style.overflow = "hidden";
     protector.classList.remove("ocultar");
 
@@ -332,13 +334,19 @@ async function mostrarProducto(producto, iniciado) {
     div.id = "ventana";
 
     let formVal = document.createElement("form");
-    formVal.action = "#";
+    formVal.action = pagina;
     formVal.method = "POST";
     formVal.id = "formVal";
+
+    let divVal = document.createElement('div');
+    divVal.style.display = "flex";
+    divVal.style.gap = "10px";
+    divVal.style.width = "100%";
 
     let chat = document.createElement('input');
     chat.placeholder = "Introduce una reseña...";
     chat.name = "valoracion";
+    let select = crearSelectEval();
     let imgEnviar = document.createElement('img');
     imgEnviar.src = "img/enviar.png";
     imgEnviar.alt = "Enviar";
@@ -348,7 +356,7 @@ async function mostrarProducto(producto, iniciado) {
 
     let formCarrito = document.createElement("form");
     formCarrito.id = "formCarrito";
-    formCarrito.action = "#";
+    formCarrito.action = pagina;
 
     let input = document.createElement("input");
     input.classList.add("ocultar");
@@ -374,10 +382,10 @@ async function mostrarProducto(producto, iniciado) {
         let msjValor = crearValoracion(valoracion);        
         val.appendChild(msjValor);
     });
-
     let accion = "Añadir al carrito"; 
     console.log(iniciado);
     if (!iniciado) {
+        formVal.action = "iniciaSesion.php";
         formCarrito.action = "iniciaSesion.php";
         accion = "Inicia sesión";
     } else {
@@ -399,8 +407,12 @@ async function mostrarProducto(producto, iniciado) {
     formCarrito.appendChild(precio);
     formCarrito.appendChild(buttons[0]);
     formCarrito.appendChild(buttons[1]);
-    
-    formVal.appendChild(chat);
+
+    divVal.appendChild(chat);
+    divVal.appendChild(select);
+
+    formVal.appendChild(input);
+    formVal.appendChild(divVal);
     formVal.appendChild(button);
 
     div.appendChild(formCarrito);
@@ -449,14 +461,128 @@ function crearValoracion(valoracion) {
     msjValor.appendChild(divMensaje);
     return msjValor;
 }
-function formVal() {
-    
+function crearSelectEval() {
+    let select = document.createElement('select');
+    OPCIONES_EVAL.forEach(opcion => {
+        const option = document.createElement("option");
+        option.value = opcion;
+        option.textContent = opcion;
+        select.appendChild(option); 
+    });
+    select.name = "eval";
+    select.id = "eval";
+    return select;
 }
 function addVal() {
+    let accion = "Añadir valoración";
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
 
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminVal.php";
+    form.classList.add("formAddVal");
+    form.id = "formulario";
+
+    let email = document.createElement('input');
+    email.name = "email";
+    email.id = "email";
+    email.placeholder = "Email";
+
+    let prod = document.createElement('input');
+    prod.name = "prod";
+    prod.id = "prod";
+    prod.placeholder = "ID producto";
+
+    let descrip = document.createElement('input');
+    descrip.name = "descrip";
+    descrip.id = "descrip";
+    descrip.placeholder = "Descripción";
+
+    let select = crearSelectEval();
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+    input.value = 1;
+
+    form.appendChild(input);
+    form.appendChild(email);
+    form.appendChild(descrip);
+    form.appendChild(prod);
+    form.appendChild(select);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
 }
-function actVal() {
 
+function actVal() {
+    let accion = "Actualizar valoración";
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
+
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminVal.php";
+    form.classList.add("formUpdVal");
+    form.id = "formulario";
+
+    let id = document.createElement('input');
+    id.name = "id";
+    id.id = "id";
+    id.placeholder = "ID valoración";
+
+    let email = document.createElement('input');
+    email.name = "email";
+    email.id = "email";
+    email.placeholder = "Email";
+
+    let prod = document.createElement('input');
+    prod.name = "prod";
+    prod.id = "prod";
+    prod.placeholder = "ID producto";
+
+    let descrip = document.createElement('input');
+    descrip.name = "descrip";
+    descrip.id = "descrip";
+    descrip.placeholder = "Descripción";
+
+    let select = crearSelectEval();
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+    input.value = 2;
+
+    form.appendChild(input);
+    form.appendChild(id);
+    form.appendChild(email);
+    form.appendChild(descrip);
+    form.appendChild(prod);
+    form.appendChild(select);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
 }
 function formDelVal(accion) {
     protector.classList.remove("ocultar");

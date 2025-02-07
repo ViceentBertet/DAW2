@@ -7,7 +7,7 @@
 
             $correcto = "";
             if ($accion == 1) {
-                $correcto = anyadirVal($_POST['id'], $_POST['email'], $_POST['prod'], $_POST['descrip'], $_POST['eval']);
+                $correcto = anyadirVal( $_POST['email'], $_POST['prod'], $_POST['descrip'], $_POST['eval']);
             } else if ($accion == 2) {
                 $correcto = updateVal($_POST['id'], $_POST['email'], $_POST['prod'], $_POST['descrip'], $_POST['eval']);
             } else {

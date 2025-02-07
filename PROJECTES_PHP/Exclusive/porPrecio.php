@@ -4,10 +4,23 @@ include("gestionConexion.php");
 $price = $_GET['price'];
 $operator = $_GET['operator'];
 try {
+    if (isset($_POST['valoracion']) && isset($_POST['eval']) && isset($_POST['producto'])) {
+        $correcto = anyadirVal($_SESSION["usu"], $_POST["producto"], $_POST["valoracion"], $_POST["eval"]);
+        if ($correcto) {
+?>
+            <p class="margen">Se ha añadido correctamente su reseña</p>
+<?php
+        } else {
+?>
+            <p class="margen">No se ha podido añadir la reseña</p>
+<?php
+        }
+    }
     $stmt = selectByPrice($price, $operator);
     $stmt->execute();
     $n_filas = $stmt->rowCount();
-    mostrarProductos($stmt, $n_filas);
+    $pagina = "./porPrecio.php";
+    mostrarProductos($stmt, $n_filas, $pagina);
 } catch (PDOException $e) {
     echo "Error con la base de datos: <b>$database</b><br>" . $e->getMessage(); 
 }

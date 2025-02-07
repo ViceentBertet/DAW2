@@ -147,9 +147,9 @@
         $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         return $stmt;
     }
-    function anyadirVal($id, $email, $prod, $descrip, $eval){
+    function anyadirVal($email, $prod, $descrip, $eval){
         $pdo = crearConexion();
-        $query = "INSERT INTO valoracion (ID_val, email, ID_prod, descrip, eval) VALUES ('$id', '$email', '$prod', '$descrip', '$eval');";
+        $query = "INSERT INTO valoracion (email, ID_prod, descrip, eval) VALUES ('$email', '$prod', '$descrip', '$eval');";
         $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         $stmt->execute();
         $n_filas = $stmt->rowCount();
@@ -181,7 +181,7 @@
         return false;
     }
     /*      MOSTRAR REGISTROS       */
-    function mostrarProductos($stmt , $n_filas) {
+    function mostrarProductos($stmt , $n_filas, $pagina) {
         ?>
             <p class="margen">Productos encontrados: <?=$n_filas?></p>
             <div class='productos'>
@@ -192,7 +192,7 @@
             }
             while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
         ?>
-            <div id='<?=$registro['ID_prod']?>' onclick='mostrarProducto(this, "<?=$usu?>")'>
+            <div id='<?=$registro['ID_prod']?>' onclick='mostrarProducto(this, "<?=$usu?>", "<?=$pagina?>")'>
                 <h3><?=$registro['nom']?></h3>
                 <img src="<?=$registro['img']?>" alt="<?=$registro['nom']?>">
                 <p class="descrip"><?=$registro['descrip']?></p>

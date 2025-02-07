@@ -8,6 +8,16 @@ body {
     padding: 0;
     font-family: Verdana;
     color: #7F598A;
+    
+}
+* {
+    user-select: none; /* Evita la selección en navegadores modernos */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+body::-webkit-scrollbar {
+    display: none;
 }
 html {
     min-height: 100%;
@@ -444,7 +454,8 @@ table {
     border-radius: 15px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     font-size: 25px;
-    text-align: center;   
+    text-align: center;
+
 }
 #formCarrito {
     display: grid;
@@ -480,7 +491,16 @@ table {
     border: 1px solid #f5f5f5;
     padding: 10px;
     border-radius: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    & > div {
+        margin-bottom: 5px;
+    }
+} 
+#val::-webkit-scrollbar {
+    display: none;
 }
+  
 #cant {
     position: absolute;
 }
@@ -567,7 +587,27 @@ table {
 #tProd {
     grid-area: tit;
 }
-.formVal {
+.formAddVal {
+    width: 220px;
+    margin: auto;
+    display: grid;
+    grid-template-areas:
+        "prod eva" 
+        "ema ema"
+        "desc desc"
+        "but1 but1"
+        "but2 but2";
+    grid-template-columns: repeat(2, 100px);
+    gap: 7px;
+    * {
+        width: auto;
+        margin: 0;
+    }
+    #but1 {
+        margin-top: 20px;
+    }
+}
+.formUpdVal {
     width: 220px;
     margin: auto;
     display: grid;

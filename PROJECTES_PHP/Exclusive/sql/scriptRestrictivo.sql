@@ -34,11 +34,12 @@ CREATE TABLE Incluye (
     FOREIGN KEY (ID_prod) REFERENCES Producto(ID_prod)
 );
 CREATE TABLE Valoracion (
-    ID_val VARCHAR(32) NOT NULL PRIMARY KEY,
+    ID_val INT AUTO_INCREMENT,
     email VARCHAR(32) NOT NULL,
     ID_prod VARCHAR(32) NOT NULL,
     descrip VARCHAR(255),
     eval ENUM('Excelente', 'Notable', 'Bueno', 'Suficiente', 'Insuficiente') NOT NULL,
     FOREIGN KEY (email) REFERENCES Usuario(email),
-    FOREIGN KEY (ID_prod) REFERENCES Producto(ID_prod)
+    FOREIGN KEY (ID_prod) REFERENCES Producto(ID_prod),
+    PRIMARY KEY (ID_val, email, ID_prod)
 );

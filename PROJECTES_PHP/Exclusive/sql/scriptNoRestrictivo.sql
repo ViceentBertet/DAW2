@@ -31,9 +31,10 @@ CREATE TABLE Incluye (
     PRIMARY KEY (ID_pedido, ID_prod)
 );
 CREATE TABLE Valoracion (
-    ID_val VARCHAR(32) PRIMARY KEY,
+    ID_val INT AUTO_INCREMENT,
     email VARCHAR(32),
-    ID_prod VARCHAR(32),
+    ID_prod VARCHAR(32) ,
     descrip VARCHAR(255),
-    eval ENUM('Excelente', 'Notable', 'Bueno', 'Suficiente', 'Insuficiente')
+    eval ENUM('Excelente', 'Notable', 'Bueno', 'Suficiente', 'Insuficiente'),
+    PRIMARY KEY (ID_val, email, ID_prod)
 );
