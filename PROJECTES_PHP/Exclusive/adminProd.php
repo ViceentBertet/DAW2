@@ -34,9 +34,7 @@
 
 <?php
         $stmt = selectAll();
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        mostrarTablaProd($stmt, $n_filas);
+        mostrarTablaProd($stmt);
     } else {
 ?>
         <div class="formulari">

@@ -34,9 +34,7 @@
 
 <?php
         $stmt = selectUsers();
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        mostrarUsers($stmt, $n_filas);
+        mostrarUsers($stmt);
     } else {
 ?>
         <div class="formulari">

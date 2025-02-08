@@ -1,7 +1,8 @@
 <?php
     include("header.php");
     include("gestionConexion.php");
-    if ($_SESSION['tpo_usu'] == "Admin") {
+    $stmt = "";
+    if ($_SESSION['tpo_usu'] != "Cliente") {
         if (isset($_POST["accion"])) {
             $accion = $_POST['accion'];
 
@@ -33,16 +34,10 @@
 
 <?php
         $stmt = selectAllVal();
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        mostrarVal($stmt, $n_filas);
+        
     } else {
-?>
-        <div class="formulari">
-            <p>Usted no tiene permisos para estar aquí</p>
-            <a href="administrar.php">Pulsa aquí para volver</a>
-        </div>
-<?php
+        $stmt = selectUsuVal($_SESSION['usu']);
     }
+    mostrarVal($stmt);
     include("footer.php");
 ?>

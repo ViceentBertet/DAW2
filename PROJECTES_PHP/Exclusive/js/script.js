@@ -325,7 +325,10 @@ function delProd() {
     formDelProd("Borrar producto");
     accion.value = 3;
 }
-async function mostrarProducto(producto, iniciado, pagina) {
+async function mostrarProducto(producto, iniciado) {
+    let sitio = window.location.pathname + window.location.search;
+    sitio =  sitio.replace("/Exclusive", ".");
+    console.log(sitio);
     document.body.style.overflow = "hidden";
     protector.classList.remove("ocultar");
 
@@ -334,7 +337,7 @@ async function mostrarProducto(producto, iniciado, pagina) {
     div.id = "ventana";
 
     let formVal = document.createElement("form");
-    formVal.action = pagina;
+    formVal.action = sitio;
     formVal.method = "POST";
     formVal.id = "formVal";
 
@@ -356,7 +359,7 @@ async function mostrarProducto(producto, iniciado, pagina) {
 
     let formCarrito = document.createElement("form");
     formCarrito.id = "formCarrito";
-    formCarrito.action = pagina;
+    formCarrito.action = sitio;
 
     let input = document.createElement("input");
     input.classList.add("ocultar");

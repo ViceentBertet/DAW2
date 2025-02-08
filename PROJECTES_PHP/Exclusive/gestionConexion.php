@@ -11,35 +11,71 @@
     }
     /*      GESTIÓN DE PRODUCTOS   */
     function selectAll() {
-        $pdo = crearConexion();
-        $query = 'SELECT * FROM producto';
-        return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        try {
+            $pdo = crearConexion();
+            $query = 'SELECT * FROM producto';
+            $stmt = $pdo->prepare($query);            
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener productos: " . $e->getMessage();
+            return false;
+        }
     }
 
     function selectByType($tipo) {
-        $pdo = crearConexion();
-        $query = "SELECT * FROM producto where tpo_prod = '$tipo'";
-        return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        try {
+            $pdo = crearConexion();
+            $query = "SELECT * FROM producto WHERE tpo_prod = :tipo";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([':tipo' => $tipo]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener productos: " . $e->getMessage();
+            return false;
+        }
     }
 
     function selectByPrice($precio, $operador) {
         $pdo = crearConexion();
-        $query = "SELECT * FROM producto where precio $operador '$precio'";
-        return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        try {
+            $operadoresValidos = ['=', '<', '>'];
+            if (!in_array($operador, $operadoresValidos)) {
+                throw new InvalidArgumentException("Operador inválido");
+            }
+            $query = "SELECT * FROM producto WHERE precio $operador :precio";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([':precio' => $precio]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener productos: " . $e->getMessage();
+            return false;
+        } catch (InvalidArgumentException $e) {
+            echo $e->getMessage();
+            return false;
+        }
     }
-    /* TODO HACER mensaje para error PRIMARY KEY 
-     */
     function anyadirProd($id, $nom, $descrip, $img, $precio, $stock, $tipo) {
-        $pdo = crearConexion();
         $rutaImg = subirImagen($img);
         if ($rutaImg) {
-            $query = "INSERT INTO producto (ID_prod, nom, descrip, img, precio, stock, tpo_prod)" . 
-            "VALUES ('$id', '$nom', '$descrip', '$rutaImg', " . floatval($precio) . ", " . intval($stock) . ", '$tipo');";
-            $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-            $stmt->execute();
-            $n_filas = $stmt->rowCount();
-            if ($n_filas == 1) {
-                return true;
+            try {
+                $pdo = crearConexion();
+                $query = "INSERT INTO producto (ID_prod, nom, descrip, img, precio, stock, tpo_prod) 
+                          VALUES (:id, :nom, :descrip, :rutaImg, :precio, :stock, :tipo)";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([
+                    ':id' => $id,
+                    ':nom' => $nom,
+                    ':descrip' => $descrip,
+                    ':rutaImg' => $rutaImg,
+                    ':precio' => floatval($precio),
+                    ':stock' => intval($stock),
+                    ':tipo' => $tipo
+                ]);
+                return $stmt->rowCount() === 1;
+            } catch (PDOException $e) {
+                echo "Error al insertar producto: " . $e->getMessage();
+                return false;
             }
         }
         return false;
@@ -53,160 +89,251 @@
         return false;
     }
     function updateProd($id, $nom, $descrip, $img, $precio, $stock, $tipo) { 
-        $pdo = crearConexion();
         $rutaImg = subirImagen($img);
         if ($rutaImg) {
-            $query = "UPDATE producto" . 
-            "SET nom = '$nom', descrip = '$descrip', img = '$rutaImg', precio = " . floatval($precio) . ", stock = " . intval($stock) . ", tpo_prod = '$stock" . 
-            "WHERE ID_prod = '$id';";;
-            $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-            $stmt->execute();
-            $n_filas = $stmt->rowCount();
-            if ($n_filas == 1) {
-                return true;
+            try {
+                $pdo = crearConexion();
+                $query = "UPDATE producto 
+                          SET nom = :nom, 
+                              descrip = :descrip, 
+                              img = :rutaImg, 
+                              precio = :precio, 
+                              stock = :stock, 
+                              tpo_prod = :tipo 
+                          WHERE ID_prod = :id";
+                $stmt = $pdo->prepare($query);
+                $stmt->execute([
+                    ':id' => $id,
+                    ':nom' => $nom,
+                    ':descrip' => $descrip,
+                    ':rutaImg' => $rutaImg,
+                    ':precio' => floatval($precio),
+                    ':stock' => intval($stock),
+                    ':tipo' => $tipo
+                ]);
+                return $stmt->rowCount() > 0;
+            } catch (PDOException $e) {
+                echo "Error al actualizar producto: " . $e->getMessage();
+                return false;
             }
         }
         return false;
     }
     function deleteProd($id) {
-        $pdo = crearConexion();
-        $query = "DELETE FROM producto WHERE ID_prod = '$id';";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        if ($n_filas == 1) {
-            return true;
+        try {
+            $pdo = crearConexion();
+            $query = "DELETE FROM producto WHERE ID_prod = :id";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([':id' => $id]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            echo "Error al eliminar producto: " . $e->getMessage();
+            return false;
         }
-        return false;
     }
     /*      GESTIÓN DE USUARIOS      */
     function buscaUsuarios($usu, $pwd) {
-        $pdo = crearConexion();
-        $query = "SELECT * FROM usuario WHERE email = '$usu' AND pwd = '$pwd'";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        if ($n_filas == 1) {
-            while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) { 
-                return $registro;
-            }
+        try {
+            $pdo = crearConexion();
+            $query = "SELECT * FROM usuario WHERE email = :email AND pwd = :pwd";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                ':email' => $usu,
+                ':pwd' => $pwd 
+            ]);
+            $registro = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $registro ?: false;
+        } catch (PDOException $e) {
+            echo "Error al obtener usuario: " . $e->getMessage();
+            return false;
         }
-        return false;
     }
     function selectUsers() { 
-        $pdo = crearConexion();
-        $query = "SELECT * FROM usuario";
-        return $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        try {
+            $pdo = crearConexion();
+            $query = "SELECT * FROM usuario";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Manejo de excepciones: Si hay un error, se captura y se muestra
+            echo "Error al obtener usuarios: " . $e->getMessage();
+            return false;
+        }
     }
     function anyadirUsu($email, $nom, $pwd, $tpo_usu) {
         $pdo = crearConexion();
-        $query = "INSERT INTO usuario (email, nom, pwd, tpo_usu)" . 
-        "VALUES ('" . $email . "', '" . $nom . "', '" . $pwd . "', '" . $tpo_usu . "')";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        if ($n_filas == 1) {
-            return true;
+        try {
+            $query = "INSERT INTO usuario (email, nom, pwd, tpo_usu) 
+                      VALUES (:email, :nom, :pwd, :tpo_usu)";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                ':email' => $email,
+                ':nom' => $nom,
+                ':pwd' => $pwd,
+                ':tpo_usu' => $tpo_usu
+            ]);
+            return $stmt->rowCount() === 1;
+        } catch (PDOException $e) {
+            echo "Error al insertar usuario: " . $e->getMessage();
+            return false;
         }
-        return false;
     }
     function updateUsu($email, $nom, $pwd, $tpo_usu) { 
-        $pdo = crearConexion();
-        $query = "UPDATE usuario SET nom = '" . $nom . "', pwd = '" . $pwd . "', tpo_usu = '" . $tpo_usu . "' WHERE email = '" . $email . "'";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        if ($n_filas == 1) {
-            return true;
+        try {
+            $pdo = crearConexion();
+            $query = "UPDATE usuario 
+                      SET nom = :nom, 
+                          pwd = :pwd, 
+                          tpo_usu = :tpo_usu 
+                      WHERE email = :email";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                ':email' => $email,
+                ':nom' => $nom,
+                ':pwd' => password_hash($pwd, PASSWORD_DEFAULT), // Hashear la contraseña
+                ':tpo_usu' => $tpo_usu
+            ]);
+            return $stmt->rowCount() === 1;            
+        } catch (PDOException $e) {
+            echo "Error al actualizar usuario: " . $e->getMessage();
+            return false;
         }
-        return false;
     }
-
     function deleteUsu($email) {
-        $pdo = crearConexion();
-        $query = "DELETE FROM usuario WHERE email = '" . $email . "'";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        if ($n_filas == 1) {
-            return true;
+        try {
+            $pdo = crearConexion();
+            $query = "DELETE FROM usuario WHERE email = :email";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([':email' => $email]);
+            return $stmt->rowCount() === 1;
+        } catch (PDOException $e) {
+            echo "Error al eliminar usuario: " . $e->getMessage();
+            return false;
         }
-        return false;
     }
     /*          VALORACIONES        */
     function selectIdValNom($id){
-        $pdo = crearConexion();
-        $query = "SELECT v.ID_val, u.nom, v.ID_prod, v.descrip, v.eval FROM valoracion v JOIN usuario u ON v.email = u.email WHERE v.ID_PROD = '$id';";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $pdo = crearConexion();
+            $query = "SELECT v.ID_val, u.nom, v.ID_prod, v.descrip, v.eval 
+                      FROM valoracion v 
+                      JOIN usuario u ON v.email = u.email 
+                      WHERE v.ID_PROD = :id";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener valoraciones: " . $e->getMessage();
+            return false;
+        }
+    }
+    function selectUsuVal($usu) {
+        try {
+            $pdo = crearConexion();
+            $query = "SELECT * FROM valoracion WHERE email = :usu";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([':usu' => $usu]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener valoraciones: " . $e->getMessage();
+            return false;
+        }
     }
     function selectAllVal(){
         $pdo = crearConexion();
-        $query = "SELECT * FROM valoracion ";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        return $stmt;
+        $query = "SELECT * FROM valoracion";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     function anyadirVal($email, $prod, $descrip, $eval){
-        $pdo = crearConexion();
-        $query = "INSERT INTO valoracion (email, ID_prod, descrip, eval) VALUES ('$email', '$prod', '$descrip', '$eval');";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        if ($n_filas == 1) {
-            return true;
+        try {
+            $pdo = crearConexion();
+            $query = "INSERT INTO valoracion (email, ID_prod, descrip, eval) 
+                      VALUES (:email, :prod, :descrip, :eval)";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                ':email' => $email,
+                ':prod' => $prod,
+                ':descrip' => $descrip,
+                ':eval' => $eval
+            ]);
+            return $stmt->rowCount() === 1;
+        } catch (PDOException $e) {
+            echo "Error al insertar valoración: " . $e->getMessage();
+            return false;
         }
-        return false;
     }
     function updateVal($id, $email, $prod, $descrip, $eval) { 
-        $pdo = crearConexion();
-        $query = "UPDATE valoracion SET email = '$email', ID_prod = '$prod', descrip = '$descrip', eval = '$eval' WHERE ID_val= '$id';";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        if ($n_filas == 1) {
-            return true;
+        try {
+            $pdo = crearConexion();
+            $query = "UPDATE valoracion 
+                      SET email = :email, 
+                          ID_prod = :prod, 
+                          descrip = :descrip, 
+                          eval = :eval 
+                      WHERE ID_val = :id";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                ':id' => $id,
+                ':email' => $email,
+                ':prod' => $prod,
+                ':descrip' => $descrip,
+                ':eval' => $eval
+            ]);
+            return $stmt->rowCount() === 1;
+        } catch (PDOException $e) {
+            echo "Error al actualizar valoración: " . $e->getMessage();
+            return false;
         }
-        return false;
     }
     function deleteVal($id, $email, $prod) {
-        $pdo = crearConexion();
-        $query = "DELETE FROM usuario WHERE ID_val = '$id' email = '$email' AND ID_prod = '$prod'";
-        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->execute();
-        $n_filas = $stmt->rowCount();
-        if ($n_filas == 1) {
-            return true;
+        try {
+            $pdo = crearConexion();
+            $query = "DELETE FROM usuario 
+                      WHERE ID_val = :id AND email = :email AND ID_prod = :prod";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                ':id' => $id,
+                ':email' => $email,
+                ':prod' => $prod
+            ]);
+            return $stmt->rowCount() === 1;
+        } catch (PDOException $e) {
+            echo "Error al eliminar usuario: " . $e->getMessage();
+            return false;
         }
-        return false;
     }
     /*      MOSTRAR REGISTROS       */
-    function mostrarProductos($stmt , $n_filas, $pagina) {
-        ?>
-            <p class="margen">Productos encontrados: <?=$n_filas?></p>
-            <div class='productos'>
-        <?php
+    function mostrarProductos($stmt) {
+        $n_filas = count($stmt);
+?>
+        <p class="margen">Productos encontrados: <?=$n_filas?></p>
+        <div class='productos'>
+<?php
             $usu = false;
             if (isset($_SESSION['usu'])) {                
                 $usu = $_SESSION['usu'];
             }
-            while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
-        ?>
-            <div id='<?=$registro['ID_prod']?>' onclick='mostrarProducto(this, "<?=$usu?>", "<?=$pagina?>")'>
+        foreach ($stmt as $registro) {
+            
+?>
+            <div id='<?=$registro['ID_prod']?>' onclick='mostrarProducto(this, "<?=$usu?>")'>
                 <h3><?=$registro['nom']?></h3>
                 <img src="<?=$registro['img']?>" alt="<?=$registro['nom']?>">
                 <p class="descrip"><?=$registro['descrip']?></p>
                 <p class="precio"><?=$registro['precio']?> €</p>
             </div>
-        <?php
-                }
-        ?>
+<?php
+        }
+?>
         </div>
         <div id="protector" class="ocultar"></div>
-
-            <?php
+<?php
     }
-    function mostrarTablaProd($stmt , $n_filas) {
+    function mostrarTablaProd($stmt) {
+        $n_filas = count($stmt);
 ?>
         <p class="margen">Productos registrados: <?=$n_filas?></p>
         <table>
@@ -220,7 +347,7 @@
                 <th>TIPO DE PRODUCTO</th>
             </tr>
 <?php
-        while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+        foreach ($stmt as $registro) {
 ?>
             <tr>
                 <td><?=$registro['ID_prod']?></td>
@@ -237,7 +364,8 @@
         </table>
 <?php 
     }
-    function mostrarUsers($stmt , $n_filas) {
+    function mostrarUsers($stmt) {
+        $n_filas = count($stmt);
 ?>
         <p class="margen">Usuarios registrados: <?=$n_filas?></p>
         <table>
@@ -248,7 +376,7 @@
                 <th>TIPO</th>
             </tr>
 <?php
-        while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+        foreach ($stmt as $registro) {
 ?>
             <tr>
                 <td><?=$registro['email']?></td>
@@ -262,8 +390,9 @@
         </table>
 <?php 
     }
-    function mostrarVal($stmt, $n_filas) {
-        ?>
+    function mostrarVal($stmt) {
+        $n_filas = count($stmt);
+?>
         <p class="margen">Valoraciones registradas: <?=$n_filas?></p>
         <table>
             <tr>
@@ -274,7 +403,7 @@
                 <th>EVALUACIÓN</th>
             </tr>
 <?php
-        while ($registro = $stmt->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+        foreach ($stmt as $registro) {
 ?>
             <tr>
                 <td><?=$registro['ID_val']?></td>
