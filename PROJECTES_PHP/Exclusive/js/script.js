@@ -370,12 +370,22 @@ async function mostrarProducto(producto, iniciado) {
     titulo.id = "tProd";
     let img = producto.querySelector("img").cloneNode(true);
     img.id = "img";
-    
+
+    let srcImg = document.createElement('input');
+    srcImg.value = img.src;
+    srcImg.name = "img";
+    srcImg.classList.add('ocultar');
+
     let descrip = producto.querySelector("p").cloneNode(true);
     descrip.id = "descrip";
 
     let precio = producto.querySelectorAll("p")[1].cloneNode(true);
     precio.id = "precio";
+
+    let precioString = document.createElement('input');
+    precioString.value = precio.innerText;
+    precioString.name = "precio";
+    precioString.classList.add('ocultar');
 
     let val = document.createElement("div");
     val.id = "val";
@@ -410,6 +420,8 @@ async function mostrarProducto(producto, iniciado) {
     formCarrito.appendChild(descrip);
     formCarrito.appendChild(val);
     formCarrito.appendChild(precio);
+    formCarrito.appendChild(precioString);
+    formCarrito.appendChild(srcImg);
     formCarrito.appendChild(buttons[0]);
     formCarrito.appendChild(buttons[1]);
 
@@ -644,7 +656,7 @@ async function verCarrito() {
     div.classList.add("formulari");
     div.classList.add("muestraCarrito");
 
-    if (!carrito) {
+    if (carrito == '[]') {
         let texto = document.createElement('p');
         texto.innerText = "No hay ningún producto seleccionado";
         div.appendChild(texto);
@@ -700,7 +712,4 @@ function crearFila(producto) {
     tr.appendChild(td1);
     tr.appendChild(td2);
     return tr;
-}
-function alCarrito() {
-
 }
