@@ -16,8 +16,8 @@ try {
 <?php
         }
     }
-    $stmt = selectByPrice($price, $operator);
-    mostrarProductos($stmt);
+    $array = selectByPrice($price, $operator);
+    mostrarProductos($array);
 } catch (PDOException $e) {
     echo "Error con la base de datos: <b>$database</b><br>" . $e->getMessage(); 
 }

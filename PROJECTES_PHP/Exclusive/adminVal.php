@@ -1,7 +1,7 @@
 <?php
     include("header.php");
     include("gestionConexion.php");
-    $stmt = "";
+    $array = "";
     if ($_SESSION['tpo_usu'] != "Cliente") {
         if (isset($_POST["accion"])) {
             $accion = $_POST['accion'];
@@ -33,11 +33,11 @@
         <div id="protector" class="ocultar"></div>
 
 <?php
-        $stmt = selectAllVal();
+        $array = selectAllVal();
         
     } else {
-        $stmt = selectUsuVal($_SESSION['usu']);
+        $array = selectUsuVal($_SESSION['usu']);
     }
-    mostrarVal($stmt);
+    mostrarVal($array);
     include("footer.php");
 ?>

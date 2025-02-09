@@ -4,6 +4,7 @@ const OPCIONES_OPERADORES = ["Igual que", "Menor que", "Mayor que "];
 const TIPO_USUS = ['Cliente', 'Empleado', 'Admin'];
 const URL_VALORACIONES = "JSON_VAL.php";
 const OPCIONES_EVAL = ['Excelente', 'Notable', 'Bueno', 'Suficiente', 'Insuficiente'];
+const URL_CARRITO = "JSON_carrito.php";
 
 function addTipo() {
     protector.classList.remove("ocultar");
@@ -328,7 +329,6 @@ function delProd() {
 async function mostrarProducto(producto, iniciado) {
     let sitio = window.location.pathname + window.location.search;
     sitio =  sitio.replace("/Exclusive", ".");
-    console.log(sitio);
     document.body.style.overflow = "hidden";
     protector.classList.remove("ocultar");
 
@@ -386,7 +386,6 @@ async function mostrarProducto(producto, iniciado) {
         val.appendChild(msjValor);
     });
     let accion = "Añadir al carrito"; 
-    console.log(iniciado);
     if (!iniciado) {
         formVal.action = "iniciaSesion.php";
         formCarrito.action = "iniciaSesion.php";
@@ -395,6 +394,9 @@ async function mostrarProducto(producto, iniciado) {
         let cantidad = document.createElement("input");
         cantidad.type = "number";
         cantidad.id = "cant";
+        cantidad.name = "cant";
+        cantidad.min = "0";
+        cantidad.max = "10";
         formCarrito.appendChild(cantidad);
     }
 
@@ -414,7 +416,7 @@ async function mostrarProducto(producto, iniciado) {
     divVal.appendChild(chat);
     divVal.appendChild(select);
 
-    formVal.appendChild(input);
+    formVal.appendChild(input.cloneNode());
     formVal.appendChild(divVal);
     formVal.appendChild(button);
 
@@ -426,12 +428,10 @@ async function mostrarProducto(producto, iniciado) {
 async function fetchVal(id) {
     try {
         let respuesta = await fetch(URL_VALORACIONES + "?prod=" + id);
-    
         if (!respuesta.ok) {
             console.log("ERROR: SOLICITANDO VALORACIONES");
             return null;
         }
-
         return respuesta.text();
     } catch (e) {
         console.log("ERROR: " + e);
@@ -528,7 +528,6 @@ function addVal() {
     document.body.appendChild(ventana);
     but2.addEventListener("click", closeWindow);
 }
-
 function actVal() {
     let accion = "Actualizar valoración";
     protector.classList.remove("ocultar");
@@ -638,7 +637,70 @@ function delVal() {
     formDelVal("Borrar valoración");
     accion.value = 3;
 }
-function visualizarCarrito() {
-    let div = document.createElement("div");
-    div.id = "ventana";
+async function verCarrito() {
+    let carrito = await fetchCarrito();
+    carrito = JSON.parse(carrito);
+    let div = createWindow();
+    div.classList.add("formulari");
+    div.classList.add("muestraCarrito");
+
+    if (!carrito) {
+        let texto = document.createElement('p');
+        texto.innerText = "No hay ningún producto seleccionado";
+        div.appendChild(texto);
+    } else {
+        let table = document.createElement("table");
+        carrito.forEach(producto => {
+            let cabecera = crearCabecera();
+            let tr = crearFila(producto);
+
+            table.appendChild(cabecera);
+            table.appendChild(tr);
+        });
+        div.appendChild(table);
+    }
+    let boton = document.createElement('boton');
+    boton.innerText = "Cerrar ventana";
+    boton.id = "botonCarrito";
+    div.appendChild(boton);
+    document.body.appendChild(div);
+    botonCarrito.addEventListener("click", closeWindow);
+}
+async function fetchCarrito() {
+    try {
+        let respuesta = await fetch(URL_CARRITO);
+        if (!respuesta.ok) {
+            console.log("ERROR: SOLICITANDO CARRITO");
+            return null;
+        }
+        return respuesta.text();
+    } catch (e) {
+        console.log("ERROR: " + e);
+        return null;
+    } 
+}
+function crearCabecera() {
+    let cabecera = document.createElement('tr');
+    let th1 = document.createElement('th');
+    let th2 = document.createElement('th');
+    th1.innerText = "PRODUCTO";
+    th2.innerText = "CANTIDAD";
+    
+    cabecera.appendChild(th1);
+    cabecera.appendChild(th2);
+    return cabecera;
+}
+function crearFila(producto) {
+    let tr = document.createElement('tr');
+    console.log(producto);
+    let td1 = document.createElement('td');
+    let td2 = document.createElement('td');
+    td1.innerText = producto.prod;
+    td2.innerText = producto.cant;
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    return tr;
+}
+function alCarrito() {
+
 }

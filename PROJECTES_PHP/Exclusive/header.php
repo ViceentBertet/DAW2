@@ -12,7 +12,8 @@
 </head>
 <body>
     <header>
-    <img src="img/compra.png" alt="Carro de la compra" onclick="visualizarCarrito()">
+
+    <img src="img/compra.png" alt="Carro de la compra" onclick='verCarrito()'>
 <?php   
     if(isset($_SESSION["nom"])) {
 ?>

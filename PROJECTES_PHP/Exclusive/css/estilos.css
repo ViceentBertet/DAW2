@@ -471,6 +471,11 @@ table {
         width: 240px;
         height: 240px;
         border-radius: 15px;
+        transition: box-shadow 1s;
+    }
+    img:hover {
+        transition: box-shadow 1s;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
     #precio {
         margin: 0;
@@ -499,10 +504,12 @@ table {
 } 
 #val::-webkit-scrollbar {
     display: none;
-}
-  
+} 
 #cant {
     position: absolute;
+    top:470px;
+    left:52%;
+    width: 100px;
 }
 #formVal {
     position: relative;
@@ -653,6 +660,17 @@ table {
 #eval {
     grid-area: eva;
 }
+.muestraCarrito {
+    height: fit-content;
+    width: fit-content;
+}
+#botonCarrito {
+    background-color: white;
+    color: #7F598A;
+    border-radius: 15px;
+    padding: 5px;
+    margin-top: 50px;
+}
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {
     /*      index.html      */
@@ -665,14 +683,12 @@ table {
         grid-template-rows: repeat(4, 175px);
         grid-template-columns: repeat(7, 85px);
         margin-bottom: 100px;
-
     }
     .ubi {
         width: calc(600px - 80px);
         height: 350px;
         margin: auto;
         margin-bottom: 200px;
-
         div:first-child {
             & > *  {
                 width: 225px;

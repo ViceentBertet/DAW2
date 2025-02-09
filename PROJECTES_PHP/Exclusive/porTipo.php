@@ -15,8 +15,8 @@ try {
 <?php
         }
     }
-    $stmt = selectByType($type);
-    mostrarProductos($stmt);
+    $array = selectByType($type);
+    mostrarProductos($array);
 } catch (PDOException $e) {
     echo "Error con la base de datos: <b>$database</b><br>" . $e->getMessage(); 
 }

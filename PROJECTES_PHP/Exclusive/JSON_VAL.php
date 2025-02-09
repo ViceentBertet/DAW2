@@ -5,6 +5,6 @@
         $registros = selectIdValNom($_GET['prod']);
         echo json_encode($registros);
     } else {
-        return null;
+        return json_encode([]);
     }
 ?>

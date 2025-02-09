@@ -306,8 +306,8 @@
         }
     }
     /*      MOSTRAR REGISTROS       */
-    function mostrarProductos($stmt) {
-        $n_filas = count($stmt);
+    function mostrarProductos($array) {
+        $n_filas = count($array);
 ?>
         <p class="margen">Productos encontrados: <?=$n_filas?></p>
         <div class='productos'>
@@ -316,7 +316,7 @@
             if (isset($_SESSION['usu'])) {                
                 $usu = $_SESSION['usu'];
             }
-        foreach ($stmt as $registro) {
+        foreach ($array as $registro) {
             
 ?>
             <div id='<?=$registro['ID_prod']?>' onclick='mostrarProducto(this, "<?=$usu?>")'>
@@ -332,8 +332,8 @@
         <div id="protector" class="ocultar"></div>
 <?php
     }
-    function mostrarTablaProd($stmt) {
-        $n_filas = count($stmt);
+    function mostrarTablaProd($array) {
+        $n_filas = count($array);
 ?>
         <p class="margen">Productos registrados: <?=$n_filas?></p>
         <table>
@@ -347,7 +347,7 @@
                 <th>TIPO DE PRODUCTO</th>
             </tr>
 <?php
-        foreach ($stmt as $registro) {
+        foreach ($array as $registro) {
 ?>
             <tr>
                 <td><?=$registro['ID_prod']?></td>
@@ -364,8 +364,8 @@
         </table>
 <?php 
     }
-    function mostrarUsers($stmt) {
-        $n_filas = count($stmt);
+    function mostrarUsers($array) {
+        $n_filas = count($array);
 ?>
         <p class="margen">Usuarios registrados: <?=$n_filas?></p>
         <table>
@@ -376,7 +376,7 @@
                 <th>TIPO</th>
             </tr>
 <?php
-        foreach ($stmt as $registro) {
+        foreach ($array as $registro) {
 ?>
             <tr>
                 <td><?=$registro['email']?></td>
@@ -390,8 +390,8 @@
         </table>
 <?php 
     }
-    function mostrarVal($stmt) {
-        $n_filas = count($stmt);
+    function mostrarVal($array) {
+        $n_filas = count($array);
 ?>
         <p class="margen">Valoraciones registradas: <?=$n_filas?></p>
         <table>
@@ -403,7 +403,7 @@
                 <th>EVALUACIÓN</th>
             </tr>
 <?php
-        foreach ($stmt as $registro) {
+        foreach ($array as $registro) {
 ?>
             <tr>
                 <td><?=$registro['ID_val']?></td>

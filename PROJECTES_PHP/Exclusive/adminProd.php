@@ -33,8 +33,8 @@
         <div id="protector" class="ocultar"></div>
 
 <?php
-        $stmt = selectAll();
-        mostrarTablaProd($stmt);
+        $array = selectAll();
+        mostrarTablaProd($array);
     } else {
 ?>
         <div class="formulari">
