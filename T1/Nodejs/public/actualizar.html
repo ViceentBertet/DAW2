@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insertar datos</title>
+</head>
+<body>
+    <h3>Actualizar usuario</h3>
+
+    <input type="number" id="id1">
+    <select id="opcion1">
+        <option value="nom">Nombre</option>
+        <option value="pwd">Contraseña</option>
+        <option value="email">Email</option>
+    </select>
+    <input type="text" id="newValue1">
+    <button id="boton">Enviar</button>
+    
+    <script>
+        boton.addEventListener("click", function() {
+            const id = id1.value;
+            const opcion = opcion1.value;
+            const newValue = newValue1.value;
+            
+            fetch("/usuario", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({id, opcion, newValue
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>

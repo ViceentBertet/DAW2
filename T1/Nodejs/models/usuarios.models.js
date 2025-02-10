@@ -31,18 +31,64 @@ Usuario.buscarPorID = (request, result) => {
 /*************************** POST *******************************/
 Usuario.insertar = (request, result) => {
     const datos = request.body;
-    sql.query(`INSERT INTO usuario (nom, pwd, email) VALUES (${datos["nom"]}, ${datos["pwd"]}, ${datos["email"]};`, (err, res) => {
-        console.log(res);
-        if(res) {
-            console.log("Con éxito"); 
-            result.json("Usuario metido con éxito");
+    console.log(datos);
+
+    const query = `INSERT INTO usuario (nom, pwd, email) VALUES (?, ?, ?)`;
+    const values = [datos["nom"], datos["pwd"], datos["email"]];
+
+    sql.query(query, values, (err, res) => {
+        if (err) {
+            console.error("Error al insertar el usuario: ", err); 
+            return result.status(500).json({ mensaje: "Error al insertar el usuario", error: err.message });
+        }
+        if (res.affectedRows > 0) {
+            console.log("Usuario insertado con éxito");
+            return result.json({ mensaje: "Usuario insertado con éxito" });
         } else {
-            console.log("Sin éxito");
-            result.json("Uy! Ha habido un error");
-        };
+            console.log("No se insertó el usuario");
+            return result.status(400).json({ mensaje: "No se insertó el usuario" });
+        }
     });
 };
 /*************************** PUT *******************************/
+Usuario.actualizar = (request, result) => {
+    const datos = request.body;
+    console.log(datos);
+    if (!datos["opcion"] || !datos["newValue"] || !datos["id"]) {
+        return result.status(400).json({ mensaje: "Faltan datos necesarios para actualizar el usuario" });
+    }
+
+    const query = `UPDATE usuario SET ?? = ? WHERE idusuario = ?`;
+    const values = [datos["opcion"], datos["newValue"], datos["id"]];
+
+    sql.query(query, values, (err, res) => {
+        if (err) {
+            console.error("Error al actualizar el usuario: ", err);
+            return result.status(500).json({ mensaje: "Error al actualizar el usuario", error: err.message });
+        }
+        if (res.affectedRows > 0) {
+            console.log("Usuario actualizado con éxito");
+            return result.json({ mensaje: "Usuario actualizado con éxito" });
+        } else {
+            console.log("No se encontró el usuario o no se realizaron cambios");
+            return result.status(404).json({ mensaje: "No se encontró el usuario o no se realizaron cambios" });
+        }
+    });
+};
+
+Usuario.eliminar =  (req, res) => {
+    const id = req.body["id"];
+
+    console.log("Eliminar usuario con id:", id);
+
+    sql.query(`DELETE FROM usuario WHERE idusuario = ?`, [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ mensaje: "Error al eliminar el usuario", error: err });
+        }
+        res.json({ mensaje: `Usuario con id ${id} eliminado con éxito` });
+    });
+};
+
 
 /*************************** DELETE *******************************/
 module.exports = Usuario;

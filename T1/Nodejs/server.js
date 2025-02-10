@@ -2,11 +2,11 @@ const express = require('express');
 //const mysql = require('mysql2');
 
 const port = 3000;
-
 //Declaramos la aplicación
 const app = express();
 
 require("./routes/usuarios.routes.js")(app);
+app.use(express.static('public'));
 
 //Arrancamos el servidor
 app.listen(port, () => {
