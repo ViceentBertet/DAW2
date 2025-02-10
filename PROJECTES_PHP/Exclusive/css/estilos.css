@@ -671,6 +671,17 @@ table {
     padding: 5px;
     margin-top: 50px;
 }
+.carrito {
+    margin: auto;
+    
+    img {
+        width: 100px;
+        height: 100px;
+    }
+    td {
+        width: fit-content;
+    }
+}
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {
     /*      index.html      */

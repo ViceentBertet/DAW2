@@ -650,18 +650,25 @@ function delVal() {
     accion.value = 3;
 }
 async function verCarrito() {
+    let protector = document.getElementById('protector');
+    if (!protector) {
+        protector = document.createElement('div');
+        protector.id = "protector";
+        document.body.appendChild(protector);
+    }
     let carrito = await fetchCarrito();
     carrito = JSON.parse(carrito);
     let div = createWindow();
     div.classList.add("formulari");
     div.classList.add("muestraCarrito");
 
-    if (carrito == '[]') {
+    if (carrito.length === 0) {
         let texto = document.createElement('p');
         texto.innerText = "No hay ningún producto seleccionado";
         div.appendChild(texto);
     } else {
         let table = document.createElement("table");
+        table.classList.add("carrito");
         carrito.forEach(producto => {
             let cabecera = crearCabecera();
             let tr = crearFila(producto);
@@ -693,23 +700,35 @@ async function fetchCarrito() {
 }
 function crearCabecera() {
     let cabecera = document.createElement('tr');
-    let th1 = document.createElement('th');
-    let th2 = document.createElement('th');
-    th1.innerText = "PRODUCTO";
-    th2.innerText = "CANTIDAD";
-    
-    cabecera.appendChild(th1);
-    cabecera.appendChild(th2);
+    const CABECERA_CARRITO = ["PRODUCTO", "CANTIDAD", "PRECIO"];
+    CABECERA_CARRITO.forEach(titulo => {
+        let th = document.createElement('th');
+        th.innerText = titulo;
+        if (titulo == "PRODUCTO") th.colspan = "2";
+        cabecera.appendChild(th);
+    })
     return cabecera;
 }
 function crearFila(producto) {
     let tr = document.createElement('tr');
     console.log(producto);
-    let td1 = document.createElement('td');
-    let td2 = document.createElement('td');
-    td1.innerText = producto.prod;
-    td2.innerText = producto.cant;
-    tr.appendChild(td1);
-    tr.appendChild(td2);
+    let imgTd = document.createElement('td');
+    let prod = document.createElement('td');
+    let cant = document.createElement('td');
+    let precio = document.createElement('td');
+
+    let img = document.createElement('img');
+    img.src = producto.img;
+
+    imgTd.appendChild(img);
+    prod.innerText = producto.prod;
+    cant.innerText = producto.cant;
+    precio.innerText = producto.precio;
+
+    tr.appendChild(imgTd);
+    tr.appendChild(prod);
+    tr.appendChild(cant);
+    tr.appendChild(precio);
+    
     return tr;
 }
