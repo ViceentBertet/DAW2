@@ -363,7 +363,7 @@ async function mostrarProducto(producto, iniciado) {
 
     let input = document.createElement("input");
     input.classList.add("ocultar");
-    input.name = "producto";
+    input.name = "idProd";
     input.value = producto.id;
 
     let titulo = producto.querySelector("h3").cloneNode(true);
@@ -372,9 +372,14 @@ async function mostrarProducto(producto, iniciado) {
     img.id = "img";
 
     let srcImg = document.createElement('input');
-    srcImg.value = img.src;
+    srcImg.value = img.src.replace("http://localhost/Exclusive", ".");
     srcImg.name = "img";
     srcImg.classList.add('ocultar');
+
+    let nomProd = document.createElement('input');
+    nomProd.value = img.alt;
+    nomProd.name = "nomProd";
+    nomProd.classList.add('ocultar');
 
     let descrip = producto.querySelector("p").cloneNode(true);
     descrip.id = "descrip";
@@ -383,7 +388,7 @@ async function mostrarProducto(producto, iniciado) {
     precio.id = "precio";
 
     let precioString = document.createElement('input');
-    precioString.value = precio.innerText;
+    precioString.value = precio.innerText.replace('€',"");
     precioString.name = "precio";
     precioString.classList.add('ocultar');
 
@@ -421,6 +426,7 @@ async function mostrarProducto(producto, iniciado) {
     formCarrito.appendChild(val);
     formCarrito.appendChild(precio);
     formCarrito.appendChild(precioString);
+    formCarrito.appendChild(nomProd);
     formCarrito.appendChild(srcImg);
     formCarrito.appendChild(buttons[0]);
     formCarrito.appendChild(buttons[1]);
@@ -676,14 +682,28 @@ async function verCarrito() {
             table.appendChild(cabecera);
             table.appendChild(tr);
         });
+        let tr = calcularTotal(table);
+        table.appendChild(tr);
         div.appendChild(table);
     }
-    let boton = document.createElement('boton');
-    boton.innerText = "Cerrar ventana";
-    boton.id = "botonCarrito";
-    div.appendChild(boton);
+    let boton1 = document.createElement('boton');
+    boton1.innerText = "Comprar";
+    boton1.id = "comprarTodo";
+    boton1.classList.add("botonCarrito");
+
+    let boton2 = document.createElement('boton');
+    boton2.innerText = "Cerrar ventana";
+    boton2.classList.add("botonCarrito");
+    boton2.id = "cerrar";
+
+    let divBotones = document.createElement('div');
+    divBotones.id = "botonesCarrito";
+    divBotones.appendChild(boton1);
+    divBotones.appendChild(boton2);
+    div.appendChild(divBotones);
     document.body.appendChild(div);
-    botonCarrito.addEventListener("click", closeWindow);
+    comprarTodo.addEventListener("click", comprar);
+    cerrar.addEventListener("click", closeWindow);
 }
 async function fetchCarrito() {
     try {
@@ -704,31 +724,98 @@ function crearCabecera() {
     CABECERA_CARRITO.forEach(titulo => {
         let th = document.createElement('th');
         th.innerText = titulo;
-        if (titulo == "PRODUCTO") th.colspan = "2";
         cabecera.appendChild(th);
     })
     return cabecera;
 }
 function crearFila(producto) {
     let tr = document.createElement('tr');
-    console.log(producto);
     let imgTd = document.createElement('td');
-    let prod = document.createElement('td');
+
     let cant = document.createElement('td');
     let precio = document.createElement('td');
+    let cuadrado = document.createElement('td');
 
     let img = document.createElement('img');
     img.src = producto.img;
+    img.alt = producto.idProd;
+    imgTd.classList.add("prodCarrito");
+    let inputCant = document.createElement('input');
+    inputCant.classList.add("cantCarrito");
 
-    imgTd.appendChild(img);
-    prod.innerText = producto.prod;
-    cant.innerText = producto.cant;
+    inputCant.type = "number";
+    inputCant.min = 0;
+    inputCant.max = 10;
+
+    inputCant.value = producto.cant;
+
+
+    imgTd.innerText = producto.nomProd;
     precio.innerText = producto.precio;
+    precio.classList.add("precioCarrito");
+    let borrarRegistro = document.createElement('div');
+    borrarRegistro.innerText = "X";
+    borrarRegistro.classList.add("borrarRegistro");
+
+    cant.appendChild(inputCant);
+    imgTd.prepend(img);
+    cuadrado.appendChild(borrarRegistro);
 
     tr.appendChild(imgTd);
-    tr.appendChild(prod);
     tr.appendChild(cant);
     tr.appendChild(precio);
-    
+    tr.appendChild(cuadrado);
+    tr.querySelector(".borrarRegistro").addEventListener("click", borrarFila);
+
     return tr;
+}
+function calcularTotal(table) {
+    let precios = table.querySelectorAll(".precioCarrito");
+    let precio = 0;
+    precios.forEach(registro => {
+        precio += parseFloat(registro.innerText);
+    })
+    let tr = document.createElement('tr');
+    let td = document.createElement('td');
+    td.colSpan = 4;
+    td.innerText = "Total: " + precio.toFixed(2) + " €";
+    tr.appendChild(td);
+    return tr;
+}
+function borrarFila() {
+    if (ventana.querySelectorAll('.borrarRegistro').length == 1) {
+        ventana.querySelector('.carrito').remove();
+        let texto = document.createElement('p');
+        texto.innerText = "No hay ningún producto seleccionado";
+        ventana.prepend(texto);
+    } else {
+        this.parentNode.parentNode.remove();
+    }
+}
+function comprar() {
+    let productos = ventana.querySelectorAll(".prodCarrito");
+    let cants = ventana.querySelectorAll(".cantCarrito");
+    let precios = ventana.querySelectorAll(".precioCarrito");
+    let datos = [];
+
+    for (let i = 0; i < productos.length; i++) {
+        datos.push({
+            id: productos[i].querySelector("img").alt,
+            cant: cants[i].value,
+            precio: parseFloat(precios[i].innerText)
+        });
+    }
+    enviarCompra(datos);
+}
+function enviarCompra(datos) {
+    fetch('./comprar.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify(datos)
+    })
+    .then(response => response.json())
+    .then(data => console.log('Respuesta:', data)) 
+    .catch(error => console.error('Error:', error));
 }

@@ -305,6 +305,36 @@
             return false;
         }
     }
+    /*      Pedidos                  */
+    function anyadirPedido() {
+        try {
+            // Crear conexión PDO
+            $pdo = crearConexion();
+        
+            $sql = "INSERT INTO pedido (direccion, entregado, precio_total, email) 
+            VALUES (:direccion, :entregado ,:precio_total, :email)";
+            
+            // Preparar la consulta
+            $stmt = $pdo->prepare($sql);
+            
+            // Definir valores para los placeholders
+            $nombre = "Laptop";
+            $precio = 1200.50;
+            $cantidad = 10;
+            
+            // Ejecutar la consulta con los valores
+            $stmt->execute([
+                ':nombre' => $nombre,
+                ':precio' => $precio,
+                ':cantidad' => $cantidad
+            ]);
+        
+            echo "Producto insertado con éxito.";
+        } catch (PDOException $e) {
+            // Capturar errores y mostrar mensaje
+            echo "Error en la inserción: " . $e->getMessage();
+        }
+    }
     /*      MOSTRAR REGISTROS       */
     function mostrarProductos($array) {
         $n_filas = count($array);

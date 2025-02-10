@@ -664,12 +664,18 @@ table {
     height: fit-content;
     width: fit-content;
 }
-#botonCarrito {
+.botonCarrito {
     background-color: white;
     color: #7F598A;
     border-radius: 15px;
     padding: 5px;
     margin-top: 50px;
+}
+#botonesCarrito {
+    display: flex;
+    gap:10px;
+    justify-content: center;
+    height: fit-content;
 }
 .carrito {
     margin: auto;
@@ -677,10 +683,29 @@ table {
     img {
         width: 100px;
         height: 100px;
+        border-radius: 15px;
+        transition: box-shadow 1s;
+    }
+    input[type="number"] {
+        width:40px;
+        margin: 0;
+        text-align: center;
     }
     td {
         width: fit-content;
+        max-width: 100px;
     }
+}
+.borrarRegistro {
+    background-color: red;
+    color: whitesmoke;
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {

@@ -2,9 +2,14 @@
 include("header.php");
 include("gestionConexion.php");
 
-if (isset($_GET["producto"]) && isset($_GET['cant']) && isset($_GET['img']) && isset($_GET['precio'])) {
-    unset($_SESSION["carrito"]);
-    $registro = array("prod" => $_GET["producto"], "cant" => $_GET["cant"], "img" => $_GET['img'], "precio" => $_GET['precio']);
+if (isset($_GET["idProd"]) && isset($_GET['cant']) && isset($_GET['img']) && isset($_GET['precio']) && isset($_GET['nomProd'])) {
+    $registro = array(
+        "idProd" => $_GET["idProd"], 
+        "cant" => $_GET["cant"], 
+        "img" => $_GET['img'], 
+        "precio" => $_GET['precio'],
+        "nomProd" => $_GET['nomProd']);
+
     $_SESSION["carrito"][] = $registro;
 ?>
     <p class="margen">Se ha añadido al carrito</p>
