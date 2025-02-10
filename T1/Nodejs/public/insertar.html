@@ -1,49 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insertar datos</title>
+    <title>Insertar Usuario</title>
     <style>
+        /* Estilo global */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Contenedor principal */
+        .container {
+            background-color: #fff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
         h3 {
             text-align: center;
-            margin:5px;
-            padding: 0;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
         }
-        table {
-            margin: auto;
+
+        /* Estilo para el campo de input */
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+            border-color: #4CAF50;
+        }
+
+        /* Estilo para el botón de submit */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:active {
+            background-color: #388e3c;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px;
             text-align: center;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .success {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .error {
+            background-color: #f44336;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <h3>Insertar usuario</h3>
-    <form method="post" action="/usuario">
-        <table>
-            <tr>
-                <td>Nombre:</td>
-                <td>Contraseña:</td>
-                <td>Email:</td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="text" id="nom" name="nom">
-
-                </td>
-                <td>
-                    <input type="password" name="pwd" id="pwd">
-                </td>
-                <td>
-                    <input type="email" id="email" name="email" >
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <input type="submit">
-                </td>
-            </tr>
+    <div class="container">
+        <h3>Insertar Usuario</h3>
+    
+        <label for="nom1">Nombre:</label>
+        <input type="text" id="nom1" placeholder="Introduce el nombre" required>
+        
+        <label for="pwd1">Contraseña:</label>
+        <input type="password" id="pwd1" placeholder="Introduce la contraseña" required>
+        
+        <label for="email1">Email:</label>
+        <input type="email" id="email1" placeholder="Introduce el email" required>
+        
+        <button id="boton">Insertar Usuario</button>
+        <div id="message" class="message"></div>
+        
+    </div>
+    <script>
+        boton.addEventListener("click", function() {
+            const nom = nom1.value;
+            const pwd = pwd1.value;
+            const email = email1.value;
             
-        </table>
-    </form>
+            fetch("/usuario", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({nom, pwd, email})
+            })
+            .then(response => response.json())
+            .then(data => message.innerText = data.mensaje)
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
 </body>
 </html>

@@ -79,8 +79,6 @@ Usuario.actualizar = (request, result) => {
 Usuario.eliminar =  (req, res) => {
     const id = req.body["id"];
 
-    console.log("Eliminar usuario con id:", id);
-
     sql.query(`DELETE FROM usuario WHERE idusuario = ?`, [id], (err, result) => {
         if (err) {
             return res.status(500).json({ mensaje: "Error al eliminar el usuario", error: err });
