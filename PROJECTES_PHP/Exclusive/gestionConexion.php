@@ -307,10 +307,54 @@
     }
     /*          Pedidos                  */
     function selectAllPed() {
-
+        try {
+            $pdo = crearConexion();
+            $query = "SELECT 
+                    p.ID_pedido, 
+                    p.direccion, 
+                    p.entregado, 
+                    p.precio_total, 
+                    p.email, 
+                    GROUP_CONCAT(i.ID_prod SEPARATOR ', ') AS productos,
+                    GROUP_CONCAT(i.cantProd SEPARATOR ', ') AS cantidades
+                FROM pedido p
+                LEFT JOIN incluye i ON p.ID_pedido = i.ID_pedido
+                GROUP BY p.ID_pedido;";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener pedidos: " . $e->getMessage();
+            return false;
+        }
     }
     function selectUsuPed($email) {
-
+        try {
+            $pdo = crearConexion();
+            $query = "SELECT 
+                        p.ID_pedido, 
+                        p.direccion, 
+                        p.entregado, 
+                        p.precio_total, 
+                        p.email, 
+                        GROUP_CONCAT(i.ID_prod SEPARATOR ', ') AS productos,
+                        GROUP_CONCAT(i.cantProd SEPARATOR ', ') AS cantidades
+                      FROM pedido p
+                      LEFT JOIN incluye i ON p.ID_pedido = i.ID_pedido
+                      WHERE p.email = :email
+                      GROUP BY p.ID_pedido;";
+            
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([
+                ':email' => $email
+            ]);
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error al obtener pedidos: " . $e->getMessage();
+            return false;
+        }
+        
     }
     function anyadirPedido( $precio_total, $email) {
         try {
@@ -362,6 +406,65 @@
             return false;
         }
     }
+    function updatePed($id, $opcion, $valor) {
+        try {
+            $pdo = crearConexion();
+    
+            $columnas_permitidas = ['direccion', 'entregado']; 
+            if (!in_array($opcion, $columnas_permitidas)) {
+                throw new Exception("Campo no permitido para actualización.");
+            }
+
+            $query = "UPDATE pedido SET $opcion = :valor WHERE ID_pedido = :id";
+            $stmt = $pdo->prepare($query);
+
+            $stmt->execute([
+                ":valor" => $valor,
+                ":id" => $id
+            ]);
+            return $stmt->rowCount() > 0;
+        } catch (Exception $e) {
+            return false;
+        }
+    }        
+
+    function deletePed($id) {
+        try {
+            if (deleteInclude($id)) {
+                $pdo = crearConexion();
+                
+                $query = "DELETE FROM pedido WHERE ID_pedido = :id";
+                $stmt = $pdo->prepare($query);
+        
+                $stmt->execute([
+                    ":id" => $id
+                ]);
+                return $stmt->rowCount() > 0;
+            }
+
+            return false;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    function deleteInclude($idPed) {
+        try {
+            $pdo = crearConexion(); 
+
+            $query = "DELETE FROM incluye WHERE ID_pedido = :idPed";
+            $stmt = $pdo->prepare($query);
+    
+            $stmt->execute(
+                [':idPed' => $idPed]
+            );
+    
+            return $stmt->rowCount() > 0;
+    
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    
     /*      MOSTRAR REGISTROS       */
     function mostrarProductos($array) {
         $n_filas = count($array);
@@ -476,6 +579,35 @@
 <?php 
     }
     function mostrarPed($array) {
-
+        $n_filas = count($array);
+?>
+        <p class="margen">Pedidos registrados: <?=$n_filas?></p>
+        <table>
+            <tr>
+                <th>ID Pedido</th>
+                <th>Dirección</th>
+                <th>Entregado</th>
+                <th>Precio Total</th>
+                <th>Email</th>
+                <th>Productos</th>
+                <th>Cantidades</th>
+            </tr>
+<?php
+        foreach ($array as $registro) {
+?>
+            <tr>
+                <td><?=$registro['ID_pedido']?></td>
+                <td><?=$registro['direccion']?></td>
+                <td><?=$registro['entregado'] ? 'Sí' : 'No'?></td>
+                <td><?=$registro['precio_total']?> €</td>
+                <td><?=$registro['email']?></td>
+                <td><?=$registro['productos']?></td>
+                <td><?=$registro['cantidades']?></td>
+            </tr>
+<?php
+        }
+?>
+        </table>
+<?php
     }
 ?>  

@@ -254,14 +254,17 @@ h2 {
 }
 .ventana {
     position: absolute;
-    margin: 100px auto;
-    top: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    top: 500px;
     transform: translateY(-75%);
     left: 0;
     right: 0;
     z-index: 100;
     padding: 20px;
-    min-height: calc(300px - 40px);
     height: fit-content;
     width: calc(300px - 40px);
     border-radius: 15px;
@@ -711,6 +714,57 @@ table {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.formActPed {
+    width: 200px;
+    height: fit-content;
+    margin:0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+    gap: 20px;
+    grid-template-areas: 
+        "id opt"
+        "new new"
+        "but1 but1"
+        "but2 but2"
+    ;
+    input, button, select {
+        width: auto;
+    }
+    input, select {
+        margin:0;
+    }
+    button {
+        margin:0;
+    }
+}
+.formDelPed {
+    width: 200px;
+    height: fit-content;
+    margin:0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+    gap: 20px;
+    grid-template-areas: 
+        "id id"
+        "but1 but1"
+        "but2 but2"
+    ;
+    input, button, select {
+        width: auto;
+    }
+    input, select {
+        margin:0;
+    }
+    button {
+        margin:0;
+    }
+}
+#newValue {
+    grid-area: new;    
+}
+#opcion {
+    grid-area: opt;
 }
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {

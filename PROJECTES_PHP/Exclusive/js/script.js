@@ -5,6 +5,7 @@ const TIPO_USUS = ['Cliente', 'Empleado', 'Admin'];
 const URL_VALORACIONES = "JSON_VAL.php";
 const OPCIONES_EVAL = ['Excelente', 'Notable', 'Bueno', 'Suficiente', 'Insuficiente'];
 const URL_CARRITO = "JSON_carrito.php";
+const OPCIONES_PEDIDO = ['Dirección', "Entregado"];
 
 function addTipo() {
     protector.classList.remove("ocultar");
@@ -851,7 +852,97 @@ function enviarCompra(datos, email, precioTotal) {
         return response;
     })
     .then(data => borrarTablaCarrito(data.message)) 
-    .catch(error => console.log(error)/*borrarTablaCarrito(error.message)*/);
+    .catch(error => borrarTablaCarrito(error.message));
 }
+function actPed() {
+    let accion = "Actualizar pedido";
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
 
-//TODO mirar tema google my business
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminPed.php";
+    form.classList.add("formActPed");
+    form.id = "formulario";
+
+    let id = document.createElement('input');
+    id.name = "id";
+    id.id = "id";
+    id.placeholder = "ID pedido";
+
+
+    let select = document.createElement("select");
+    select.name = "opcion";
+    select.id = "opcion";
+
+    OPCIONES_PEDIDO.forEach(opcion => {
+        let option = document.createElement('option');
+        option.value = opcion.replace("ó","o").toLowerCase();
+        option.innerText = opcion;
+        select.appendChild(option);
+    });
+
+    let nuevoValor = document.createElement("input");
+    nuevoValor.name = "newValue";
+    nuevoValor.id = "newValue";
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+    input.value = 1;
+
+    form.appendChild(input);
+    form.appendChild(id);
+    form.appendChild(select);
+    form.appendChild(nuevoValor);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
+}
+function delPed() {
+    let accion = "Eliminar pedido";
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
+
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminPed.php";
+    form.classList.add("formDelPed");
+    form.id = "formulario";
+
+    let id = document.createElement('input');
+    id.name = "id";
+    id.id = "id";
+    id.placeholder = "ID pedido";
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+    input.value = 2;
+
+    form.appendChild(input);
+    form.appendChild(id);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
+}

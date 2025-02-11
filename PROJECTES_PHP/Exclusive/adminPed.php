@@ -8,11 +8,9 @@
 
             $correcto = "";
             if ($accion == 1) {
-                $correcto = anyadirVal( $_POST['email'], $_POST['prod'], $_POST['descrip'], $_POST['eval']);
-            } else if ($accion == 2) {
-                $correcto = updateVal($_POST['id'], $_POST['email'], $_POST['prod'], $_POST['descrip'], $_POST['eval']);
+                $correcto = updatePed($_POST['id'], $_POST['opcion'], $_POST['newValue']);
             } else {
-                $correcto = deleteVal($_POST['id'], $_POST['email'], $_POST['prod']);
+                $correcto = deletePed($_POST['id']);
             }
             if ($correcto) {
 ?>
@@ -26,9 +24,8 @@
     }
 ?>
         <div class="opciones">
-            <div class="ins" onclick="addVal()">+</div>
-            <div class="act" onclick="actVal()"><img src="img/editar.png" alt="Editar"></div>
-            <div class="eli" onclick="delVal()">-</div>
+            <div class="act" onclick="actPed()"><img src="img/editar.png" alt="Editar"></div>
+            <div class="eli" onclick="delPed()">-</div>
         </div>
         <div id="protector" class="ocultar"></div>
 
