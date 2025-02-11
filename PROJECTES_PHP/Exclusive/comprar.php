@@ -7,9 +7,9 @@ header("Content-Type: application/json");
 
 $inputJSON = file_get_contents("php://input");
 $inputData = json_decode($inputJSON, true);
-
 if ($inputData) {
     if (anyadirInclude($inputData['datos'], $inputData['precioTotal'], $inputData['email'])) {
+        unset($_SESSION['carrito']);
         echo json_encode([
             "status" => "success",
             "message" => "Se ha confirmado su pedido"

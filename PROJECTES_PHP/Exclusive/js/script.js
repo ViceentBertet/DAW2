@@ -328,7 +328,7 @@ function delProd() {
 }
 async function mostrarProducto(producto, iniciado) {
     let sitio = window.location.pathname + window.location.search;
-    sitio =  sitio.replace("/Exclusive", ".").replace("?del=1");
+    sitio =  sitio.replace("/Exclusive", ".").replace("?del=1", "");
     document.body.style.overflow = "hidden";
     protector.classList.remove("ocultar");
 
@@ -359,8 +359,9 @@ async function mostrarProducto(producto, iniciado) {
     button.appendChild(imgEnviar);
 
     let formCarrito = document.createElement("form");
-    formCarrito.id = "formCarrito";
     formCarrito.action = sitio;
+    formCarrito.method = "POST";
+    formCarrito.id = "formCarrito";
 
     let input = document.createElement("input");
     input.classList.add("ocultar");
@@ -411,7 +412,8 @@ async function mostrarProducto(producto, iniciado) {
         cantidad.type = "number";
         cantidad.id = "cant";
         cantidad.name = "cant";
-        cantidad.min = "0";
+        cantidad.min = "1";
+        cantidad.value = "1";
         cantidad.max = "10";
         formCarrito.appendChild(cantidad);
     }
@@ -668,7 +670,8 @@ async function verCarrito() {
     let div = createWindow();
     div.classList.add("formulari");
     div.classList.add("muestraCarrito");
-
+    let divBotones = document.createElement('div');
+    divBotones.id = "botonesCarrito";
     if (carrito.length === 0) {
         let texto = document.createElement('p');
         texto.innerText = "No hay ningún producto seleccionado";
@@ -689,24 +692,22 @@ async function verCarrito() {
         table.appendChild(tr);
         div2.appendChild(table);
         div.appendChild(div2);
+        let boton1 = document.createElement('boton');
+        boton1.innerText = "Comprar";
+        boton1.id = "comprarTodo";
+        boton1.classList.add("botonCarrito");
+        divBotones.appendChild(boton1);
+        boton1.addEventListener("click", comprar);
     }
-    let boton1 = document.createElement('boton');
-    boton1.innerText = "Comprar";
-    boton1.id = "comprarTodo";
-    boton1.classList.add("botonCarrito");
 
     let boton2 = document.createElement('boton');
     boton2.innerText = "Cerrar ventana";
     boton2.classList.add("botonCarrito");
     boton2.id = "cerrar";
 
-    let divBotones = document.createElement('div');
-    divBotones.id = "botonesCarrito";
-    divBotones.appendChild(boton1);
     divBotones.appendChild(boton2);
     div.appendChild(divBotones);
     document.body.appendChild(div);
-    comprarTodo.addEventListener("click", comprar);
     cerrar.addEventListener("click", closeWindow);
 }
 async function fetchCarrito() {
@@ -748,7 +749,7 @@ function crearFila(producto) {
     inputCant.classList.add("cantCarrito");
 
     inputCant.type = "number";
-    inputCant.min = 0;
+    inputCant.min = 1;
     inputCant.max = 10;
 
     inputCant.value = producto.cant;
@@ -797,8 +798,13 @@ function calcularTotal(table) {
 function borrarFila() {
     if (ventana.querySelectorAll('.borrarRegistro').length == 1) {
         borrarTablaCarrito("No hay ningún producto seleccionado");
-        let url = new URL(window.location.replace("?del=1", "cant=5&idProd=BEL001&precio=12.50+&nomProd=Base&img=.%2Fimg%2FBelleza%2Fbase.avif"));
-        window.location.href = url;
+        fetch(window.location.href, {
+            method: 'POST', 
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ del: 1 }) 
+        })
     } else {
         this.parentNode.parentNode.remove();
     }
@@ -808,6 +814,7 @@ function borrarTablaCarrito(texto) {
     let p = document.createElement('p');
     p.innerText = texto;
     ventana.prepend(p);
+    comprarTodo.remove();
 }
 function comprar() {
     let productos = ventana.querySelectorAll(".prodCarrito");
@@ -846,3 +853,5 @@ function enviarCompra(datos, email, precioTotal) {
     .then(data => borrarTablaCarrito(data.message)) 
     .catch(error => console.log(error)/*borrarTablaCarrito(error.message)*/);
 }
+
+//TODO mirar tema google my business

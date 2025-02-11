@@ -28,3 +28,15 @@
             <li><a href="iniciaSesion.php">Inicia sesión</a></li>
         </ul>
     </header>
+<?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+
+        if (isset($data['del'])) {
+            if (isset($_SESSION["carrito"])){
+                unset($_SESSION["carrito"]);
+            }
+        }
+    }
+?>

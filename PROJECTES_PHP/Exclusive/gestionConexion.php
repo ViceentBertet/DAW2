@@ -305,7 +305,13 @@
             return false;
         }
     }
-    /*      Pedidos                  */
+    /*          Pedidos                  */
+    function selectAllPed() {
+
+    }
+    function selectUsuPed($email) {
+
+    }
     function anyadirPedido( $precio_total, $email) {
         try {
             $pdo = crearConexion();
@@ -314,14 +320,11 @@
             $sql = "INSERT INTO pedido (direccion, entregado, precio_total, email) 
             VALUES (:direccion, :entregado ,:precio_total, :email)";
             
-            // Preparar la consulta
             $stmt = $pdo->prepare($sql);
-            
-            // Definir valores para los placeholders
+                        
             $dir = "Gerrería, 34";
             $entregado = false;
             
-            // Ejecutar la consulta con los valores
             $stmt->execute([
                 ':direccion' => $dir,
                 ':entregado' => $entregado,
@@ -331,7 +334,6 @@
             return $pdo->lastInsertId();;
            
         } catch (Exception $e) {
-            // Capturar errores y mostrar mensaje
             return false;
         }
     }
@@ -472,5 +474,8 @@
 ?>
         </table>
 <?php 
+    }
+    function mostrarPed($array) {
+
     }
 ?>  

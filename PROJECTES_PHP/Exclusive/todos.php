@@ -2,18 +2,13 @@
 include("header.php");
 include("gestionConexion.php");
 
-if(isset($_GET['del'])) {
-    if (isset($_SESSION["carrito"])){
-        unset($_SESSION["carrito"]);
-    }
-}
-if (isset($_GET["idProd"]) && isset($_GET['cant']) && isset($_GET['img']) && isset($_GET['precio']) && isset($_GET['nomProd'])) {
+if (isset($_POST["idProd"]) && isset($_POST['cant']) && isset($_POST['img']) && isset($_POST['precio']) && isset($_POST['nomProd'])) {
     $registro = array(
-        "idProd" => $_GET["idProd"], 
-        "cant" => $_GET["cant"], 
-        "img" => $_GET['img'], 
-        "precio" => $_GET['precio'],
-        "nomProd" => $_GET['nomProd']
+        "idProd" => $_POST["idProd"], 
+        "cant" => $_POST["cant"], 
+        "img" => $_POST['img'], 
+        "precio" => $_POST['precio'],
+        "nomProd" => $_POST['nomProd']
     );
 
     $encontrado = false;
@@ -50,8 +45,14 @@ if (isset($_POST['valoracion']) && isset($_POST['eval']) && isset($_POST['idProd
 <?php
     }
 }
-$array = selectAll();
-$pagina = "./todos.php";
-mostrarProductos($array);
+try {
+    $array = selectAll();
+    $pagina = "./todos.php";
+    mostrarProductos($array);
+} catch (Exception $e) {
+    ?>
+        <p class="margen">No se han podido mostrar los productos</p>
+    <?php
+    }
 include("footer.php");
 ?>
