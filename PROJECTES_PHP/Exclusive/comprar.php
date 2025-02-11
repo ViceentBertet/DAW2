@@ -1,23 +1,25 @@
 <?php
-// Configurar las cabeceras para permitir solicitudes desde cualquier origen (CORS)
+include("gestionConexion.php");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
-// Obtener los datos enviados en el cuerpo de la solicitud
 $inputJSON = file_get_contents("php://input");
 $inputData = json_decode($inputJSON, true);
 
-// Verificar si los datos existen y son válidos
 if ($inputData) {
-    
-    // Responder con un JSON de éxito
-    echo json_encode([
-        "status" => "success",
-        "message" => "Datos recibidos correctamente",
-        "received_data" => $inputData
-    ]);
+    if (anyadirInclude($inputData['datos'], $inputData['precioTotal'], $inputData['email'])) {
+        echo json_encode([
+            "status" => "success",
+            "message" => "Se ha confirmado su pedido"
+        ]);
+    } else {
+        echo json_encode([
+            "status" => "error",
+            "message" => "No se ha podido confirmar su pedido."
+        ]);
+    }
 } else {
     // Responder con un JSON de error
     echo json_encode([

@@ -306,11 +306,11 @@
         }
     }
     /*      Pedidos                  */
-    function anyadirPedido() {
+    function anyadirPedido( $precio_total, $email) {
         try {
-            // Crear conexión PDO
             $pdo = crearConexion();
         
+          
             $sql = "INSERT INTO pedido (direccion, entregado, precio_total, email) 
             VALUES (:direccion, :entregado ,:precio_total, :email)";
             
@@ -318,21 +318,46 @@
             $stmt = $pdo->prepare($sql);
             
             // Definir valores para los placeholders
-            $nombre = "Laptop";
-            $precio = 1200.50;
-            $cantidad = 10;
+            $dir = "Gerrería, 34";
+            $entregado = false;
             
             // Ejecutar la consulta con los valores
             $stmt->execute([
-                ':nombre' => $nombre,
-                ':precio' => $precio,
-                ':cantidad' => $cantidad
+                ':direccion' => $dir,
+                ':entregado' => $entregado,
+                ':precio_total' => $precio_total,
+                ':email'=> $email
             ]);
-        
-            echo "Producto insertado con éxito.";
-        } catch (PDOException $e) {
+            return $pdo->lastInsertId();;
+           
+        } catch (Exception $e) {
             // Capturar errores y mostrar mensaje
-            echo "Error en la inserción: " . $e->getMessage();
+            return false;
+        }
+    }
+    function anyadirInclude ($datos, $precio_total, $email) {
+        try {
+            $pedido = anyadirPedido( $precio_total, $email);
+            if ($pedido) {
+                $pdo = crearConexion();
+                $sql = "INSERT INTO incluye (ID_pedido, ID_prod, cantProd, precio) 
+                VALUES (?, ?, ?, ?)";
+                $stmt = $pdo->prepare($sql);
+                $pdo->beginTransaction();
+                foreach ($datos as $value) {
+                    $stmt->execute([
+                        $pedido,
+                        $value['id'],
+                        $value['cant'],
+                        $value['precio']
+                    ]);
+                }
+                $pdo->commit();
+                return true;
+            }
+            return false;
+        } catch (Exception $e) {
+            return false;
         }
     }
     /*      MOSTRAR REGISTROS       */

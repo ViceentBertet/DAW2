@@ -16,7 +16,7 @@ body {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
 }
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
     display: none;
 }
 html {
@@ -677,9 +677,13 @@ table {
     justify-content: center;
     height: fit-content;
 }
-.carrito {
+#carrito {
     margin: auto;
-    
+    height: 250px;
+    overflow-y: scroll;
+    table {
+        margin: 0 auto;
+    }
     img {
         width: 100px;
         height: 100px;
@@ -697,7 +701,7 @@ table {
     }
 }
 .borrarRegistro {
-    background-color: red;
+    background-color:red;
     color: whitesmoke;
     width: 40px;
     height: 40px;

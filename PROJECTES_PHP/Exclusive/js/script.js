@@ -328,7 +328,7 @@ function delProd() {
 }
 async function mostrarProducto(producto, iniciado) {
     let sitio = window.location.pathname + window.location.search;
-    sitio =  sitio.replace("/Exclusive", ".");
+    sitio =  sitio.replace("/Exclusive", ".").replace("?del=1");
     document.body.style.overflow = "hidden";
     protector.classList.remove("ocultar");
 
@@ -337,6 +337,7 @@ async function mostrarProducto(producto, iniciado) {
     div.id = "ventana";
 
     let formVal = document.createElement("form");
+    console.log(sitio);
     formVal.action = sitio;
     formVal.method = "POST";
     formVal.id = "formVal";
@@ -674,17 +675,20 @@ async function verCarrito() {
         div.appendChild(texto);
     } else {
         let table = document.createElement("table");
-        table.classList.add("carrito");
-        carrito.forEach(producto => {
-            let cabecera = crearCabecera();
-            let tr = crearFila(producto);
+        let div2 = document.createElement('div');
+        div2.id = "carrito";
+        let cabecera = crearCabecera();
+        table.appendChild(cabecera);
 
-            table.appendChild(cabecera);
+        carrito.forEach(producto => {
+            let tr = crearFila(producto);
+            tr.addEventListener("change", nuevoPrecio)
             table.appendChild(tr);
         });
         let tr = calcularTotal(table);
         table.appendChild(tr);
-        div.appendChild(table);
+        div2.appendChild(table);
+        div.appendChild(div2);
     }
     let boton1 = document.createElement('boton');
     boton1.innerText = "Comprar";
@@ -769,14 +773,22 @@ function crearFila(producto) {
 
     return tr;
 }
+function nuevoPrecio() {
+    textoTotal.remove();
+    let table = document.querySelector('table');
+    table.appendChild(calcularTotal(table));
+}
 function calcularTotal(table) {
     let precios = table.querySelectorAll(".precioCarrito");
+    let cants = table.querySelectorAll(".cantCarrito");
+
     let precio = 0;
-    precios.forEach(registro => {
-        precio += parseFloat(registro.innerText);
-    })
+    for (let i = 0; i < precios.length; i++) {
+        precio += parseFloat(precios[i].innerText)* parseInt(cants[i].value);
+    }
     let tr = document.createElement('tr');
     let td = document.createElement('td');
+    td.id = "textoTotal";
     td.colSpan = 4;
     td.innerText = "Total: " + precio.toFixed(2) + " €";
     tr.appendChild(td);
@@ -784,20 +796,27 @@ function calcularTotal(table) {
 }
 function borrarFila() {
     if (ventana.querySelectorAll('.borrarRegistro').length == 1) {
-        ventana.querySelector('.carrito').remove();
-        let texto = document.createElement('p');
-        texto.innerText = "No hay ningún producto seleccionado";
-        ventana.prepend(texto);
+        borrarTablaCarrito("No hay ningún producto seleccionado");
+        let url = new URL(window.location.replace("?del=1", "cant=5&idProd=BEL001&precio=12.50+&nomProd=Base&img=.%2Fimg%2FBelleza%2Fbase.avif"));
+        window.location.href = url;
     } else {
         this.parentNode.parentNode.remove();
     }
+}
+function borrarTablaCarrito(texto) {
+    ventana.querySelector('#carrito').remove();
+    let p = document.createElement('p');
+    p.innerText = texto;
+    ventana.prepend(p);
 }
 function comprar() {
     let productos = ventana.querySelectorAll(".prodCarrito");
     let cants = ventana.querySelectorAll(".cantCarrito");
     let precios = ventana.querySelectorAll(".precioCarrito");
+    let email = nombreUsuario.name;
+    let precioTotal = parseFloat(textoTotal.innerText.replace("Total: ", "").replace(" €", ""));
     let datos = [];
-
+    
     for (let i = 0; i < productos.length; i++) {
         datos.push({
             id: productos[i].querySelector("img").alt,
@@ -805,17 +824,25 @@ function comprar() {
             precio: parseFloat(precios[i].innerText)
         });
     }
-    enviarCompra(datos);
+    enviarCompra(datos, email, precioTotal);
 }
-function enviarCompra(datos) {
+function enviarCompra(datos, email, precioTotal) {
+    console.log(datos);
+    console.log(email);
+    console.log(precioTotal);
+
     fetch('./comprar.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json' 
         },
-        body: JSON.stringify(datos)
+        body: JSON.stringify({datos, email, precioTotal})
     })
-    .then(response => response.json())
-    .then(data => console.log('Respuesta:', data)) 
-    .catch(error => console.error('Error:', error));
+    .then(response => {
+        response = response.json();
+        console.log(response);
+        return response;
+    })
+    .then(data => borrarTablaCarrito(data.message)) 
+    .catch(error => console.log(error)/*borrarTablaCarrito(error.message)*/);
 }

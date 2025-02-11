@@ -17,7 +17,7 @@
 <?php   
     if(isset($_SESSION["nom"])) {
 ?>
-        <p><a href="administrar.php"><?=$_SESSION["nom"]?></a></p>
+        <p><a href="administrar.php" id="nombreUsuario" name="<?=$_SESSION['usu']?>"><?=$_SESSION["nom"]?></a></p>
 <?php
     }
 ?>

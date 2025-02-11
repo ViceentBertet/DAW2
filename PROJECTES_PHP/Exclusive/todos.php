@@ -2,23 +2,44 @@
 include("header.php");
 include("gestionConexion.php");
 
+if(isset($_GET['del'])) {
+    if (isset($_SESSION["carrito"])){
+        unset($_SESSION["carrito"]);
+    }
+}
 if (isset($_GET["idProd"]) && isset($_GET['cant']) && isset($_GET['img']) && isset($_GET['precio']) && isset($_GET['nomProd'])) {
     $registro = array(
         "idProd" => $_GET["idProd"], 
         "cant" => $_GET["cant"], 
         "img" => $_GET['img'], 
         "precio" => $_GET['precio'],
-        "nomProd" => $_GET['nomProd']);
+        "nomProd" => $_GET['nomProd']
+    );
 
-    $_SESSION["carrito"][] = $registro;
+    $encontrado = false;
+    if (isset($_SESSION["carrito"])) {
+        for ($i = 0; $i < count($_SESSION['carrito']); $i++) {
+            if (in_array($registro['idProd'], $_SESSION['carrito'][$i])) {
 ?>
-    <p class="margen">Se ha añadido al carrito</p>
-<?php
-}
-print_r( $_SESSION["carrito"]);
+                <p class="margen">El producto ya esta en el carrito</p>
+<?php           
+                $encontrado = true;
+                break;
+            }
+        }
 
-if (isset($_POST['valoracion']) && isset($_POST['eval']) && isset($_POST['producto'])) {
-    $correcto = anyadirVal($_SESSION["usu"], $_POST["producto"], $_POST["valoracion"], $_POST["eval"]);
+    } 
+
+    if (!$encontrado) {
+        $_SESSION["carrito"][] = $registro;
+?>
+        <p class="margen">Se ha añadido al carrito</p>
+<?php
+    }
+}
+
+if (isset($_POST['valoracion']) && isset($_POST['eval']) && isset($_POST['idProd'])) {
+    $correcto = anyadirVal($_SESSION["usu"], $_POST["idProd"], $_POST["valoracion"], $_POST["eval"]);
     if ($correcto) {
 ?>
         <p class="margen">Se ha añadido correctamente su reseña</p>
