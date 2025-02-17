@@ -6,7 +6,9 @@ body {
     align-items: center;
 }
 div {
+    padding: 10px;
     border-radius: 10px;
+    width: calc(100% - 20px);
 }
 #main {
     width: 99%;
@@ -45,6 +47,10 @@ div {
     background: #333;
     width: 100%;
     height: 20%;
+    display: flex;
+    gap:20px;
+    justify-content: center;
+    align-items: center;
 }
 #der {
     height: 800px;
@@ -65,12 +71,53 @@ div {
     border: 1px solid #212121;
     border-radius: 10px;
     position:relative;
-    top: 600px;
-    width:250px;
+    top: 590px;
     height: 100px;
     margin: auto;
 }
-
+.carta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid whitesmoke;
+    padding: 5px;
+    width: calc(200px - 12px);
+    height: 150px;
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    img {
+        width: 100px;
+        margin: 0 auto;
+        
+    }
+    
+}
+#cartasJugador .carta {
+    transition: 1s border;
+    img {
+        filter: drop-shadow(0px 0px 12px whitesmoke);
+        transition:1s filter;
+    }
+}
+#cartasJugador .carta:hover {
+    border: 1px solid yellow;
+    transition: 1s border;
+    img {
+        filter: drop-shadow(0px 0px 12px yellow);
+        transition:1s filter;
+    }
+}
+#nom {
+    text-decoration: underline;
+    text-align: center;
+}
+#xp {
+    text-align: right;
+    color: yellow;
+    font-weight: bold;
+}
 @media (max-width: 1300px) {
     #comment {
         width: 90%;
