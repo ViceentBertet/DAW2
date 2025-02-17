@@ -147,9 +147,16 @@
                 body: JSON.stringify({id, opcion, newValue
                 })
             })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error("Error:", error));
+            .then((data) => {
+                message.classList.remove('error');
+                message.classList.add('success');
+                message.innerText = data.mensaje;
+            })
+            .catch((error) => {
+                message.classList.add('error');
+                message.classList.remove('success');
+                message.innerText = data.mensaje;
+            })
         });
     </script>
 </body>

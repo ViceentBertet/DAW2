@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+</head>
+
+<body>
+    <h1>Lista de Usuarios</h1>
+    <ul id="userList"></ul>
+    <script>
+        try{
+            fetch('http://localhost:3000/users')
+            .then(response =>{
+                if (!response.ok) {
+                    console.log("ERROR MAMAHUEVO", response);
+                    return;
+                }
+                return response.json();
+            }).then(data =>{
+                const list = document.getElementById('userList');
+                data.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = `${user.name} - ${user.email}`;
+                    list.appendChild(li);
+                });
+            })
+        }catch(ffff){
+            console.log("Error perro", ffff);
+        }
+    </script>
+</body>
+
+</html>
