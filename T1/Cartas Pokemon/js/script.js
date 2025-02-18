@@ -1,3 +1,4 @@
+let played = false;
 const NUM_POKEMONS = 5;
 let pokemons = "";
 let maquina = "";
@@ -36,24 +37,64 @@ function nAleatorio (max) {
 }
 function mostrarCartasJugador() {
     for (let i = 0; i < jugador.length; i++) {
-        let div = document.createElement("div");
-        div.classList.add("carta");
-
-        let nom = document.createElement("p");
-        nom.id = "nom";
-        nom.innerText = jugador[i][0];
-
-        let img = document.createElement("img");
-        img.src = jugador[i][1];
-        img.alt = nom.innerText;
-        img.id = "img";
-
-        let xp = document.createElement("p");
-        xp.id = "xp";
-        xp.innerText = jugador[i][2];
-        div.appendChild(xp);
-        div.appendChild(img);
-        div.appendChild(nom);
+        let div = crearCarta(jugador[i]);
+        div.addEventListener("dblclick", jugada);
         cartasJugador.appendChild(div);
     }
+}
+function crearCarta(datosCarta) {
+    let div = document.createElement("div");
+    div.classList.add("carta");
+
+    let nom = document.createElement("p");
+    nom.id = "nom";
+    nom.innerText = datosCarta[0];
+
+    let img = document.createElement("img");
+    img.src = datosCarta[1];
+    img.alt = nom.innerText;
+    img.id = "img";
+
+    let xp = document.createElement("p");
+    xp.id = "xp";
+    xp.innerText = datosCarta[2];
+    div.appendChild(xp);
+    div.appendChild(img);
+    div.appendChild(nom);
+    return div;
+}
+function jugada(){
+    let carta  = this.cloneNode(true);
+    propio.appendChild(carta);
+    if (!played) {
+        played = true;
+        setTimeout(maquinaJugada, 2000);
+    } else {
+        procesarRespuesta();
+    }
+    this.remove();
+}
+function maquinaJugada(){
+    let num = nAleatorio(5) - 1;
+    let carta = crearCarta(maquina[num]);
+    maquina.splice(num, 1);
+    rival.appendChild(carta);
+    if (!played) {
+        played = true;
+        setTimeout(jugada(), 2000);
+    } else {
+        procesarRespuesta();
+    }
+    cartasMaquina.querySelector(".carta").remove();
+}
+function procesarRespuesta() {
+    cargando();
+}
+function cargando() {
+    let div = document.createElement("div");
+    div.id = "cargando";
+    let imgCargando = document.createElement("img");
+    imgCargando.src = "./img/cargando.webp";
+    div.appendChild(imgCargando);
+    document.body.appendChild(div);
 }
