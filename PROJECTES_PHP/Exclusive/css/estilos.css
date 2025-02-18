@@ -119,32 +119,155 @@ footer {
 h2 {
     text-align: center;
     margin-bottom: 30px;
-}
-#serv {
+}/*
+.cuadros {
     display: flex;
-    justify-content: space-around;
-    height: 200px;
-    width:95%;
+    width: 100%;
+    overflow: hidden;
+    & > div {
+        transform: translate(-400px);
+        display: flex;
+        transition: transform .5s;
+        width: 100%;
+    }
+    p {
+        width: 300px;
+    }
+    .imgServ {
+        transform: translate(-180px);
+        justify-content: center;
+        align-items: center;
+        width: 500px;
+        transition: transform .5s;
+    }
+}
+.cuadros:hover {
+    & > div:first-child {
+        margin: auto;
+        transform: translate(75px);
+    }
+    .imgServ {
+        transform:translate(400px);
+    }
+}
+#serv0 {
+    grid-area: sZ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#serv1 {
+    grid-area: sA;
+}
+#serv2 {
+    grid-area: sB;
+}
+#serv3 {
+    grid-area: sC;
+}*/
+#serv {
+    display: grid;
+    width: 1200px;
     margin: auto;
     margin-bottom: 200px;
+    grid-template-columns: repeat(3, 400px);
+    grid-template-rows: repeat(2, 200px);
+    grid-template-areas: 
+        "sZ sZ sZ"
+        "sA sC sB";
     p {
         text-align: justify;
     }
+}
+#serv0, #serv1, #serv2, #serv3 {
+    display: flex;
+    justify-content: center;  /* Centrar horizontalmente */
+    align-items: center;      /* Centrar verticalmente */
+}
+
+#serv0 {
+    grid-area: sZ;
+}
+
+#serv1 {
+    grid-area: sA;
+}
+
+#serv2 {
+    grid-area: sB;
+}
+
+#serv3 {
+    grid-area: sC;
+}
+.cuadros {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    justify-content: center;  
+    align-items: center;
+    position: relative;
+    color: white;
+    & > div:first-child {
+        background-color: #7F598A;
+        padding: 10px;
+        height: 100%;
+    }
     & > div {
-        width: 25%;
-        height: 250px;
-        padding:15px;
         display: flex;
-        flex-direction: column;
-        border-radius: 15px;
-        border: 2px solid #7F598A;
-        transition: transform .5s;
-        text-align: center;
+        transition: transform 0.5s;
+        width: 100%;
+        justify-content: center; 
+        align-items: center;    
+        position: absolute;      
     }
-    & > div:hover {
-        transition: transform .5s;
-        transform: scale(1.1); 
+    & > div:first-child {
+        transform: translateX(-100%);
     }
+    &:hover > div:first-child {
+        transform: translateX(0);
+    }
+    &:hover .imgServ {
+        transform: translateX(100%);
+    }
+    p {
+        width: calc(100% - 25px);
+    }
+}
+.imgServ {
+    transition: transform 0.5s ease;
+    width: 400px;
+    height: 100%;
+    transform: translateX(0); 
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+}
+.imgServ::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(127, 89, 138, 0.4);
+    pointer-events: none; /* Asegura que la capa de filtro no interfiera con los clics */
+}
+.imgServ h3 {
+    position: relative; /* Color del texto que no cambia */
+    color: white;
+    font-weight: normal;
+    z-index: 1;  /* Asegura que el texto esté por encima de la capa de filtro */
+    padding: 20px;  /* Ajuste del espaciado alrededor del texto */
+}
+#img1 {
+    background-image: url("../img/Servicios/serv1.webp");
+}
+#img2 {
+    background-image: url("../img/Servicios/serv2.jpg");
+}
+#img3 {
+    background-image: url("../img/Servicios/serv3.webp");
 }
 .bola {
     width: 75px;
@@ -159,15 +282,6 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-#bola1 {
-    background-image: url("../img/servicio1.png");
-}
-#bola2 {
-    background-image: url("../img/servicio2.png");
-}
-#bola3 {
-    background-image: url("../img/servicio3.png");
 }
 
 .container {
@@ -794,9 +908,6 @@ table {
 /*      MEDIA PANTALLA      */
 @media (max-width: 1200px) {
     /*      index.html      */
-    #serv > div {
-        height: 340px;
-    }
     .container {
         width: 600px;
         height: 750px;
@@ -831,18 +942,6 @@ table {
     /*      index.html      */
     h2:first-of-type {
         margin-bottom:370px;
-    }
-    #serv {
-        flex-direction: column;
-        justify-content: center;
-        width: 70%;
-        margin: auto;
-        margin-bottom: 340px;
-    }
-    #serv > div {
-        width: 100%;
-        height: 600px;
-        margin-bottom: 15px;
     }
     .container {
         width: 450px;

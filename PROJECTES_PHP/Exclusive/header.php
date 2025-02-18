@@ -9,6 +9,7 @@
     <title>Peluquería y Estética</title>
     <link rel="stylesheet" href="css/estilos.css">
     <meta name="description" content="Castelló de Rugat, Mónica Bertet Mascarell, Monica Exclusive donde el lujo y la innovación se unen para brindarte un servicio personalizado. Ofrecemos tratamientos capilares de alta gama, extensiones premium y los mejores productos de peluquería, garantizando un estilo sofisticado y impecable.">
+    <link rel="icon" type="image/png" href="img/tijeras.png">
     <script src="./js/script.js"></script>
 </head>
 <body>

@@ -10,28 +10,43 @@
         <p>Descubre Monica Exclusive donde el estilo y la sofisticación se fusionan. Ofrecemos tratamientos capilares avanzados, extensiones de alta calidad y un servicio personalizado para realzar tu belleza con resultados impecables.</p>
     </div>
 </div>
-<h2>Nuestros Servicios</h2>
 <div id="serv">
-    <div>
-        <div id="bola1" class="bola">
-        </div>
-        <p>
-            Nuestro servicio de atención personalizada está diseñado para brindarte una experiencia única, adaptada a tus necesidades específicas, garantizando que cada interacción sea una oportunidad para proporcionarte el máximo confort, eficacia y satisfacción.
-        </p>
+    <div id="serv0">
+        <h2>Nuestros Servicios</h2>
+
     </div>
-    <div>
-        <div id="bola2" class="bola">
+    <div id="serv1" class="cuadros">
+        <div>
+            <p>
+                Nuestro servicio de atención personalizada está diseñado para brindarte una experiencia única, adaptada a tus necesidades específicas, garantizando que cada interacción sea una oportunidad para proporcionarte el máximo confort, eficacia y satisfacción.
+            </p>
+        </div>
+        <div id="img1" class="imgServ">
+            <h3>Atención personalizada</h3>
         </div>
         <p>
         Nuestro equipo de expertos en peluquería está comprometido con realzar tu belleza y estilo. Siempre actualizados con las últimas tendencias, utilizamos técnicas innovadoras y productos de alta calidad para ofrecerte un servicio excepcional, cerca de ti.
         </p>
     </div>
-    <div>
-        <div id="bola3" class="bola">
+    <div id="serv2" class="cuadros">
+        <div>
+            <p>
+                Nuestro equipo de estilistas altamente capacitados se mantiene al tanto de las últimas innovaciones y cambios en la industria de la moda capilar.  Utilizamos técnicas modernas y productos de la más alta calidad para garantizar resultados impecables.
+            </p>
         </div>
-        <p>
-        La constante mejora es la clave de nuestro trabajo diario. Nos esforzamos por perfeccionar nuestras técnicas y conocimientos en tratamientos capilares, extensiones de pelo y artículos de peluquería, para brindarte siempre lo mejor.
-        </p>
+        <div id="img2" class="imgServ">
+            <h3>Equipo de estilistas</h3>
+        </div>  
+    </div>
+    <div id="serv3" class="cuadros">
+        <div>
+            <p>
+                La constante mejora es el motor que impulsa nuestro trabajo diario. Nos dedicamos a perfeccionar nuestras técnicas y conocimientos para ofrecer siempre lo mejor a nuestros clientes.
+            </p>
+        </div>
+        <div id="img3" class="imgServ">
+            <h3>Constante mejora</h3>
+        </div>
     </div>
 </div>
 <h2>Galería de estilos</h2>
