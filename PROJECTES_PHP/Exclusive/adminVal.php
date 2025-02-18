@@ -12,7 +12,7 @@
             } else if ($accion == 2) {
                 $correcto = updateVal($_POST['id'], $_POST['email'], $_POST['prod'], $_POST['descrip'], $_POST['eval']);
             } else {
-                $correcto = deleteVal($_POST['id'], $_POST['email'], $_POST['prod']);
+                $correcto = deleteVal($_POST['id']);
             }
             if ($correcto) {
 ?>

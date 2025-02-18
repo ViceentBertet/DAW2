@@ -625,16 +625,6 @@ function formDelVal(accion) {
     id.id = "id";
     id.placeholder = "ID valoración";
 
-    let email = document.createElement('input');
-    email.name = "email";
-    email.id = "email";
-    email.placeholder = "Email";
-
-    let prod = document.createElement('input');
-    prod.name = "prod";
-    prod.id = "prod";
-    prod.placeholder = "ID producto";
-
     let buttons = createButtons(accion);
     buttons[0].id = "but1";
     buttons[1].id = "but2";
@@ -646,8 +636,6 @@ function formDelVal(accion) {
 
     form.appendChild(input);
     form.appendChild(id);
-    form.appendChild(email);
-    form.appendChild(prod);
     form.appendChild(buttons[0]);
     form.appendChild(buttons[1]);
     ventana.appendChild(titulo);

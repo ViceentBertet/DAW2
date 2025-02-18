@@ -5,12 +5,11 @@
     if ($_SESSION['tpo_usu'] != "Cliente") {
         if (isset($_POST["accion"])) {
             $accion = $_POST['accion'];
-            
             $correcto = "";
             if ($accion == 1) {
-                $correcto = anyadirProd($_POST['id'], $_POST['nom'], $_POST['descrip'], $_POST['img'], $_POST['precio'], $_POST['stock'], $_POST['tipo']);
+                $correcto = anyadirProd($_POST['id'], $_POST['nom'], $_POST['descrip'], $_FILES["img"], $_POST['precio'], $_POST['stock'], $_POST['tipo']);
             } else if ($accion == 2) {
-                $correcto = updateProd($_POST['id'], $_POST['nom'], $_POST['descrip'], $_POST['img'], $_POST['precio'], $_POST['stock'], $_POST['tipo']);
+                $correcto = updateProd($_POST['id'], $_POST['nom'], $_POST['descrip'], $_FILES["img"], $_POST['precio'], $_POST['stock'], $_POST['tipo']);
             } else {
                 $correcto = deleteProd($_POST['id']);
             }

@@ -1,8 +1,14 @@
 <?php
     include("header.php");
 ?>
-<div class="logo">
-    <img src="img/logo2.jpg" alt="Logo">
+<h1>Peluquería y estética</h1>
+<div id=presen>
+    <div class="logo">
+        <img src="img/logo2.jpg" alt="Logo">
+    </div>
+    <div>
+        <p>Descubre Monica Exclusive donde el estilo y la sofisticación se fusionan. Ofrecemos tratamientos capilares avanzados, extensiones de alta calidad y un servicio personalizado para realzar tu belleza con resultados impecables.</p>
+    </div>
 </div>
 <h2>Nuestros Servicios</h2>
 <div id="serv">
@@ -17,14 +23,14 @@
         <div id="bola2" class="bola">
         </div>
         <p>
-            Nuestro equipo de estilistas altamente capacitados se mantiene al tanto de las últimas innovaciones y cambios en la industria de la moda capilar.  Utilizamos técnicas modernas y productos de la más alta calidad para garantizar resultados impecables.
+        Nuestro equipo de expertos en peluquería está comprometido con realzar tu belleza y estilo. Siempre actualizados con las últimas tendencias, utilizamos técnicas innovadoras y productos de alta calidad para ofrecerte un servicio excepcional, cerca de ti.
         </p>
     </div>
     <div>
         <div id="bola3" class="bola">
         </div>
         <p>
-            La constante mejora es el motor que impulsa nuestro trabajo diario. Nos dedicamos a perfeccionar nuestras técnicas y conocimientos para ofrecer siempre lo mejor a nuestros clientes.
+        La constante mejora es la clave de nuestro trabajo diario. Nos esforzamos por perfeccionar nuestras técnicas y conocimientos en tratamientos capilares, extensiones de pelo y artículos de peluquería, para brindarte siempre lo mejor.
         </p>
     </div>
 </div>

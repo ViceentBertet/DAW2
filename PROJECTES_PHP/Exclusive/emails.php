@@ -2,7 +2,8 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     require "./vendor/autoload.php";
-
+    // PONER TU CORREO Y IR A CONSTANTES.PHP Y PONER TU CONTRASEÑA
+    // PARA EL CORRECTO FUNCIONAMIENTO DE enviarCorreo();
     define("CORREO_EMPRESA","perellobertetjosepvicent@gmail.com");
     function enviarCorreo($nomRemit, $asunto, $msj, $destino, $nomDest) {
         $const = include('constantes.php');

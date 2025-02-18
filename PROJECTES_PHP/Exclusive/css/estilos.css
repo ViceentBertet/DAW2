@@ -19,6 +19,10 @@ body {
 *::-webkit-scrollbar {
     display: none;
 }
+h1 {
+    text-align: center;
+    margin: 50px;
+}
 html {
     min-height: 100%;
     position: relative;
@@ -79,13 +83,35 @@ footer {
     height: 150px;
 }
 /*      index.html      */
+#presen {    
+    display:flex;
+    background-color: #7F598A;
+    color: whitesmoke;
+    border-radius: 15px;
+    padding: 30px 15px;
+    width: 40%;
+    margin: auto;
+    margin-bottom: 50px;
+    align-items: center;
+    justify-content: space-around;
+    transition: .5s box-shadow;
+    div {
+        width: 45%;
+    }
+    p {
+        text-align: justify;
+    }
+}
+#presen:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    transition: .5s box-shadow;
+}
 .logo {
     display: flex;
     justify-content: center;
-    margin:120px 0;
+    align-items: center;
     img {
-        width: 95%;
-        max-width: 500px;
+        width: 100%;
         border-radius: 50%;
         box-shadow: 0px 0px 15px #7F598A;
     }
@@ -644,8 +670,7 @@ table {
     margin: auto;
     display: grid;
     grid-template-areas:
-        "id prod" 
-        "ema ema"
+        "id id"
         "but1 but1"
         "but2 but2";
     grid-template-columns: repeat(2, 100px);

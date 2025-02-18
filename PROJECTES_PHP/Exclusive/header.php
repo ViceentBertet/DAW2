@@ -6,8 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MONICA EXCLUSIVE</title>
+    <title>Peluquería y Estética</title>
     <link rel="stylesheet" href="css/estilos.css">
+    <meta name="description" content="Castelló de Rugat, Mónica Bertet Mascarell, Monica Exclusive donde el lujo y la innovación se unen para brindarte un servicio personalizado. Ofrecemos tratamientos capilares de alta gama, extensiones premium y los mejores productos de peluquería, garantizando un estilo sofisticado y impecable.">
     <script src="./js/script.js"></script>
 </head>
 <body>

@@ -191,7 +191,7 @@
             $stmt->execute([
                 ':email' => $email,
                 ':nom' => $nom,
-                ':pwd' => password_hash($pwd, PASSWORD_DEFAULT), // Hashear la contraseña
+                ':pwd' => $pwd,
                 ':tpo_usu' => $tpo_usu
             ]);
             return $stmt->rowCount() === 1;            
@@ -288,16 +288,14 @@
             return false;
         }
     }
-    function deleteVal($id, $email, $prod) {
+    function deleteVal($id) {
         try {
             $pdo = crearConexion();
-            $query = "DELETE FROM usuario 
-                      WHERE ID_val = :id AND email = :email AND ID_prod = :prod";
+            $query = "DELETE FROM valoracion 
+                      WHERE ID_val = :id";
             $stmt = $pdo->prepare($query);
             $stmt->execute([
-                ':id' => $id,
-                ':email' => $email,
-                ':prod' => $prod
+                ':id' => $id
             ]);
             return $stmt->rowCount() === 1;
         } catch (PDOException $e) {
