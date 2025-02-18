@@ -18,15 +18,12 @@
     <div id="serv1" class="cuadros">
         <div>
             <p>
-                Nuestro servicio de atención personalizada está diseñado para brindarte una experiencia única, adaptada a tus necesidades específicas, garantizando que cada interacción sea una oportunidad para proporcionarte el máximo confort, eficacia y satisfacción.
+                Nuestro equipo de expertos en peluquería está comprometido con realzar tu belleza y estilo. Siempre actualizados con las últimas tendencias, utilizamos técnicas innovadoras y productos de alta calidad para ofrecerte un servicio excepcional, cerca de ti.
             </p>
         </div>
         <div id="img1" class="imgServ">
-            <h3>Atención personalizada</h3>
+            <h3>Belleza y estilo</h3>
         </div>
-        <p>
-        Nuestro equipo de expertos en peluquería está comprometido con realzar tu belleza y estilo. Siempre actualizados con las últimas tendencias, utilizamos técnicas innovadoras y productos de alta calidad para ofrecerte un servicio excepcional, cerca de ti.
-        </p>
     </div>
     <div id="serv2" class="cuadros">
         <div>
@@ -35,13 +32,13 @@
             </p>
         </div>
         <div id="img2" class="imgServ">
-            <h3>Equipo de estilistas</h3>
+            <h3>Nuestro equipo</h3>
         </div>  
     </div>
     <div id="serv3" class="cuadros">
         <div>
             <p>
-                La constante mejora es el motor que impulsa nuestro trabajo diario. Nos dedicamos a perfeccionar nuestras técnicas y conocimientos para ofrecer siempre lo mejor a nuestros clientes.
+                La constante mejora es la clave de nuestro trabajo diario. Nos esforzamos por perfeccionar nuestras técnicas y conocimientos en tratamientos capilares, extensiones de pelo y artículos de peluquería, para brindarte siempre lo mejor.
             </p>
         </div>
         <div id="img3" class="imgServ">
