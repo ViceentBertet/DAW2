@@ -5,37 +5,37 @@
     <img src="img/logo2.jpg" alt="Logo">
 </div>
 <div id="serv">
-    <h2 id="serv0">Nuestros Servicios</h2>
+    <div id="serv0">
+        <h2>Nuestros Servicios</h2>
+
+    </div>
     <div id="serv1" class="cuadros">
         <div>
-            <div id="bola1" class="bola"></div>
             <p>
                 Nuestro servicio de atención personalizada está diseñado para brindarte una experiencia única, adaptada a tus necesidades específicas, garantizando que cada interacción sea una oportunidad para proporcionarte el máximo confort, eficacia y satisfacción.
             </p>
         </div>
-        <div class="imgServ">
+        <div id="img1" class="imgServ">
             <h3>Atención personalizada</h3>
         </div>
     </div>
     <div id="serv2" class="cuadros">
         <div>
-            <div id="bola2" class="bola"></div>
             <p>
                 Nuestro equipo de estilistas altamente capacitados se mantiene al tanto de las últimas innovaciones y cambios en la industria de la moda capilar.  Utilizamos técnicas modernas y productos de la más alta calidad para garantizar resultados impecables.
             </p>
         </div>
-        <div class="imgServ">
+        <div id="img2" class="imgServ">
             <h3>Equipo de estilistas</h3>
         </div>  
     </div>
     <div id="serv3" class="cuadros">
         <div>
-            <div id="bola3" class="bola"></div>
             <p>
                 La constante mejora es el motor que impulsa nuestro trabajo diario. Nos dedicamos a perfeccionar nuestras técnicas y conocimientos para ofrecer siempre lo mejor a nuestros clientes.
             </p>
         </div>
-        <div class="imgServ">
+        <div id="img3" class="imgServ">
             <h3>Constante mejora</h3>
         </div>
     </div>
