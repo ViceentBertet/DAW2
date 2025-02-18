@@ -12,10 +12,10 @@
     if ($_SESSION['tpo_usu'] != "Cliente") {
 ?>
         <div class="bola"><a href="adminProd.php">Productos</a></div>
-        <div class="bola"><a href="adminPed.php">Pedidos</a></div>
 <?php
     }
 ?>
+        <div class="bola"><a href="adminPed.php">Pedidos</a></div>
         <div class="bola"><a href="adminVal.php">Reseñas</a></div>
 <?php
 ?>

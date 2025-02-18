@@ -5,6 +5,7 @@ const TIPO_USUS = ['Cliente', 'Empleado', 'Admin'];
 const URL_VALORACIONES = "JSON_VAL.php";
 const OPCIONES_EVAL = ['Excelente', 'Notable', 'Bueno', 'Suficiente', 'Insuficiente'];
 const URL_CARRITO = "JSON_carrito.php";
+const OPCIONES_PEDIDO = ['Dirección', "Entregado"];
 
 function addTipo() {
     protector.classList.remove("ocultar");
@@ -328,7 +329,7 @@ function delProd() {
 }
 async function mostrarProducto(producto, iniciado) {
     let sitio = window.location.pathname + window.location.search;
-    sitio =  sitio.replace("/Exclusive", ".");
+    sitio =  sitio.replace("/Exclusive", ".").replace("?del=1", "");
     document.body.style.overflow = "hidden";
     protector.classList.remove("ocultar");
 
@@ -337,6 +338,7 @@ async function mostrarProducto(producto, iniciado) {
     div.id = "ventana";
 
     let formVal = document.createElement("form");
+    console.log(sitio);
     formVal.action = sitio;
     formVal.method = "POST";
     formVal.id = "formVal";
@@ -358,12 +360,13 @@ async function mostrarProducto(producto, iniciado) {
     button.appendChild(imgEnviar);
 
     let formCarrito = document.createElement("form");
-    formCarrito.id = "formCarrito";
     formCarrito.action = sitio;
+    formCarrito.method = "POST";
+    formCarrito.id = "formCarrito";
 
     let input = document.createElement("input");
     input.classList.add("ocultar");
-    input.name = "producto";
+    input.name = "idProd";
     input.value = producto.id;
 
     let titulo = producto.querySelector("h3").cloneNode(true);
@@ -372,9 +375,14 @@ async function mostrarProducto(producto, iniciado) {
     img.id = "img";
 
     let srcImg = document.createElement('input');
-    srcImg.value = img.src;
+    srcImg.value = img.src.replace("http://localhost/Exclusive", ".");
     srcImg.name = "img";
     srcImg.classList.add('ocultar');
+
+    let nomProd = document.createElement('input');
+    nomProd.value = img.alt;
+    nomProd.name = "nomProd";
+    nomProd.classList.add('ocultar');
 
     let descrip = producto.querySelector("p").cloneNode(true);
     descrip.id = "descrip";
@@ -383,7 +391,7 @@ async function mostrarProducto(producto, iniciado) {
     precio.id = "precio";
 
     let precioString = document.createElement('input');
-    precioString.value = precio.innerText;
+    precioString.value = precio.innerText.replace('€',"");
     precioString.name = "precio";
     precioString.classList.add('ocultar');
 
@@ -405,7 +413,8 @@ async function mostrarProducto(producto, iniciado) {
         cantidad.type = "number";
         cantidad.id = "cant";
         cantidad.name = "cant";
-        cantidad.min = "0";
+        cantidad.min = "1";
+        cantidad.value = "1";
         cantidad.max = "10";
         formCarrito.appendChild(cantidad);
     }
@@ -421,6 +430,7 @@ async function mostrarProducto(producto, iniciado) {
     formCarrito.appendChild(val);
     formCarrito.appendChild(precio);
     formCarrito.appendChild(precioString);
+    formCarrito.appendChild(nomProd);
     formCarrito.appendChild(srcImg);
     formCarrito.appendChild(buttons[0]);
     formCarrito.appendChild(buttons[1]);
@@ -661,29 +671,45 @@ async function verCarrito() {
     let div = createWindow();
     div.classList.add("formulari");
     div.classList.add("muestraCarrito");
-
+    let divBotones = document.createElement('div');
+    divBotones.id = "botonesCarrito";
     if (carrito.length === 0) {
         let texto = document.createElement('p');
         texto.innerText = "No hay ningún producto seleccionado";
         div.appendChild(texto);
     } else {
         let table = document.createElement("table");
-        table.classList.add("carrito");
-        carrito.forEach(producto => {
-            let cabecera = crearCabecera();
-            let tr = crearFila(producto);
+        let div2 = document.createElement('div');
+        div2.id = "carrito";
+        let cabecera = crearCabecera();
+        table.appendChild(cabecera);
 
-            table.appendChild(cabecera);
+        carrito.forEach(producto => {
+            let tr = crearFila(producto);
+            tr.addEventListener("change", nuevoPrecio)
             table.appendChild(tr);
         });
-        div.appendChild(table);
+        let tr = calcularTotal(table);
+        table.appendChild(tr);
+        div2.appendChild(table);
+        div.appendChild(div2);
+        let boton1 = document.createElement('boton');
+        boton1.innerText = "Comprar";
+        boton1.id = "comprarTodo";
+        boton1.classList.add("botonCarrito");
+        divBotones.appendChild(boton1);
+        boton1.addEventListener("click", comprar);
     }
-    let boton = document.createElement('boton');
-    boton.innerText = "Cerrar ventana";
-    boton.id = "botonCarrito";
-    div.appendChild(boton);
+
+    let boton2 = document.createElement('boton');
+    boton2.innerText = "Cerrar ventana";
+    boton2.classList.add("botonCarrito");
+    boton2.id = "cerrar";
+
+    divBotones.appendChild(boton2);
+    div.appendChild(divBotones);
     document.body.appendChild(div);
-    botonCarrito.addEventListener("click", closeWindow);
+    cerrar.addEventListener("click", closeWindow);
 }
 async function fetchCarrito() {
     try {
@@ -704,31 +730,219 @@ function crearCabecera() {
     CABECERA_CARRITO.forEach(titulo => {
         let th = document.createElement('th');
         th.innerText = titulo;
-        if (titulo == "PRODUCTO") th.colspan = "2";
         cabecera.appendChild(th);
     })
     return cabecera;
 }
 function crearFila(producto) {
     let tr = document.createElement('tr');
-    console.log(producto);
     let imgTd = document.createElement('td');
-    let prod = document.createElement('td');
+
     let cant = document.createElement('td');
     let precio = document.createElement('td');
+    let cuadrado = document.createElement('td');
 
     let img = document.createElement('img');
     img.src = producto.img;
+    img.alt = producto.idProd;
+    imgTd.classList.add("prodCarrito");
+    let inputCant = document.createElement('input');
+    inputCant.classList.add("cantCarrito");
 
-    imgTd.appendChild(img);
-    prod.innerText = producto.prod;
-    cant.innerText = producto.cant;
+    inputCant.type = "number";
+    inputCant.min = 1;
+    inputCant.max = 10;
+
+    inputCant.value = producto.cant;
+
+
+    imgTd.innerText = producto.nomProd;
     precio.innerText = producto.precio;
+    precio.classList.add("precioCarrito");
+    let borrarRegistro = document.createElement('div');
+    borrarRegistro.innerText = "X";
+    borrarRegistro.classList.add("borrarRegistro");
+
+    cant.appendChild(inputCant);
+    imgTd.prepend(img);
+    cuadrado.appendChild(borrarRegistro);
 
     tr.appendChild(imgTd);
-    tr.appendChild(prod);
     tr.appendChild(cant);
     tr.appendChild(precio);
-    
+    tr.appendChild(cuadrado);
+    tr.querySelector(".borrarRegistro").addEventListener("click", borrarFila);
+
     return tr;
+}
+function nuevoPrecio() {
+    textoTotal.remove();
+    let table = document.querySelector('table');
+    table.appendChild(calcularTotal(table));
+}
+function calcularTotal(table) {
+    let precios = table.querySelectorAll(".precioCarrito");
+    let cants = table.querySelectorAll(".cantCarrito");
+
+    let precio = 0;
+    for (let i = 0; i < precios.length; i++) {
+        precio += parseFloat(precios[i].innerText)* parseInt(cants[i].value);
+    }
+    let tr = document.createElement('tr');
+    let td = document.createElement('td');
+    td.id = "textoTotal";
+    td.colSpan = 4;
+    td.innerText = "Total: " + precio.toFixed(2) + " €";
+    tr.appendChild(td);
+    return tr;
+}
+function borrarFila() {
+    if (ventana.querySelectorAll('.borrarRegistro').length == 1) {
+        borrarTablaCarrito("No hay ningún producto seleccionado");
+        fetch(window.location.href, {
+            method: 'POST', 
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ del: 1 }) 
+        })
+    } else {
+        this.parentNode.parentNode.remove();
+    }
+}
+function borrarTablaCarrito(texto) {
+    ventana.querySelector('#carrito').remove();
+    let p = document.createElement('p');
+    p.innerText = texto;
+    ventana.prepend(p);
+    comprarTodo.remove();
+}
+function comprar() {
+    let productos = ventana.querySelectorAll(".prodCarrito");
+    let cants = ventana.querySelectorAll(".cantCarrito");
+    let precios = ventana.querySelectorAll(".precioCarrito");
+    let email = nombreUsuario.name;
+    let precioTotal = parseFloat(textoTotal.innerText.replace("Total: ", "").replace(" €", ""));
+    let datos = [];
+    
+    for (let i = 0; i < productos.length; i++) {
+        datos.push({
+            id: productos[i].querySelector("img").alt,
+            cant: cants[i].value,
+            precio: parseFloat(precios[i].innerText)
+        });
+    }
+    enviarCompra(datos, email, precioTotal);
+}
+function enviarCompra(datos, email, precioTotal) {
+    console.log(datos);
+    console.log(email);
+    console.log(precioTotal);
+
+    fetch('./comprar.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify({datos, email, precioTotal})
+    })
+    .then(response => {
+        response = response.json();
+        console.log(response);
+        return response;
+    })
+    .then(data => borrarTablaCarrito(data.message)) 
+    .catch(error => borrarTablaCarrito(error.message));
+}
+function actPed() {
+    let accion = "Actualizar pedido";
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
+
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminPed.php";
+    form.classList.add("formActPed");
+    form.id = "formulario";
+
+    let id = document.createElement('input');
+    id.name = "id";
+    id.id = "id";
+    id.placeholder = "ID pedido";
+
+
+    let select = document.createElement("select");
+    select.name = "opcion";
+    select.id = "opcion";
+
+    OPCIONES_PEDIDO.forEach(opcion => {
+        let option = document.createElement('option');
+        option.value = opcion.replace("ó","o").toLowerCase();
+        option.innerText = opcion;
+        select.appendChild(option);
+    });
+
+    let nuevoValor = document.createElement("input");
+    nuevoValor.name = "newValue";
+    nuevoValor.id = "newValue";
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+    input.value = 1;
+
+    form.appendChild(input);
+    form.appendChild(id);
+    form.appendChild(select);
+    form.appendChild(nuevoValor);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
+}
+function delPed() {
+    let accion = "Eliminar pedido";
+    protector.classList.remove("ocultar");
+    let ventana = createWindow();
+    let titulo = document.createElement("h3");
+    titulo.innerText = accion;
+
+    let form = document.createElement("form");
+    form.method = "post";
+    form.action = "./adminPed.php";
+    form.classList.add("formDelPed");
+    form.id = "formulario";
+
+    let id = document.createElement('input');
+    id.name = "id";
+    id.id = "id";
+    id.placeholder = "ID pedido";
+
+    let buttons = createButtons(accion);
+    buttons[0].id = "but1";
+    buttons[1].id = "but2";
+
+    let input = document.createElement("input");
+    input.classList.add("ocultar");
+    input.id = "accion";
+    input.name = "accion";
+    input.value = 2;
+
+    form.appendChild(input);
+    form.appendChild(id);
+    form.appendChild(buttons[0]);
+    form.appendChild(buttons[1]);
+    ventana.appendChild(titulo);
+    ventana.appendChild(form);
+    document.body.appendChild(ventana);
+    but2.addEventListener("click", closeWindow);
 }

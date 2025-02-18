@@ -25,7 +25,7 @@ CREATE TABLE Pedido (
     FOREIGN KEY (email) REFERENCES Usuario(email)
 );
 CREATE TABLE Incluye (
-    ID_pedido VARCHAR(32) NOT NULL,
+    ID_pedido INT AUTO_INCREMENT NOT NULL,
     ID_prod VARCHAR(32) NOT NULL,
     cantProd INT NOT NULL,
     precio DECIMAL(8,2) NOT NULL,

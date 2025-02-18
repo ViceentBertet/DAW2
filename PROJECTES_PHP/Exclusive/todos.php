@@ -2,18 +2,39 @@
 include("header.php");
 include("gestionConexion.php");
 
-if (isset($_GET["producto"]) && isset($_GET['cant']) && isset($_GET['img']) && isset($_GET['precio'])) {
-    unset($_SESSION["carrito"]);
-    $registro = array("prod" => $_GET["producto"], "cant" => $_GET["cant"], "img" => $_GET['img'], "precio" => $_GET['precio']);
-    $_SESSION["carrito"][] = $registro;
-?>
-    <p class="margen">Se ha añadido al carrito</p>
-<?php
-}
-print_r( $_SESSION["carrito"]);
+if (isset($_POST["idProd"]) && isset($_POST['cant']) && isset($_POST['img']) && isset($_POST['precio']) && isset($_POST['nomProd'])) {
+    $registro = array(
+        "idProd" => $_POST["idProd"], 
+        "cant" => $_POST["cant"], 
+        "img" => $_POST['img'], 
+        "precio" => $_POST['precio'],
+        "nomProd" => $_POST['nomProd']
+    );
 
-if (isset($_POST['valoracion']) && isset($_POST['eval']) && isset($_POST['producto'])) {
-    $correcto = anyadirVal($_SESSION["usu"], $_POST["producto"], $_POST["valoracion"], $_POST["eval"]);
+    $encontrado = false;
+    if (isset($_SESSION["carrito"])) {
+        for ($i = 0; $i < count($_SESSION['carrito']); $i++) {
+            if (in_array($registro['idProd'], $_SESSION['carrito'][$i])) {
+?>
+                <p class="margen">El producto ya esta en el carrito</p>
+<?php           
+                $encontrado = true;
+                break;
+            }
+        }
+
+    } 
+
+    if (!$encontrado) {
+        $_SESSION["carrito"][] = $registro;
+?>
+        <p class="margen">Se ha añadido al carrito</p>
+<?php
+    }
+}
+
+if (isset($_POST['valoracion']) && isset($_POST['eval']) && isset($_POST['idProd'])) {
+    $correcto = anyadirVal($_SESSION["usu"], $_POST["idProd"], $_POST["valoracion"], $_POST["eval"]);
     if ($correcto) {
 ?>
         <p class="margen">Se ha añadido correctamente su reseña</p>
@@ -24,8 +45,14 @@ if (isset($_POST['valoracion']) && isset($_POST['eval']) && isset($_POST['produc
 <?php
     }
 }
-$array = selectAll();
-$pagina = "./todos.php";
-mostrarProductos($array);
+try {
+    $array = selectAll();
+    $pagina = "./todos.php";
+    mostrarProductos($array);
+} catch (Exception $e) {
+    ?>
+        <p class="margen">No se han podido mostrar los productos</p>
+    <?php
+    }
 include("footer.php");
 ?>

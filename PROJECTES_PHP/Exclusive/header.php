@@ -18,7 +18,7 @@
 <?php   
     if(isset($_SESSION["nom"])) {
 ?>
-        <p><a href="administrar.php"><?=$_SESSION["nom"]?></a></p>
+        <p><a href="administrar.php" id="nombreUsuario" name="<?=$_SESSION['usu']?>"><?=$_SESSION["nom"]?></a></p>
 <?php
     }
 ?>
@@ -29,3 +29,15 @@
             <li><a href="iniciaSesion.php">Inicia sesión</a></li>
         </ul>
     </header>
+<?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+
+        if (isset($data['del'])) {
+            if (isset($_SESSION["carrito"])){
+                unset($_SESSION["carrito"]);
+            }
+        }
+    }
+?>
