@@ -95,19 +95,25 @@ h2 {
     margin-bottom: 30px;
 }
 #serv {
-    display: flex;
-    justify-content: space-around;
-    height: 200px;
-    width:95%;
+    display: grid;
+    width:1200px;
     margin: auto;
     margin-bottom: 200px;
+    grid-template-columns: repeat(3, 400px);
+    grid-template-rows: repeat(2, 200px);
+    grid-template-areas: 
+        "sA sZ sC"
+        "sA sB sC";
     p {
         text-align: justify;
     }
-    & > div {
-        width: 25%;
-        height: 250px;
-        padding:15px;
+}
+.cuadros {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    & > div:first-child {
+        padding: 15px;
         display: flex;
         flex-direction: column;
         border-radius: 15px;
@@ -115,10 +121,22 @@ h2 {
         transition: transform .5s;
         text-align: center;
     }
-    & > div:hover {
-        transition: transform .5s;
-        transform: scale(1.1); 
+    & > div{
+        width: 300px;
+        height: 200px;
     }
+}
+#serv0 {
+    grid-area: sZ;
+}
+#serv1 {
+    grid-area: sA;
+}
+#serv2 {
+    grid-area: sB;
+}
+#serv1 {
+    grid-area: sC;
 }
 .bola {
     width: 75px;
