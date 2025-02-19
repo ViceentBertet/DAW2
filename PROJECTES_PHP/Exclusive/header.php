@@ -24,10 +24,10 @@
     }
 ?>
         <ul>
-            <li><a href="index.php">Inicio</a></li>
-            <li><a href="productos.php">Productos</a></li>
-            <li><a href="pedirCita.php">Pide cita</a></li>
-            <li><a href="iniciaSesion.php">Inicia sesión</a></li>
+            <li><a class="linea" href="index.php">Inicio</a></li>
+            <li><a class="linea" href="productos.php">Productos</a></li>
+            <li><a class="linea" href="pedirCita.php">Pide cita</a></li>
+            <li><a class="linea" href="iniciaSesion.php">Inicia sesión</a></li>
         </ul>
     </header>
 <?php

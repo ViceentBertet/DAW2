@@ -7,6 +7,19 @@ const OPCIONES_EVAL = ['Excelente', 'Notable', 'Bueno', 'Suficiente', 'Insuficie
 const URL_CARRITO = "JSON_carrito.php";
 const OPCIONES_PEDIDO = ['Dirección', "Entregado"];
 
+window.onload = () => {
+    let boton = document.querySelector("#botonLink");
+    if (boton) {
+        boton.addEventListener("mousedown", cambiarEstado);
+        boton.addEventListener("mouseup", cambiarEstado);
+
+    }
+}
+function cambiarEstado() {
+    this.classList.toggle("oscuro");
+    this.classList.toggle("claro");
+    
+}
 function addTipo() {
     protector.classList.remove("ocultar");
     let ventana = createWindow();

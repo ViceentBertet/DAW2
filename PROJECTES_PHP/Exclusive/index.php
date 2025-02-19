@@ -7,14 +7,15 @@
         <img src="img/logo2.jpg" alt="Logo">
     </div>
     <div>
-        <p>Descubre Monica Exclusive donde el estilo y la sofisticación se fusionan. Ofrecemos tratamientos capilares avanzados, extensiones de alta calidad y un servicio personalizado para realzar tu belleza con resultados impecables.</p>
+        <p>Bienvenido/a Monica Exclusive donde el estilo y la sofisticación se fusionan. Ofrecemos tratamientos capilares avanzados, extensiones de alta calidad y un servicio personalizado para realzar tu belleza con resultados impecables.</p>
+        <div>
+            <a id="botonLink" class="claro" href="todos.php">Descubre nuestros productos</a>
+
+        </div>
     </div>
 </div>
+<h2>Nuestros Servicios</h2>
 <div id="serv">
-    <div id="serv0">
-        <h2>Nuestros Servicios</h2>
-
-    </div>
     <div id="serv1" class="cuadros">
         <div>
             <p>

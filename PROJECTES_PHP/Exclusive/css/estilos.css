@@ -21,7 +21,7 @@ body {
 }
 h1 {
     text-align: center;
-    margin: 50px;
+    margin: 30px;
 }
 html {
     min-height: 100%;
@@ -49,29 +49,28 @@ header {
         font-size: 15px;
         width: calc(100% - 510px);
     }
-    a {
-        color: whitesmoke;
-    }
     li {
         display: inline-block;
         font-size: 15px;
         margin-right: 20px;
-        a {
-            color: whitesmoke;
-        }
-        a:after {
-            display:block;
-            content: '';
-            border-bottom: solid 3px whitesmoke;  
-            transform: scaleX(0);  
-            transition: transform 250ms ease-in-out;
-        }
-        a:hover:after { transform: scaleX(1); }
-        a.fromRight:after{ transform-origin:100% 50%; }
-        a.fromLeft:after{  transform-origin:  0% 50%; }
+        
     }
     
 }
+
+.linea {
+    color: whitesmoke;
+}
+.linea:after {
+    display:block;
+    content: '';
+    border-bottom: solid 3px whitesmoke;  
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+}
+.linea:hover:after { transform: scaleX(1); }
+.linea.fromRight:after{ transform-origin:100% 50%; }
+.linea.fromLeft:after{  transform-origin: 0% 50%; }
 footer {
     position: absolute;
     bottom: 0;
@@ -91,18 +90,26 @@ footer {
     padding: 30px 15px;
     width: 40%;
     margin: auto;
-    margin-bottom: 50px;
     align-items: center;
     justify-content: space-around;
     transition: .5s box-shadow;
-    div {
+    & > div {
         width: 45%;
     }
     p {
         text-align: justify;
     }
+    div:last-child {
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+        div{
+            margin: auto;
+            width: fit-content;
+        }
+    }
 }
-#presen:hover {
+#presen:hover, .ubi:hover {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
     transition: .5s box-shadow;
 }
@@ -116,64 +123,30 @@ footer {
         box-shadow: 0px 0px 15px #7F598A;
     }
 }
+#botonLink {
+    color: #7F598A;
+    border-radius: 15px;
+    padding: 10px;
+    font-weight: bold;
+}
+.claro {
+    background-color: whitesmoke;
+}
+.oscuro {
+    background-color: rgba(245, 245, 245, 0.85);
+
+}
 h2 {
     text-align: center;
-    margin-bottom: 30px;
-}/*
-.cuadros {
-    display: flex;
-    width: 100%;
-    overflow: hidden;
-    & > div {
-        transform: translate(-400px);
-        display: flex;
-        transition: transform .5s;
-        width: 100%;
-    }
-    p {
-        width: 300px;
-    }
-    .imgServ {
-        transform: translate(-180px);
-        justify-content: center;
-        align-items: center;
-        width: 500px;
-        transition: transform .5s;
-    }
+    margin: 30px;
 }
-.cuadros:hover {
-    & > div:first-child {
-        margin: auto;
-        transform: translate(75px);
-    }
-    .imgServ {
-        transform:translate(400px);
-    }
-}
-#serv0 {
-    grid-area: sZ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#serv1 {
-    grid-area: sA;
-}
-#serv2 {
-    grid-area: sB;
-}
-#serv3 {
-    grid-area: sC;
-}*/
 #serv {
     display: grid;
     width: 1200px;
     margin: auto;
-    margin-bottom: 200px;
     grid-template-columns: repeat(3, 400px);
-    grid-template-rows: repeat(2, 200px);
+    grid-template-rows: 200px;
     grid-template-areas: 
-        "sZ sZ sZ"
         "sA sC sB";
     p {
         text-align: justify;
@@ -192,11 +165,9 @@ h2 {
 #serv1 {
     grid-area: sA;
 }
-
 #serv2 {
     grid-area: sB;
 }
-
 #serv3 {
     grid-area: sC;
 }
@@ -207,7 +178,7 @@ h2 {
     justify-content: center;  
     align-items: center;
     position: relative;
-    color: white;
+    color: whitesmoke;
     & > div:first-child {
         background-color: #7F598A;
         padding: 10px;
@@ -242,6 +213,7 @@ h2 {
     display: flex;
     justify-content: center;  
     align-items: center;
+    background-position: center;
 }
 .imgServ::after {
     content: "";
@@ -251,14 +223,14 @@ h2 {
     right: 0;
     bottom: 0;
     background: rgba(127, 89, 138, 0.4);
-    pointer-events: none; /* Asegura que la capa de filtro no interfiera con los clics */
+    pointer-events: none;
 }
 .imgServ h3 {
-    position: relative; /* Color del texto que no cambia */
-    color: white;
+    position: relative;
+    color: whitesmoke;
     font-weight: normal;
-    z-index: 1;  /* Asegura que el texto esté por encima de la capa de filtro */
-    padding: 20px;  /* Ajuste del espaciado alrededor del texto */
+    z-index: 1;  
+    padding: 20px;
 }
 #img1 {
     background-image: url("../img/Servicios/serv1.webp");
@@ -313,7 +285,13 @@ h2 {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    transition: .5s box-shadow;
     box-shadow: 0px 0px 5px #7F598A;
+}
+.item:hover {
+    transition: .5s box-shadow;
+    box-shadow: #af85bb 0px 30px 60px -12px, #7F598A 0px 18px 36px -18px;
+
 }
 .ubi {
     padding: 40px;
@@ -326,8 +304,8 @@ h2 {
     height: 550px;
     margin: auto;
     margin-bottom: 200px;
-
-    color: white;
+    transition: .5s box-shadow;
+    color: whitesmoke;
     div:first-child {
         width: 100%;
         display: flex;
@@ -409,14 +387,14 @@ h2 {
     width: calc(300px - 40px);
     border-radius: 15px;
     background-color: #7F598A;
-    color:white;
+    color:whitesmoke;
     text-align: center;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 select {
     text-align: center;
     width: 175px;
-    background-color: white;
+    background-color: whitesmoke;
     border: none;
     border-radius: 15px;
     height: 30px;
@@ -433,7 +411,7 @@ input {
     padding: 0 10px;
 }
 button {
-    background-color: white;
+    background-color: whitesmoke;
     border: none;
     border-radius: 15px;
     height: 30px;
@@ -808,7 +786,7 @@ table {
     width: fit-content;
 }
 .botonCarrito {
-    background-color: white;
+    background-color: whitesmoke;
     color: #7F598A;
     border-radius: 15px;
     padding: 5px;
