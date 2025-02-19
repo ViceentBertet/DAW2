@@ -1,3 +1,4 @@
+import {CartaElement} from "../components/carta.js";
 let played = false;
 const NUM_POKEMONS = 5;
 let pokemons = "";
@@ -43,28 +44,11 @@ function mostrarCartasJugador() {
     }
 }
 function crearCarta(datosCarta) {
-    let div = document.createElement("div");
-    div.classList.add("carta");
-
-    let nom = document.createElement("p");
-    nom.id = "nom";
-    nom.innerText = datosCarta[0];
-
-    let img = document.createElement("img");
-    img.src = datosCarta[1];
-    img.alt = nom.innerText;
-    img.id = "img";
-
-    let xp = document.createElement("p");
-    xp.id = "xp";
-    xp.innerText = datosCarta[2];
-    div.appendChild(xp);
-    div.appendChild(img);
-    div.appendChild(nom);
-    return div;
+    let carta = new CartaElement(datosCarta[1], datosCarta[0], datosCarta[2]);
+    return carta;
 }
 function jugada(){
-    let carta  = this.cloneNode(true);
+    let carta  = this.clone();
     propio.appendChild(carta);
     if (!played) {
         played = true;
