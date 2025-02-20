@@ -12,7 +12,7 @@ export class CartaElement extends HTMLElement {
         this.innerHTML = 
             `
                 <div id="xp">${experiencia}</div>
-                <img src="${this.imagen}"/>
+                <img src="${imagen}"/>
                 <div id="nom">${nombre}</div>
             `;
     }

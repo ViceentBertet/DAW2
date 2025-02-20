@@ -4,8 +4,11 @@ const NUM_POKEMONS = 5;
 let pokemons = "";
 let maquina = "";
 let jugador = "";
-window.onload = function() {
-    fetchPokemon();
+window.onload = async function() {
+    await fetchPokemon();
+    maquina = await elegirCinco();
+    jugador = await elegirCinco();
+    mostrarCartasJugador();
 }
 async function fetchPokemon() {
     let num = await fetch ("https://pokeapi.co/api/v2/pokemon")
@@ -16,9 +19,6 @@ async function fetchPokemon() {
             .then(response => response.json())
             .then(data => data.results)
             .catch(error => error)
-    maquina = await elegirCinco();
-    jugador = await elegirCinco();
-    mostrarCartasJugador();
 }
 async function elegirCinco() {
     let array = [];
@@ -59,26 +59,52 @@ function jugada(){
     this.remove();
 }
 function maquinaJugada(){
-    let num = nAleatorio(5) - 1;
+    let num = nAleatorio(maquina.length) - 1;
     let carta = crearCarta(maquina[num]);
     maquina.splice(num, 1);
     rival.appendChild(carta);
     if (!played) {
         played = true;
-        setTimeout(jugada(), 2000);
     } else {
         procesarRespuesta();
     }
     cartasMaquina.querySelector(".carta").remove();
 }
 function procesarRespuesta() {
+    played = false;
     cargando();
+    setTimeout(function () {carg.remove();}, 2000);
+    setTimeout(resultado, 2500);
 }
 function cargando() {
     let div = document.createElement("div");
-    div.id = "cargando";
+    div.id = "carg";
     let imgCargando = document.createElement("img");
     imgCargando.src = "./img/cargando.webp";
     div.appendChild(imgCargando);
     document.body.appendChild(div);
+    comment.innerText = "Cargando...";
+}
+function resultado() {
+    let cRival = rival.querySelector('carta-element');
+    let cJugador = propio.querySelector('carta-element');
+
+    let nRival = cRival.clone();
+    let nJugador = cJugador.clone();
+
+    cRival.remove();
+    cJugador.remove();
+    let suma = nJugador.experiencia + nRival.experiencia;
+
+    if (nRival.experiencia >= nJugador.experiencia) {
+        comment.innerText = "Cartas para el rival...";
+        izq.querySelector(".total").innerText = parseInt(izq.querySelector(".total").innerText) + suma;
+        izq.appendChild(nRival);
+        izq.appendChild(nJugador);
+    } else {
+        comment.innerText = "Cartas para ti...";
+        der.querySelector(".total").innerText = parseInt(der.querySelector(".total").innerText) + suma;
+        der.appendChild(nRival);
+        der.appendChild(nJugador);
+    }
 }
