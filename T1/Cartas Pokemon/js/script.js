@@ -4,11 +4,27 @@ const NUM_POKEMONS = 5;
 let pokemons = "";
 let maquina = "";
 let jugador = "";
+let turnoMaquina;
+let comprobarIzq = 0;
+let comprobarDer = 0;
+
 window.onload = async function() {
     await fetchPokemon();
     maquina = await elegirCinco();
     jugador = await elegirCinco();
     mostrarCartasJugador();
+    turnoMaquina = (nAleatorio(2) === 2) ? true : false;
+    turnos();
+}
+function turnos() {
+    if (turnoMaquina) {
+        comment.innerText = "Le toca a la máquina";
+        setTimeout(cargando,1000);
+        setTimeout(cerrarCargando, 2000);
+        setTimeout(maquinaJugada, 3000);
+    } else {
+        comment.innerText = "Te toca!";
+    }
 }
 async function fetchPokemon() {
     let num = await fetch ("https://pokeapi.co/api/v2/pokemon")
@@ -50,9 +66,13 @@ function crearCarta(datosCarta) {
 function jugada(){
     let carta  = this.clone();
     propio.appendChild(carta);
+    comment.innerText = `Has jugado ${carta.nombre}`;
+
     if (!played) {
         played = true;
-        setTimeout(maquinaJugada, 2000);
+        setTimeout(cargando,1000);
+        setTimeout(cerrarCargando, 2000);
+        setTimeout(maquinaJugada, 3000);
     } else {
         procesarRespuesta();
     }
@@ -63,6 +83,7 @@ function maquinaJugada(){
     let carta = crearCarta(maquina[num]);
     maquina.splice(num, 1);
     rival.appendChild(carta);
+    comment.innerText = `La máquina ha jugado ${carta.nombre}`;
     if (!played) {
         played = true;
     } else {
@@ -73,8 +94,11 @@ function maquinaJugada(){
 function procesarRespuesta() {
     played = false;
     cargando();
-    setTimeout(function () {carg.remove();}, 2000);
-    setTimeout(resultado, 2500);
+    setTimeout(cerrarCargando, 2000);
+    setTimeout(resultado, 3000);
+}
+function cerrarCargando() {
+    carg.remove();
 }
 function cargando() {
     let div = document.createElement("div");
@@ -95,16 +119,55 @@ function resultado() {
     cRival.remove();
     cJugador.remove();
     let suma = nJugador.experiencia + nRival.experiencia;
+    let div = document.createElement("div");
 
-    if (nRival.experiencia >= nJugador.experiencia) {
+    if (nRival.experiencia > nJugador.experiencia) {
         comment.innerText = "Cartas para el rival...";
         izq.querySelector(".total").innerText = parseInt(izq.querySelector(".total").innerText) + suma;
-        izq.appendChild(nRival);
-        izq.appendChild(nJugador);
-    } else {
+        comprobarIzq = parseInt(izq.querySelector(".total").innerText);
+        div.appendChild(nRival);
+        div.appendChild(nJugador);
+        izq.appendChild(div);
+        turnoMaquina = true;
+    } else if (nRival.experiencia < nJugador.experiencia) {
         comment.innerText = "Cartas para ti...";
         der.querySelector(".total").innerText = parseInt(der.querySelector(".total").innerText) + suma;
-        der.appendChild(nRival);
-        der.appendChild(nJugador);
+        comprobarDer = parseInt(der.querySelector(".total").innerText);
+        div.appendChild(nJugador);
+        div.appendChild(nRival);
+        der.appendChild(div);
+        turnoMaquina = false;
+    } else {
+        comment.innerText = "Empate...";
+        der.querySelector(".total").innerText = parseInt(der.querySelector(".total").innerText) + suma / 2;
+        izq.querySelector(".total").innerText = parseInt(izq.querySelector(".total").innerText) + suma / 2;
+
+        comprobarIzq = parseInt(der.querySelector(".total").innerText);
+        comprobarDer = parseInt(der.querySelector(".total").innerText);
+        let div2 = document.createElement("div");
+
+        div.appendChild(nRival);
+        div2.appendChild(nJugador);
+
+        izq.appendChild(div);
+        der.appendChild(div2);
+        turnoMaquina = false;
+    }
+    comprobarFinal();
+}
+function comprobarFinal() {
+    if (maquina.length == 0 || comprobarIzq >= 1000 || comprobarDer >= 1000) {
+        ganador();
+    } else {
+        turnos();
+    }
+}
+function ganador() {
+    if (comprobarIzq > comprobarDer) {
+        comment.innerText = "Ha ganado la máquina!";
+    } else if (comprobarIzq < comprobarDer) {
+        comment.innerText = "Has ganado!";
+    } else {
+        comment.innerText = "Empate!";
     }
 }

@@ -21,12 +21,32 @@ div {
     min-height: 800px;
     width: 15%;
     background: #333;
-    carta-element {
-        margin:auto;
-        margin-bottom: 10px;
-        width: 70%;
-        height: 140px;
+    font-size: 11px;
+    div {
+        display: flex;
+        gap:5px;
+        width: 90%;
+        margin: auto;
+        justify-content: center;
+        carta-element {
+            margin-bottom: 10px;
+            width: 70%;
+            height: 100px;
+            #xp {
+                display: flex;
+                justify-content: end;
+            }
+        }
+        
+        carta-element:last-child {
+            color:red;
+            border:1px solid red;
+        }
+        img  {
+            width: 60px;
+        }  
     }
+    
 }
 #mid {
     height: 800px;
@@ -88,6 +108,7 @@ carta-element, .carta {
     width: calc(200px - 12px);
     height: calc(100% - 20px);
     border-radius: 15px;
+    overflow: hidden;
     * {
         margin: 0 auto;
         padding: 0;
