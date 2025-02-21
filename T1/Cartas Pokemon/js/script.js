@@ -80,6 +80,9 @@ function jugada(){
 }
 function maquinaJugada(){
     let num = nAleatorio(maquina.length) - 1;
+    if (!turnoMaquina) {
+        
+    }
     let carta = crearCarta(maquina[num]);
     maquina.splice(num, 1);
     rival.appendChild(carta);

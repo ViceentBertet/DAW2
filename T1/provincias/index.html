@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>España y sus Provincias</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #mapa { height: 500px; margin: 10px 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        button { margin: 5px; padding: 8px 12px; }
+    </style>
+</head>
+<body>
+    <h1>Mapa de España y sus Provincias</h1>
+    <div id="mapa"></div>
+    <h2>Provincias de la Comunidad Autónoma seleccionada:</h2>
+    <div id="informacion"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const mapa = L.map('mapa').setView([40.4168, -3.7038], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(mapa);
+
+        const comunidades = {
+            "Andalucía": [37.5443, -4.7278],
+            "Cataluña": [41.5912, 1.5209],
+            "Madrid": [40.4168, -3.7038],
+            "Galicia": [42.5751, -8.1339],
+            "País Vasco": [43.0893, -2.4945]
+        };
+
+        // Cargar botones de CCAA
+        Object.keys(comunidades).forEach(ccaa => {
+            const btn = document.createElement('button');
+            btn.innerText = ccaa;
+            btn.setAttribute('aria-label', `Ver provincias de ${ccaa}`);
+            btn.onclick = () => cargarProvincias(ccaa);
+            document.body.insertBefore(btn, document.getElementById('mapa'));
+        });
+
+        async function cargarProvincias(ccaa) {
+            const url = `https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/georef-spain-provincia-millesime/records?refine.ccaa=${encodeURIComponent(ccaa)}`;
+            try {
+                console.log(`Fetching data for ${ccaa} from ${url}`);
+                const respuesta = await fetch(url);
+                if (!respuesta.ok) {
+                    throw new Error('Error en la solicitud');
+                }
+                const datos = await respuesta.json();
+                console.log('Datos recibidos:', datos);
+
+                const infoDiv = document.getElementById('informacion');
+                infoDiv.innerHTML = '<table><thead><tr><th>Provincia</th><th>Acción</th></tr></thead><tbody></tbody></table>';
+
+                const tbody = infoDiv.querySelector('tbody');
+                datos.records.forEach(record => {
+                    const prov = record.record.fields;
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td>${prov.provincia}</td>
+                        <td><button onclick="verMapa(${prov.geo_point_2d[0]}, ${prov.geo_point_2d[1]})">Ver Mapa</button></td>
+                    `;
+                    tbody.appendChild(fila);
+                });
+
+                // Centrar el mapa en la CCAA
+                const [lat, lon] = comunidades[ccaa];
+                mapa.setView([lat, lon], 7);
+            } catch (error) {
+                console.error('Error al cargar las provincias:', error);
+                alert('Hubo un problema al cargar las provincias. Por favor, inténtelo de nuevo más tarde.');
+            }
+        }
+
+        function verMapa(lat, lon) {
+            window.open(`https://www.openstreetmap.org/#map=12/${lat}/${lon}`, '_blank');
+        }
+    </script>
+</body>
+</html>
