@@ -13,7 +13,7 @@
     function selectAll() {
         try {
             $pdo = crearConexion();
-            $query = 'SELECT * FROM producto';
+            $query = 'SELECT * FROM productos';
             $stmt = $pdo->prepare($query);            
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +26,7 @@
     function selectByType($tipo) {
         try {
             $pdo = crearConexion();
-            $query = "SELECT * FROM producto WHERE tpo_prod = :tipo";
+            $query = "SELECT * FROM productos WHERE tpo_prod = :tipo";
             $stmt = $pdo->prepare($query);
             $stmt->execute([':tipo' => $tipo]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -43,7 +43,7 @@
             if (!in_array($operador, $operadoresValidos)) {
                 throw new InvalidArgumentException("Operador inválido");
             }
-            $query = "SELECT * FROM producto WHERE precio $operador :precio";
+            $query = "SELECT * FROM productos WHERE precio $operador :precio";
             $stmt = $pdo->prepare($query);
             $stmt->execute([':precio' => $precio]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -60,7 +60,7 @@
         if ($rutaImg) {
             try {
                 $pdo = crearConexion();
-                $query = "INSERT INTO producto (ID_prod, nom, descrip, img, precio, stock, tpo_prod) 
+                $query = "INSERT INTO productos (ID_prod, nom, descrip, img, precio, stock, tpo_prod) 
                           VALUES (:id, :nom, :descrip, :rutaImg, :precio, :stock, :tipo)";
                 $stmt = $pdo->prepare($query);
                 $stmt->execute([
@@ -93,7 +93,7 @@
         if ($rutaImg) {
             try {
                 $pdo = crearConexion();
-                $query = "UPDATE producto 
+                $query = "UPDATE productos 
                           SET nom = :nom, 
                               descrip = :descrip, 
                               img = :rutaImg, 
@@ -122,7 +122,7 @@
     function deleteProd($id) {
         try {
             $pdo = crearConexion();
-            $query = "DELETE FROM producto WHERE ID_prod = :id";
+            $query = "DELETE FROM productos WHERE ID_prod = :id";
             $stmt = $pdo->prepare($query);
             $stmt->execute([':id' => $id]);
             return $stmt->rowCount() > 0;
@@ -135,7 +135,7 @@
     function buscaUsuarios($usu, $pwd) {
         try {
             $pdo = crearConexion();
-            $query = "SELECT * FROM usuario WHERE email = :email AND pwd = :pwd";
+            $query = "SELECT * FROM usuarios WHERE email = :email AND pwd = :pwd";
             $stmt = $pdo->prepare($query);
             $stmt->execute([
                 ':email' => $usu,
@@ -151,7 +151,7 @@
     function selectUsers() { 
         try {
             $pdo = crearConexion();
-            $query = "SELECT * FROM usuario";
+            $query = "SELECT * FROM usuarios";
             $stmt = $pdo->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -164,7 +164,7 @@
     function anyadirUsu($email, $nom, $pwd, $tpo_usu) {
         $pdo = crearConexion();
         try {
-            $query = "INSERT INTO usuario (email, nom, pwd, tpo_usu) 
+            $query = "INSERT INTO usuarios (email, nom, pwd, tpo_usu) 
                       VALUES (:email, :nom, :pwd, :tpo_usu)";
             $stmt = $pdo->prepare($query);
             $stmt->execute([
@@ -182,7 +182,7 @@
     function updateUsu($email, $nom, $pwd, $tpo_usu) { 
         try {
             $pdo = crearConexion();
-            $query = "UPDATE usuario 
+            $query = "UPDATE usuarios 
                       SET nom = :nom, 
                           pwd = :pwd, 
                           tpo_usu = :tpo_usu 
@@ -203,7 +203,7 @@
     function deleteUsu($email) {
         try {
             $pdo = crearConexion();
-            $query = "DELETE FROM usuario WHERE email = :email";
+            $query = "DELETE FROM usuarios WHERE email = :email";
             $stmt = $pdo->prepare($query);
             $stmt->execute([':email' => $email]);
             return $stmt->rowCount() === 1;
@@ -217,8 +217,8 @@
         try {
             $pdo = crearConexion();
             $query = "SELECT v.ID_val, u.nom, v.ID_prod, v.descrip, v.eval 
-                      FROM valoracion v 
-                      JOIN usuario u ON v.email = u.email 
+                      FROM valoraciones v 
+                      JOIN usuarios u ON v.email = u.email 
                       WHERE v.ID_PROD = :id";
             $stmt = $pdo->prepare($query);
             $stmt->execute([':id' => $id]);
@@ -231,7 +231,7 @@
     function selectUsuVal($usu) {
         try {
             $pdo = crearConexion();
-            $query = "SELECT * FROM valoracion WHERE email = :usu";
+            $query = "SELECT * FROM valoraciones WHERE email = :usu";
             $stmt = $pdo->prepare($query);
             $stmt->execute([':usu' => $usu]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -242,7 +242,7 @@
     }
     function selectAllVal(){
         $pdo = crearConexion();
-        $query = "SELECT * FROM valoracion";
+        $query = "SELECT * FROM valoraciones";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -250,7 +250,7 @@
     function anyadirVal($email, $prod, $descrip, $eval){
         try {
             $pdo = crearConexion();
-            $query = "INSERT INTO valoracion (email, ID_prod, descrip, eval) 
+            $query = "INSERT INTO valoraciones (email, ID_prod, descrip, eval) 
                       VALUES (:email, :prod, :descrip, :eval)";
             $stmt = $pdo->prepare($query);
             $stmt->execute([
@@ -268,7 +268,7 @@
     function updateVal($id, $email, $prod, $descrip, $eval) { 
         try {
             $pdo = crearConexion();
-            $query = "UPDATE valoracion 
+            $query = "UPDATE valoraciones 
                       SET email = :email, 
                           ID_prod = :prod, 
                           descrip = :descrip, 
@@ -291,7 +291,7 @@
     function deleteVal($id) {
         try {
             $pdo = crearConexion();
-            $query = "DELETE FROM valoracion 
+            $query = "DELETE FROM valoraciones 
                       WHERE ID_val = :id";
             $stmt = $pdo->prepare($query);
             $stmt->execute([
